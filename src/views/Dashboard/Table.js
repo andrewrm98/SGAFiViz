@@ -26,12 +26,12 @@ class Table extends Component {
     }
 
     columns = [
-        { title: "ID", field: "id", visible: false },
+        { title: "ID", field: "ID", visible: false },
         {
-            title: "Name", field: "name", headerFilter: "input", bottomCalc: "count"
+            title: "Club Name", field: "Name of Club", headerFilter: "input", bottomCalc: "count"
         },
         {
-            title: "Requested Amount", field: "requested", formatter: "money", editor: "input", bottomCalc: "sum", bottomCalcFormatter: "money", headerFilter: "input",
+            title: "Requested Amount", field: "Amount Requested", formatter: "money", editor: "input", bottomCalc: "sum", bottomCalcFormatter: "money", headerFilter: "input",
             bottomCalcFormatterParams: {
                 decimal: ".",
                 thousand: ",",
@@ -50,7 +50,7 @@ class Table extends Component {
             }
         },
         {
-            title: "Approved Amount", field: "approved", formatter: "money", editor: "input", bottomCalc: "sum", bottomCalcFormatter: "money", headerFilter: "input",
+            title: "Approved Amount", field: "Amount Proposed", formatter: "money", editor: "input", bottomCalc: "sum", bottomCalcFormatter: "money", headerFilter: "input",
             bottomCalcFormatterParams: {
                 decimal: ".",
                 thousand: ",",
