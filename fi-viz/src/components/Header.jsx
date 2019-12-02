@@ -20,7 +20,6 @@ const Header = () => {
         {/* Must use require() so that webpack can process the image*/}
         <img className = "center" src={require('./wpi-logo.png')} />
       </figure>
-      
     </div>
 
     {/* Hero footer: will stick at the bottom */}
