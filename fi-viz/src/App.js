@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import MainPage from "./pages";
 import AboutPage from "./pages/about";
+import BudgetPage from "./pages/budget";
 import Header from "./components/Header.jsx";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={MainPage} />
           <Route path="/about" component={AboutPage} />
+          <Route path="/budget" component={BudgetPage} />
         </Router>
       </div>
     );
