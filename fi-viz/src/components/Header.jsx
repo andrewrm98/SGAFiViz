@@ -5,7 +5,6 @@ import './Header.css';
 const Header = () => {
   return (
   <section className="hero has-bg-img">
-    
 
     {/*  Hero head: will stick at the top */}
     <div className="hero-head">
@@ -14,7 +13,7 @@ const Header = () => {
 
     {/* Hero content: will be in the middle */}
     <div className="hero-body has-text-centered">
-      <h1 className="title is-1 has-text-white">
+      <h1 className="is-family-monospace title is-1 has-text-white">
         WPI Student Life Fee
       </h1> 
       <figure className = "image is-128x128 center">
@@ -29,9 +28,9 @@ const Header = () => {
       <nav className="tabs is-boxed is-fullwidth">
         <div className="container">
           <ul>
-            <li onClick = "selectTab()" id = "tab-1" className = "is-active"><Link className = "subtitle red" to="/story">Story</Link></li>
-            <li id = "tab-2"><Link className = "subtitle white" to="/budget">Budget</Link></li>
-            <li id = "tab-3"><Link className = "subtitle white" to="/about">About</Link></li>
+            <li id = "tab-1" className = "is-family-monospace is-active"><Link className = "subtitle red" to="/story">Story</Link></li>
+            <li id = "tab-2"><Link className = "is-family-monospace subtitle white" to="/budget">Budget</Link></li>
+            <li id = "tab-3"><Link className = "is-family-monospace subtitle white" to="/about">About</Link></li>
           </ul>
         </div>
       </nav>
