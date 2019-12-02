@@ -28,7 +28,7 @@ const Header = () => {
       <nav className="tabs is-boxed is-fullwidth">
         <div className="container">
           <ul>
-            <li id = "tab-1" className = "is-family-monospace is-active"><Link className = "subtitle red" to="/story">Story</Link></li>
+            <li id = "tab-1" className = "is-family-monospace is-active"><Link className = "subtitle red" to="/">Story</Link></li>
             <li id = "tab-2"><Link className = "is-family-monospace subtitle white" to="/budget">Budget</Link></li>
             <li id = "tab-3"><Link className = "is-family-monospace subtitle white" to="/about">About</Link></li>
           </ul>
