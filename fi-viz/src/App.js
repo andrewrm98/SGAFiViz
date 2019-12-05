@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
-import MainPage from "./pages/story";
+import StoryPage from "./pages/story";
 import AboutPage from "./pages/about";
 import BudgetPage from "./pages/budget";
 import Header from "./components/Header.jsx";
@@ -17,7 +17,7 @@ class App extends Component {
       <div>
         <Router>
           <Header />
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={StoryPage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/budget" component={BudgetPage} />
         </Router>
