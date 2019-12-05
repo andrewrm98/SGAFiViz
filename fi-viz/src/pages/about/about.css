@@ -3,10 +3,13 @@
     margin-right: 20%;
     margin-left: 20%;
     align-content: center;
-    background-color: #9D1212;
-    color: white;
+    background-color: lightgrey;
 }
 
 .center-text {
     text-align: center;
+}
+
+.wpi-red {
+    color: #9D1212              !important;
 }
