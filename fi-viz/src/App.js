@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
-import MainPage from "./pages";
+import MainPage from "./pages/story";
 import AboutPage from "./pages/about";
 import BudgetPage from "./pages/budget";
 import Header from "./components/Header.jsx";
