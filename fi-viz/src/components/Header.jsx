@@ -32,7 +32,7 @@ class Header extends React.Component {
           </h1>
           <figure className="image is-128x128 center">
             {/* Must use require() so that webpack can process the image*/}
-            <img className="center" src={require('./wpi-logo.png')} />
+            <img className = "center" src={require('./logo.jpg')} alt = "Not found"/>
           </figure>
         </div>
 
