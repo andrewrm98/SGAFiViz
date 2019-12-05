@@ -2,8 +2,13 @@
   "name": "fi-viz",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "bulma": "^0.8.0",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1",
+    "path": "^0.12.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
@@ -13,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "nodemon server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
