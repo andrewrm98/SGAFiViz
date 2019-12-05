@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import './Header.css';
-import { tsConstructorType } from "@babel/types";
 
 class Header extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      active : 'tab-1'
+      active : props.location.pathname.substring(1)
     }
   }
-W
+
   render() {
     return (
       <section className="hero has-bg-img">
@@ -37,9 +37,9 @@ W
           <nav className="tabs is-boxed is-fullwidth">
             <div className="container">
               <ul>
-                <li onClick = { () => { this.setState({ active: 'tab-1' })} } id = "one" className = {this.state.active === 'tab-1' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link  className = {this.state.active === 'tab-1' ? 'subtitle red' : 'subtitle white'} to="/">Story</Link></li>
-                <li onClick = { () => { this.setState({ active: 'tab-2' })} } id = "two" className = {this.state.active === 'tab-2' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link className = {this.state.active === 'tab-2' ? 'subtitle red' : 'subtitle white'} to="/budget">Budget</Link></li>
-                <li onClick = { () => { this.setState({ active: 'tab-3' })} } id = "three" className = {this.state.active === 'tab-3' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link className = {this.state.active === 'tab-3' ? 'subtitle red' : 'subtitle white'} to="/about">About</Link></li>
+                <li onClick = { () => { this.setState({ active: 'story' })} } id = "one" className = {this.state.active === 'story' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link  className = {this.state.active === 'story' ? 'subtitle red' : 'subtitle white'} to="/">Story</Link></li>
+                <li onClick = { () => { this.setState({ active: 'budget' })} } id = "two" className = {this.state.active === 'budget' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link className = {this.state.active === 'budget' ? 'subtitle red' : 'subtitle white'} to="/budget">Budget</Link></li>
+                <li onClick = { () => { this.setState({ active: 'about' })} } id = "three" className = {this.state.active === 'about' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link className = {this.state.active === 'about' ? 'subtitle red' : 'subtitle white'} to="/about">About</Link></li>
               </ul>
             </div>
           </nav>
@@ -52,7 +52,7 @@ W
 
 
 
-export default Header;
+export default withRouter(Header);
 
 // <Link to="/">Home</Link>
 //       <Link to="/about">Show About Page</Link>
