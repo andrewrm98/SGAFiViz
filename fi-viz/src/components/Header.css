@@ -1,5 +1,5 @@
 .has-bg-img {
-    background-color: black;
+    background-color: #AC2B37;
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -16,5 +16,5 @@
 }
 
 .red {
-    color: red          !important;
+    color: #AC2B37       !important;
 }

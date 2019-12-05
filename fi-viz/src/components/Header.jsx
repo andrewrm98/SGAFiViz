@@ -11,7 +11,7 @@ class Header extends React.Component {
       active : 'tab-1'
     }
   }
-W
+
   render() {
     return (
       <section className="hero has-bg-img">

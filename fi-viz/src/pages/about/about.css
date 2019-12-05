@@ -1,0 +1,12 @@
+.big-container {
+    margin: 20px;
+    margin-right: 20%;
+    margin-left: 20%;
+    align-content: center;
+    background-color: #AC2B37;
+    color: whitesmoke;
+}
+
+.center-text {
+    text-align: center;
+}
