@@ -51,8 +51,9 @@ class StoryPage extends Component {
 
         <h1 class = 'subtitle is-4 align-text'>The overall budget is allocated among these three student services.</h1>
         <div class = "story-container">
-          <h1 class = 'subtitle is-4 align-text white bold border'>FY {this.state.fiscal_year}</h1>
+          <h1 class = 'subtitle is-4 align-text white bold'>FY {this.state.fiscal_year}</h1>
         </div>
+
         <div class = "columns">
           <div class = "column">
             <div class = 'notification align-text is-danger'>
