@@ -18,22 +18,17 @@ class Header extends React.Component {
 
   render() {
     return (
-      <section className="hero has-bg-img">
+      <section className="hero has-bg-img is-medium">
 
         {/*  Hero head: will stick at the top */}
         <div className="hero-head">
-
         </div>
 
         {/* Hero content: will be in the middle */}
         <div className="hero-body has-text-centered">
-          <h1 className="is-family-monospace title is-1 has-text-white">
+          <h1 className="title huge-title white">
             WPI Student Life Fee
           </h1>
-          <figure className="image is-128x128 center">
-            {/* Must use require() so that webpack can process the image*/}
-            <img className = "center" src={require('./wpilogo.jpg')} alt = "Not found"/>
-          </figure>
         </div>
 
         {/* Hero footer: will stick at the bottom */}
@@ -41,9 +36,9 @@ class Header extends React.Component {
           <nav className="tabs is-boxed is-fullwidth">
             <div className="container">
               <ul>
-                <li onClick={() => { this.setState({ active: 'story' }) }} id="one" className={this.state.active === 'story' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link className={this.state.active === 'story' ? 'subtitle red' : 'subtitle white'} to="/">Story</Link></li>
-                <li onClick={() => { this.setState({ active: 'budget' }) }} id="two" className={this.state.active === 'budget' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link className={this.state.active === 'budget' ? 'subtitle red' : 'subtitle white'} to="/budget">Budget</Link></li>
-                <li onClick={() => { this.setState({ active: 'about' }) }} id="three" className={this.state.active === 'about' ? 'mytabs is-family-monospace is-active' : 'mytabs is-family-monospace'}><Link className={this.state.active === 'about' ? 'subtitle red' : 'subtitle white'} to="/about">About</Link></li>
+                <li onClick={() => { this.setState({ active: 'story' }) }} id="one" className={this.state.active === 'story' ? 'mytabs is-active' : 'mytabs'}><Link className={this.state.active === 'story' ? 'subtitle red' : 'subtitle white'} to="/">Story</Link></li>
+                <li onClick={() => { this.setState({ active: 'budget' }) }} id="two" className={this.state.active === 'budget' ? 'mytabs is-active' : 'mytabs'}><Link className={this.state.active === 'budget' ? 'subtitle red' : 'subtitle white'} to="/budget">Budget</Link></li>
+                <li onClick={() => { this.setState({ active: 'about' }) }} id="three" className={this.state.active === 'about' ? 'mytabs is-active' : 'mytabs is-family-monospace'}><Link className={this.state.active === 'about' ? 'subtitle red' : 'subtitle white'} to="/about">About</Link></li>
               </ul>
             </div>
           </nav>

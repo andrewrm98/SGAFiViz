@@ -1,15 +1,23 @@
-.big-container {
+.about-container {
     margin: 20px;
     margin-right: 20%;
     margin-left: 20%;
     align-content: center;
-    background-color: lightgrey;
+    background-color: #9D1212  ;
 }
 
 .center-text {
     text-align: center;
 }
 
-.wpi-red {
+.red {
     color: #9D1212              !important;
+}
+
+.white {
+    color: white;
+}
+
+.black {
+    color: #000000
 }

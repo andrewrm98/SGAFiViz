@@ -1,7 +1,9 @@
 .has-bg-img {
-    background-color: #9D1212;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-image: url('./wpibg.png');
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-size:  cover;
+    background-color: #A9B0B7;
 }
 
 .center {
@@ -18,3 +20,20 @@
 .red {
     color: #9D1212       !important;
 }
+
+.black {
+    color: black
+}
+
+.center {
+    align-content: center;
+    justify-content: center;
+}
+
+.huge-title {
+    font-size: 72px;
+}
+
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   }

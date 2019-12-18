@@ -1,0 +1,11 @@
+.center-text {
+    text-align: center;
+}
+
+.budget-container {
+    margin: 20px;
+    margin-right: 20%;
+    margin-left: 20%;
+    align-content: center;
+    background-color: #A9B0B7;
+}

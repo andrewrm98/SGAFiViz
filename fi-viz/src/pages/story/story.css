@@ -1,0 +1,30 @@
+.story-container {
+    text-align: center;
+    background-color: #9D1212;
+}
+
+.align-text {
+    text-align: center;
+}
+
+.margin {
+    margin: 40px;
+}
+
+.white {
+    color: white;
+}
+
+.divide {
+    background-color: #9D1212;
+    text-align: center;
+    width: 100%
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.border {
+    border: 5px solid black;
+}
