@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
 import "./story.css"
+import Plot from 'react-plotly.js';
 
-class StoryPage extends Component {
+class Chart extends Component {
+  render() {
+    return (
+      <Plot
+        data={[
+          {
+            x: [1, 2, 3],
+            y: [2, 6, 3],
+            type: 'scatter',
+            mode: 'lines+points',
+            marker: {color: 'red'},
+          },
+          {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+        ]}
+        layout={ {autosize: true, width: 600, height: 600, title: 'A Fancy Plot'} }
+      />
+    );
+  }
+}
+
+class Story extends Component {
 
   constructor(props) {
     super(props);
@@ -10,7 +31,8 @@ class StoryPage extends Component {
       fiscal_year: 2020,
       transferstotal: 273302.00,
       budgetstotal: 823527.27,
-      requesttotal: 400000.00
+      requesttotal: 400000.00,
+      SLF: 316
     };
   }
 
@@ -46,13 +68,14 @@ class StoryPage extends Component {
 
         <div class = "content divide notification">
           <h1 class = 'white title'>Where Does That Money Go?</h1>
-          <h1 class = 'white subtitle is-4'>That budget is what keeps the clubs you love alive!</h1>
+          <h1 class = 'white subtitle is-4'>The Budget Breakdown</h1>
+          <div class = "notification has-background-white no-padding">
+          <h1 class = 'subtitle is-4 align-text black bold'>Fiscal Year: {this.state.fiscal_year} - Student Life Fee: ${this.state.SLF}</h1>
+          </div>
         </div>
 
         <h1 class = 'subtitle is-4 align-text'>The overall budget is allocated among these three student services.</h1>
-        <div class = "story-container">
-          <h1 class = 'subtitle is-4 align-text white bold'>FY {this.state.fiscal_year}</h1>
-        </div>
+          
 
         <div class = "columns">
           <div class = "column">
@@ -131,7 +154,17 @@ class StoryPage extends Component {
       </div>
     );
   }
-
 }
 
-export default StoryPage;
+class Page extends Component {
+  render() {
+    return (
+      <div>
+        <Story/>
+        <Chart/>
+      </div>
+    )
+  }
+}
+
+export default Page;
