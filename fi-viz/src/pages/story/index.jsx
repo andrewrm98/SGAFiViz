@@ -5,7 +5,7 @@ import Plot from 'react-plotly.js';
 class Chart extends Component {
   render() {
     return (
-      <Plot
+      <Plot className = "fill-space"
         data={[
           {
             x: [1, 2, 3],
@@ -16,7 +16,8 @@ class Chart extends Component {
           },
           {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
         ]}
-        layout={ {autosize: true, width: 600, height: 600, title: 'A Fancy Plot'} }
+        layout={ {autosize: true, title: 'A Fancy Plot'} }
+        useResizeHandler={true}
       />
     );
   }
@@ -32,7 +33,8 @@ class Story extends Component {
       transferstotal: 273302.00,
       budgetstotal: 823527.27,
       requesttotal: 400000.00,
-      SLF: 316
+      SLF: 316,
+      budget: "1.4 Million"
     };
   }
 
@@ -69,8 +71,22 @@ class Story extends Component {
         <div class = "content divide notification">
           <h1 class = 'white title'>Where Does That Money Go?</h1>
           <h1 class = 'white subtitle is-4'>The Budget Breakdown</h1>
-          <div class = "notification has-background-white no-padding">
-          <h1 class = 'subtitle is-4 align-text black bold'>Fiscal Year: {this.state.fiscal_year} - Student Life Fee: ${this.state.SLF}</h1>
+          <div class = "columns">
+            <div class = "column">
+              <div class = "notification has-background-white">
+                <h1 class = 'subtitle is-4 align-text black bold'>Current Fiscal Year is {this.state.fiscal_year}</h1>
+              </div>
+            </div>
+            <div class = "column">
+              <div class = "notification has-background-white">
+                <h1 class = 'subtitle is-4 align-text black bold'>Current Student Life Fee is ${this.state.SLF}</h1>
+              </div>
+            </div>
+            <div class = "column">
+              <div class = "notification has-background-white">
+                <h1 class = 'subtitle is-4 align-text black bold'>Total SGA Budget is ${this.state.budget}</h1>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -162,6 +178,7 @@ class Page extends Component {
       <div>
         <Story/>
         <Chart/>
+          
       </div>
     )
   }
