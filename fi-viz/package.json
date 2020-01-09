@@ -2,7 +2,7 @@
   "name": "fi-viz",
   "version": "0.1.0",
   "private": true,
-  "main": "server.js",
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "body-parser": "^1.19.0",
     "bulma": "^0.8.0",
@@ -21,7 +21,8 @@
     "build": "react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "nodemon server.js"
+    "server": "node-env-run server --exec nodemon | pino-colada",
+    "dev": "run-p server start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,5 +38,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "express-pino-logger": "^4.0.0",
+    "node-env-run": "^3.0.2",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "pino-colada": "^1.5.0"
   }
 }

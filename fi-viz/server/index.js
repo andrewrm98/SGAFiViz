@@ -2,12 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
+const pino = require('express-pino-logger')();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(pino);
 
 var con = mysql.createConnection({
     host: "webdb.wpi.edu",
@@ -29,6 +31,10 @@ app.get('/api/home', (req, res) => {
     con.query("SELECT * FROM sgadb.Budgets;", function (err, data) {
         (err) ? res.send(err) : res.json({ budgets: data });
     })
+});
+
+app.get('/api/hello', (req, res) => {
+    res.json({"msg": "Hello!"});
 });
 
 // app.post('/api/addBudget', (req, res) => {
