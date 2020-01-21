@@ -26,7 +26,7 @@ con.connect(function (err) {
 app.use(express.static(path.join(__dirname, './build')));
 
 
-app.get('/api/home', (req, res) => {
+app.get('/api/budgets', (req, res) => {
     // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
     con.query("SELECT * FROM sgadb.Budgets;", function (err, data) {
         (err) ? res.send(err) : res.json({ budgets: data });
