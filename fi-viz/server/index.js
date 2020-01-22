@@ -33,6 +33,14 @@ app.get('/api/budgets', (req, res) => {
     })
 });
 
+app.get('/api/slf', (req, res) => {
+    // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
+    con.query("SELECT * FROM sgadb.`Student Life Fee`;", function (err, data) {
+        console.log(data);
+        (err) ? res.send(err) : res.json({ slf: data });
+    })
+});
+
 app.get('/api/hello', (req, res) => {
     res.json({"msg": "Hello!"});
 });

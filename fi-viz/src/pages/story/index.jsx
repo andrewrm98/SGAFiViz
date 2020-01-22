@@ -3,23 +3,63 @@ import "./story.css"
 import Plot from 'react-plotly.js';
 
 class Chart extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      slf: []
+    };
+  }
+
+  componentDidMount() {
+    fetch("/api/slf")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result.slf);
+          this.setState({
+            isLoaded: true,
+            slf: result.slf
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
   render() {
-    return (
-      <Plot className = "fill-space"
-        data={[
-          {
-            x: [1, 2, 3],
-            y: [2, 6, 3],
-            type: 'scatter',
-            mode: 'lines+points',
-            marker: {color: 'red'},
-          },
-          {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-        ]}
-        layout={ {autosize: true, title: 'A Fancy Plot'} }
-        useResizeHandler={true}
-      />
-    );
+    const { error, isLoaded, slf } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <Plot className = "fill-space"
+          data={[
+            {
+              x: [1, 2, 3],
+              y: [2, 6, 3],
+              type: 'scatter',
+              mode: 'lines+points',
+              marker: {color: 'red'},
+            },
+            {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+          ]}
+          layout={ {autosize: true, title: 'A Fancy Plot'} }
+          useResizeHandler={true}
+        />
+      );
+    }
   }
 }
 
@@ -43,10 +83,11 @@ class Story extends Component {
   }
 
   getData = async () => {
-    const response = await fetch('/api/home');
+    const response = await fetch('/api/budgets');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-    this.setState({ budgets: body.budgets });
+    console.log(body);
+    this.setState({ budgets: body.msg });
   }
 
   render() {
