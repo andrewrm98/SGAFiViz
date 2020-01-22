@@ -43,22 +43,53 @@ class Chart extends Component {
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      return (
-        <Plot className = "fill-space"
-          data={[
-            {
-              x: [1, 2, 3],
-              y: [2, 6, 3],
-              type: 'scatter',
-              mode: 'lines+points',
-              marker: {color: 'red'},
-            },
-            {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-          ]}
-          layout={ {autosize: true, title: 'A Fancy Plot'} }
-          useResizeHandler={true}
-        />
-      );
+
+        // loop through elements in slf fee to construct x & y axis
+        var xAxis = [], yAxis = [], i = 0
+        for (i=0; i< slf.length; i++) {
+          xAxis.push((slf[i])["Fiscal Year"])
+          yAxis.push((slf[i])["SLF Amount"])
+        } 
+
+        const result = yAxis
+            .map((item, index) => [xAxis[index], item]) // add the clickCount to sort by
+            .sort(([count1], [count2]) => count2 - count1) // sort by the clickCount data
+            .map(([, item]) => item); // extract the sorted items
+          
+        yAxis = result.reverse()
+        xAxis = xAxis.sort((a, b) => a - b)
+
+        console.log(xAxis)
+        console.log(yAxis)
+
+        return (
+
+          <Plot className = "fill-space"
+            data={[
+              {
+                x: xAxis,
+                y: yAxis,
+                type: 'scatter',
+                mode: 'lines+points',
+                marker: {color: 'red'},
+              },
+              
+            ]}
+            layout={ 
+              {autosize: true, 
+                title: 'Student Life Fee Trend',
+                yaxis: {
+                  title: 'Yearly Cost',
+                  showline: false
+                },
+                xaxis: {
+                  title: 'Fiscal Year',
+                  showline: false}
+              }}
+            useResizeHandler={true}
+          />
+
+        );
     }
   }
 }
