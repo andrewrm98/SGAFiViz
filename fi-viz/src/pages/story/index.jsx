@@ -3,23 +3,94 @@ import "./story.css"
 import Plot from 'react-plotly.js';
 
 class Chart extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      slf: []
+    };
+  }
+
+  componentDidMount() {
+    fetch("/api/slf")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result.slf);
+          this.setState({
+            isLoaded: true,
+            slf: result.slf
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
   render() {
-    return (
-      <Plot className = "fill-space"
-        data={[
-          {
-            x: [1, 2, 3],
-            y: [2, 6, 3],
-            type: 'scatter',
-            mode: 'lines+points',
-            marker: {color: 'red'},
-          },
-          {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-        ]}
-        layout={ {autosize: true, title: 'A Fancy Plot'} }
-        useResizeHandler={true}
-      />
-    );
+    const { error, isLoaded, slf } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+
+        // loop through elements in slf fee to construct x & y axis
+        var xAxis = [], yAxis = [], i = 0
+        for (i=0; i< slf.length; i++) {
+          xAxis.push((slf[i])["Fiscal Year"])
+          yAxis.push((slf[i])["SLF Amount"])
+        } 
+
+        const result = yAxis
+            .map((item, index) => [xAxis[index], item]) // add the clickCount to sort by
+            .sort(([count1], [count2]) => count2 - count1) // sort by the clickCount data
+            .map(([, item]) => item); // extract the sorted items
+          
+        yAxis = result.reverse()
+        xAxis = xAxis.sort((a, b) => a - b)
+
+        console.log(xAxis)
+        console.log(yAxis)
+
+        return (
+
+          <Plot className = "fill-space"
+            data={[
+              {
+                x: xAxis,
+                y: yAxis,
+                type: 'scatter',
+                mode: 'lines+points',
+                marker: {color: 'red'},
+              },
+              
+            ]}
+            layout={ 
+              {autosize: true, 
+                title: 'Student Life Fee Trend',
+                yaxis: {
+                  title: 'Yearly Cost',
+                  showline: false
+                },
+                xaxis: {
+                  title: 'Fiscal Year',
+                  showline: false}
+              }}
+            useResizeHandler={true}
+          />
+
+        );
+    }
   }
 }
 
