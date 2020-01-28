@@ -51,9 +51,9 @@ class LineChart extends Component {
         } 
 
         const result = yAxis
-            .map((item, index) => [xAxis[index], item]) // add the clickCount to sort by
-            .sort(([count1], [count2]) => count2 - count1) // sort by the clickCount data
-            .map(([, item]) => item); // extract the sorted items
+            .map((item, index) => [xAxis[index], item]) 
+            .sort(([count1], [count2]) => count2 - count1) 
+            .map(([, item]) => item); 
           
         yAxis = result.reverse()
         xAxis = xAxis.sort((a, b) => a - b)
@@ -104,7 +104,7 @@ class BarChart extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/budgetBreakdown")
+    fetch("/api/budget_breakdown")
       .then(res => res.json())
       .then(
         (result) => {
@@ -155,7 +155,7 @@ class BarChart extends Component {
         var trace2 = {
           x: xAxis,
           y: yCB,
-          name: "Club Budget",
+          name: "Organization Budgets",
           type: "bar",
           marker: {
             color: 'rgb(255, 221, 87)'}
@@ -195,13 +195,12 @@ class Story extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      budgets: [],
       fiscal_year: 2020,
-      transferstotal: 273302.00,
-      budgetstotal: 823527.27,
-      requesttotal: 400000.00,
+      MT_total: 273302.00,
+      CB_total: 823527.27,
+      Other_total: 400000.00,
       SLF: 316,
-      budget: "1.4 Million"
+      total: "1.4 Million"
     };
   }
 
@@ -210,11 +209,15 @@ class Story extends Component {
   }
 
   getData = async () => {
-    const response = await fetch('/api/slf');
+    const response = await fetch('/api/budget_breakdown');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     console.log(body);
-    this.setState({ budgets: body.slf });
+    this.setState({ fiscal_year: body.budgets[0]["Fiscal Year"],
+                    MT_total: body.budgets[0]["Mandatory Transfers Budget"],
+                    CB_total : body.budgets[0]["Club Budget"],
+                    Other_total : body.budgets[0]["Other"],
+                    total: body.budgets[0]["Total"]});
   }
 
   render() {
@@ -235,29 +238,28 @@ class Story extends Component {
             Insert student life fee example image here
           </div>
         </div>
-
+        <LineChart/>
         <div className = "content divide notification">
           <h1 className = 'white title'>Where Does That Money Go?</h1>
           <h1 className = 'white subtitle is-4'>The Budget Breakdown</h1>
           <div className = "columns">
             <div className = "column">
               <div className = "notification has-background-white">
-                <h1 className = 'subtitle is-4 align-text black bold'>Current Fiscal Year is {this.state.fiscal_year}</h1>
+                <h1 className = 'subtitle is-4 align-text black bold'>The Fiscal Year is </h1><h1 className = "green">{this.state.fiscal_year}</h1>
               </div>
             </div>
             <div className = "column">
               <div className = "notification has-background-white">
-                <h1 className = 'subtitle is-4 align-text black bold'>Current Student Life Fee is ${this.state.SLF}</h1>
+                <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "green">${this.state.SLF}</h1>
               </div>
             </div>
             <div className = "column">
               <div className = "notification has-background-white">
-                <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is ${this.state.budget}</h1>
+                <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is </h1><h1 className = "green">${this.state.total}</h1>
               </div>
             </div>
           </div>
         </div>
-
         <h1 className = 'subtitle is-4 align-text'>The overall budget is allocated among these three student services.</h1>
           
 
@@ -265,27 +267,9 @@ class Story extends Component {
           <div className = "column">
             <div className = 'notification align-text is-danger'>
               <h1 className = 'subtitle is-3'>Mandatory Transfers</h1>
-              <h1 className = 'subtitle is-4'>${this.state.transferstotal}</h1>
-            </div>
-          </div>
-          <div className = "column">
-            <div className = 'notification align-text is-warning'>
-              <h1 className = 'subtitle is-3'>Organization Budgets</h1>
-              <h1 className = 'subtitle is-4'>${this.state.budgetstotal}</h1>
-            </div>
-          </div>
-          <div className = "column">
-            <div className = 'notification align-text is-info'>
-              <h1 className = 'subtitle is-3'>Sponsorship & Rollbacks</h1>
-              <h1 className = 'subtitle is-4'>${this.state.requesttotal}</h1>
-            </div>
-          </div>
-        </div>
-
-        <div className = 'columns'>
-          <div className = "column">
-            <div className = "notification has-background-light">
-              Covers a variety of widely-used campus services such as:
+              <h1 className = 'subtitle is-4'>${this.state.MT_total}</h1>
+              <div className = "notification has-background-light">
+              <p className = "black">Covers a variety of widely-used campus services such as:</p>
               <div className = 'list'>
                 <div className = 'list-item'>SNAP</div>
                 <div className = 'list-item'>Club Sports Coaches</div>
@@ -296,43 +280,64 @@ class Story extends Component {
                 <div className = 'list-item'>Goat's Head Programming</div>
                 <div className = 'list-item'>Greek Life Programming</div>
               </div>
-              This funding also enables club sport participants to receive gym credit!
+              <p className = "black">This funding also enables club sport participants to receive gym credit!</p>
+            </div>
             </div>
           </div>
           <div className = "column">
-            <div className = "notification has-background-light">
-              Organizations can request an annual budget. SGA approves budgets that
-              align with their bylaws, fit the purpose of the blub, and have been approved
-              through a funding request. Organizations are filtered by class:
-              <div className = "list">
-                <div className = "list-item">
-                  <h1 className = "bold">Class One:</h1>
-                  <p>Special Interests (Hobbies/Community Outreach)</p>
+            <div className = 'notification align-text is-warning'>
+              <h1 className = 'subtitle is-3'>Organization Budgets</h1>
+              <h1 className = 'subtitle is-4'>${this.state.CB_total}</h1>
+              <div className = "notification has-background-light">
+                Organizations can request an annual budget. SGA approves budgets that
+                align with their bylaws, fit the purpose of the blub, and have been approved
+                through a funding request. Organizations are filtered by class:
+                <div className = "list">
+                  <div className = "list-item">
+                    <h1 className = "bold">Class One:</h1>
+                    <p>Special Interests (Hobbies/Community Outreach)</p>
+                  </div>
                 </div>
-              </div>
-              <div className = "list">
-                <div className = "list-item">
-                  <h1 className = "bold">Class Two:</h1>
-                  <p>Club Sports</p>
+                <div className = "list">
+                  <div className = "list-item">
+                    <h1 className = "bold">Class Two:</h1>
+                    <p>Club Sports</p>
+                  </div>
                 </div>
-              </div>
-              <div className = "list">
-                <div className = "list-item">
-                  <h1 className = "bold">Class Three:</h1>
-                  <p>Clubs that provide programming or services to the entire campus</p>
+                <div className = "list">
+                  <div className = "list-item">
+                    <h1 className = "bold">Class Three:</h1>
+                    <p>Clubs that provide programming or services to the entire campus</p>
+                  </div>
                 </div>
-              </div>
+            </div>
             </div>
           </div>
           <div className = "column">
-            <div className = "notification has-background-light">
-              <p>The remaining SLF budget is allocated here, as Sponsorship, after Mandatory Transfers and Organization Budgets have
-              been resolved. Rollbacks include any funds that were leftover from the previous fiscal year.</p>
-              <br></br>
-              <p>The combined sponsorship & rollbacks are used for Funding Requests (FR). FRs are meants to supplement club budgets, or
-              provide funds for organizations that do not receive an annual budget. FRs are heard by the Financial Board, and are approved
-              or denied based on the organization's need.</p>
+            <div className = 'notification align-text is-info'>
+              <h1 className = 'subtitle is-3'>Other</h1>
+              <h1 className = 'subtitle is-4'>${this.state.Other_total}</h1>
+              <div className = "notification has-background-light">
+                <p className = "black">The remaining SLF budget is allocated here (made up of Sponsorship, Rollbacks, and Liability) after Mandatory Transfers and Organization Budgets have
+                been resolved. Rollbacks include any funds that were leftover from the previous fiscal year.</p>
+                <br></br>
+                <p className = "black">This budget is used for Funding Requests (FR). FRs are meants to supplement club budgets, or
+                provide funds for organizations that do not receive an annual budget. FRs are heard by the Financial Board, and are approved
+                or denied based on the organization's need.</p>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <div className = 'columns'>
+          <div className = "column">
+            
+          </div>
+          <div className = "column">
+            
+          </div>
+          <div className = "column">
+            
           </div>
         </div>
       </div>
@@ -345,8 +350,9 @@ class Page extends Component {
     return (
       <div>
         <Story/>
-        <LineChart/>
         <BarChart/>
+        
+        
           
       </div>
     )
