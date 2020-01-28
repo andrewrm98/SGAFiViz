@@ -43,10 +43,11 @@ class Story extends Component {
   }
 
   getData = async () => {
-    const response = await fetch('/api/home');
+    const response = await fetch('/api/slf');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-    this.setState({ budgets: body.budgets });
+    console.log(body);
+    this.setState({ budgets: body.slf });
   }
 
   render() {

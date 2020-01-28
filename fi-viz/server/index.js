@@ -33,8 +33,39 @@ app.get('/api/budgets', (req, res) => {
     })
 });
 
-app.get('/api/hello', (req, res) => {
-    res.json({"msg": "Hello!"});
+app.get('/api/sunburst', (req, res) => {
+    // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
+    con.query("SELECT * FROM sgadb.`Total Budget` WHERE `Fiscal Year` = 'FY 20';", function (err, data) {
+        (err) ? res.send(err) : res.json({ data: data[0] });
+    })
+});
+
+app.get('/api/club_budgets', (req, res) => {
+    // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
+    con.query("SELECT * FROM sgadb.`Club Total Budget` WHERE `Fiscal Year` = 'FY 20';", function (err, data) {
+        (err) ? res.send(err) : res.json({ budgets: data });
+    })
+});
+
+app.get('/api/categories_budgets', (req, res) => {
+    // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
+    con.query("SELECT * FROM sgadb.`Categories Total Budget` WHERE `Fiscal Year` = 'FY 20';", function (err, data) {
+        (err) ? res.send(err) : res.json({ budgets: data });
+    })
+});
+
+app.get('/api/slf', (req, res) => {
+    con.query("SELECT * FROM sgadb.`Student Life Fee`;", function (err, data) {
+        console.log(data);
+        (err) ? res.send(err) : res.json({ slf: data });
+    })
+});
+
+app.get('/api/mandatory_transfers', (req, res) => {
+    con.query("SELECT * FROM sgadb.`Mandatory Transfers Total Budget` WHERE `Fiscal Year` = 'FY 20';", function (err, data) {
+        console.log(data);
+        (err) ? res.send(err) : res.json({ mandatory: data });
+    })
 });
 
 // app.post('/api/addBudget', (req, res) => {
