@@ -7,6 +7,17 @@
     padding-right: 4%;
 }
 
+.vertical-divider {
+    border-left: 2px solid rgba(169, 176, 183);
+    height: 100px;
+    position: absolute;
+    left: 50%;
+}
+
+.red-bg {
+    background-color: rgb(172, 43, 55);
+}
+
 .video {
     margin-top: 80px;
     margin-bottom: 80px;
@@ -34,7 +45,8 @@
 .story-page2 {
     padding-left: 15%;
     padding-Right: 15%;
-    background-color: rgba(169, 176, 183)
+    background-color: rgba(169, 176, 183);
+    background-color: rgb(172, 43, 55);
 }
 
 .align-text {

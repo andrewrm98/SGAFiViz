@@ -6,6 +6,8 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "bulma": "^0.8.0",
+    "bulma-divider": "^0.2.0",
+    "bulma-extensions": "^6.2.7",
     "express": "^4.17.1",
     "mysql": "^2.17.1",
     "path": "^0.12.7",
