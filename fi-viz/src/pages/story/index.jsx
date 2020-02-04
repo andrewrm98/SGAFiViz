@@ -223,47 +223,39 @@ class Story extends Component {
   render() {
     return (
       <div>
-        <div className = "columns margin">
-          <div className = "column story-container white notification is-half">
-            <div>
-              <h1 className = "title">What is the Student Life Fee (SLF)?</h1>
-              <p>Every WPI Student pays a small fee, through their tuition, so that the clubs on campus 
-                have funds to be run and mantained. 
-                The Student Goverment Association (SGA), handles these funds in order to give each club a budget, 
-                as well as to fulfill certain funding requests if they deem the club has an acceptable need.</p>
+        <div className="story-page">
+          <div className = "story-container box border">
+              <div>
+                <h1 className = "title">What is the <span className="red">Student Life Fee</span>?</h1>
+                <p>Every WPI Student pays a small fee, through their tuition, so that the clubs on campus 
+                  have funds to be run and mantained. 
+                  The Student Goverment Association (SGA), handles these funds in order to give each club a budget, 
+                  as well as to fulfill certain funding requests if they deem the club has an acceptable need.</p>
+              </div>
             </div>
-            
-          </div>
-          <div className = "column is-half">
-            Insert student life fee example image here
-          </div>
+          <div className="padding-video">
+            <figure className = "image is-16by9">
+              <iframe className="has-ratio" frameborder="0" src="https://biteable.com/watch/embed/sgafiviz-2439134" allowfullscreen="true" allow="autoplay"></iframe>
+            </figure>
+          </div> 
         </div>
-        <LineChart/>
-        <div className = "content divide notification">
-          <h1 className = 'white title'>Where Does That Money Go?</h1>
-          <h1 className = 'white subtitle is-4'>The Budget Breakdown</h1>
+      
+        <div className = "padding-grey story-page2">
+          <div className = "center">
+            <h1 className = 'title'>Where Does That Money Go?</h1>
+            <h1 className = 'subtitle is-4'>The Budget Breakdown</h1>
+            <div className = "columns">
+              <div className = "column">
+                <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red">${this.state.SLF}</h1>
+              </div>
+              <div className = "column">
+                  <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is </h1><h1 className = "title red">${this.state.total}</h1>
+              </div>
+            </div>
+          </div>
+          <br></br>
+          <br></br>
           <div className = "columns">
-            <div className = "column">
-              <div className = "notification has-background-white">
-                <h1 className = 'subtitle is-4 align-text black bold'>The Fiscal Year is </h1><h1 className = "green">{this.state.fiscal_year}</h1>
-              </div>
-            </div>
-            <div className = "column">
-              <div className = "notification has-background-white">
-                <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "green">${this.state.SLF}</h1>
-              </div>
-            </div>
-            <div className = "column">
-              <div className = "notification has-background-white">
-                <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is </h1><h1 className = "green">${this.state.total}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h1 className = 'subtitle is-4 align-text'>The overall budget is allocated among these three student services.</h1>
-          
-
-        <div className = "columns">
           <div className = "column">
             <div className = 'notification align-text is-danger'>
               <h1 className = 'subtitle is-3'>Mandatory Transfers</h1>
@@ -328,6 +320,12 @@ class Story extends Component {
             </div>
           </div>
         </div>
+        </div>
+        
+        <h1 className = 'subtitle is-4 align-text'>The overall budget is allocated among these three student services.</h1>
+          
+
+        
 
         <div className = 'columns'>
           <div className = "column">
@@ -350,10 +348,8 @@ class Page extends Component {
     return (
       <div>
         <Story/>
-        <BarChart/>
-        
-        
-          
+        <BarChart/>  
+        <LineChart/>
       </div>
     )
   }

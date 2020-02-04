@@ -1,6 +1,40 @@
 .story-container {
     text-align: center;
-    background-color: #9D1212;
+    margin-top: 60px;
+    margin-bottom: 0px      !important;
+    padding-top: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.video {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.padding-video {
+    padding: 7%;
+}
+
+.padding-grey {
+    padding: 3%;
+}
+
+.center {
+    display: flex;
+    text-align: center;
+    align-content: center;
+}
+
+.story-page {
+    padding-left: 20%;
+    padding-Right: 20%;
+}
+
+.story-page2 {
+    padding-left: 15%;
+    padding-Right: 15%;
+    background-color: rgba(169, 176, 183)
 }
 
 .align-text {
@@ -19,18 +53,12 @@
     color: white;
 }
 
-.divide {
-    background-color: #9D1212;
-    text-align: center;
-    width: 100%
-}
-
 .bold {
     font-weight: bold;
 }
 
 .border {
-    border: 5px solid black;
+    border: 1px solid rgba(169, 176, 183, .3)
 }
 
 .no-padding {

@@ -18,18 +18,19 @@ class Header extends React.Component {
 
   render() {
     return (
-      <section className="hero has-bg-img is-medium">
+      <section className="hero has-bg-img is-small">
         {/*  Hero head: will stick at the top */}
         <div className="hero-head">
         </div>
 
         {/* Hero content: will be in the middle */}
         <div className="hero-body has-text-centered">
-        <img className = "center" src={require('./wpilogo-edited.png')} alt = "" />
-          <h1 className="title huge-title white">
-            Student Life Fee Story
+        <img className = "center" src={require('./wpilogo-edited.png')} width="100" height="200" alt = ""/>
+          <h1 className="title is-1 white">
+            Your Student Life Fee
           </h1>
         </div>
+        <br></br>
 
         {/* Hero footer: will stick at the bottom */}
         <div className="hero-foot">
