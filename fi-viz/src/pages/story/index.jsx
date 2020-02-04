@@ -245,7 +245,7 @@ class Story extends Component {
             <div className = "box">
               <div className = "columns">
                 <div className = "column">
-                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red">${this.state.SLF}</h1>
+                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red"><span class='numscroller' data-min='1' data-max='1000' data-delay='5' data-increment='10'>1000</span></h1>
                 </div>
                 <div className = "is-divider-vertical"></div>
                 <div className = "column">
