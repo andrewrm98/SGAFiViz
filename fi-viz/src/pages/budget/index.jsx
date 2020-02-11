@@ -174,7 +174,6 @@ class Budget extends React.Component {
     } else {
       return (
         <div className='budget-container center-text'>
-          <h1>Budget</h1>
         </div>
       );
     }
@@ -186,8 +185,9 @@ class BudgetPage extends Component {
     return (
       <div>
         <Budget />
+        <div className="flourish-embed" data-src="visualisation/1338475"/>
         <Chart />
-
+        <div className="flourish-embed" data-src="visualisation/1338248"/>
       </div>
     )
   }
