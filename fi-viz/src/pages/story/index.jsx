@@ -237,6 +237,48 @@ class Story extends Component {
             </figure>
           </div> 
         </div>
+
+        <div className = "story-page3">
+          <div className = "box border-black margin-slf">
+            <h1 className = "title"><span className="red">Raising</span> the Student Life Fee</h1>
+            <p>The student life fee increases routinely in order to satisfy to the rapid expansion of
+              WPI's underguate student body and proportionate increase of student clubs and expenses.</p>
+          </div>
+          <div>
+            
+          </div>
+          <div className = "columns">
+            <div className = "column">
+              <div className = "box border-black">
+                <p><span className="red">39</span> more organizations since 2015 </p>
+              </div>
+            </div>
+            <div className = "column">
+              <div className = "box border-black">
+                <p><span className="red">0.007%</span> increase in tuition from FY19</p>
+              </div>
+            </div>
+            <div className = "column">
+              <div className = "box border-black">
+                <p> <span className="red">25%</span> of total budgets had to be cut in FY19 </p>
+              </div>
+            </div>
+            <div className = "column">
+              <div className = "box border-black">
+                <p> <span className="red">80</span> new clubs since 2010 </p>
+              </div>
+            </div>
+            <div className = "column">
+              <div className = "box border-black">
+                <p> SLF made <span className="red">$300</span> to account for inflation </p>
+              </div>
+            </div>
+          </div>
+    
+          <LineChart/>
+
+        </div>
+
       
         <div className = "padding-grey story-page2">
           <div className = "center">
@@ -311,7 +353,7 @@ class Page extends Component {
       <div>
         <Story/>
         <BarChart/>  
-        <LineChart/>
+       
       </div>
     )
   }
