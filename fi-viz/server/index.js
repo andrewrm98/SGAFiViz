@@ -66,11 +66,30 @@ app.get('/api/slf', (req, res) => {
     })
 });
 
+
 app.get('/api/mandatory_transfers', (req, res) => {
     con.query("SELECT * FROM sgadb.`Mandatory Transfers Total Budget` WHERE `Fiscal Year` = 'FY 20';", function (err, data) {
         console.log(data);
         (err) ? res.send(err) : res.json({ mandatory: data });
     })
+});
+
+app.get('/api/budget_breakdown', (req, res) => {
+    // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
+    con.query("SELECT * FROM sgadb.`Total Budget`;", function (err, data) {
+        var i
+        for (i=0; i<data.length; i++) {
+            var year = data[i]["Fiscal Year"]
+            var yearArr = year.split(" ")
+            data[i]["Fiscal Year"] = "20" + parseInt(yearArr[1])
+        }
+       
+        (err) ? res.send(err) : res.json({ budgets: data });
+    })
+});
+
+app.get('/api/hello', (req, res) => {
+    res.json({"msg": "Hello!"});
 });
 
 // app.post('/api/addBudget', (req, res) => {
