@@ -36,12 +36,6 @@ const AboutPage = () => {
         <div className = "column"></div>
       </div>
       <br></br>
-    
-      <div className = "about-container notification center-text">
-      <h1 className = 'title is-size-3 white'>Administrator Access</h1>
-      <a href="https://fp-admin-page.glitch.me/" className="is-size-4 white">https://fp-admin-page.glitch.me/</a>
-      </div>
-      <br></br>
     </div>
   );
 };

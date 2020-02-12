@@ -9,6 +9,7 @@
     "bulma-divider": "^0.2.0",
     "bulma-extensions": "^6.2.7",
     "d3": "^5.15.0",
+    "d3-sankey": "^0.12.3",
     "express": "^4.17.1",
     "jQuery": "^1.7.4",
     "mysql": "^2.17.1",
@@ -17,10 +18,12 @@
     "react": "^16.12.0",
     "react-countup": "^4.3.3",
     "react-currency-format": "^1.0.0",
+    "react-d3-library": "^1.1.8",
     "react-dom": "^16.12.0",
     "react-plotly.js": "^2.4.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.3.0"
+    "react-scripts": "^3.3.0",
+    "react-visibility-sensor": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts --max_old_space_size=4096 start",

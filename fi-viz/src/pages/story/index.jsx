@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import "./story.css"
 import Plot from 'react-plotly.js';
-import CurrencyFormat from 'react-currency-format';
-import CountUp from 'react-countup';  
+import CountUp, {startAnimation} from 'react-countup';  
+import VisibilitySensor from 'react-visibility-sensor';
+import rd3 from 'react-d3-library';
+import node from './d3.sankey.js';
+const RD3Component = rd3.Component;
+ 
 
 
 class LineChart extends Component {
@@ -60,7 +64,6 @@ class LineChart extends Component {
           
         yAxis = result.reverse()
         xAxis = xAxis.sort((a, b) => a - b)
-
 
         return (
 
@@ -206,15 +209,20 @@ class Sankey extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {d3: ''}
+  }
+
+  componentDidMount() {
+    this.setState({d3: node});
   }
 
   render() {
-
+    // console.log('hi')  
         return (
-         <div></div>
-      );
+            <div>
+              <RD3Component data={this.state.d3}/>
+            </div>
+      );  
   }
 }
 class Story extends Component {
@@ -233,7 +241,9 @@ class Story extends Component {
       organizations: 39,
       tuition_inc: 0.007, // %
       budget_cuts: 25,  // %
-      new_clubs: 80
+      new_clubs: 80,
+      // counting up values on proper position
+      didViewCountUp: false
     };
   }
 
@@ -250,6 +260,13 @@ class Story extends Component {
                     CB_total : body.budgets[0]["Club Budget"],
                     Other_total : body.budgets[0]["Other"],
                     total: body.budgets[0]["Total"]});
+  }
+
+  // Used to engage number countup when the section is visible 
+  onVisibilityChange = isVisible => {
+    if (isVisible) {
+      this.setState({didViewCountUp: true});
+    }
   }
 
   render() {
@@ -329,11 +346,18 @@ class Story extends Component {
             <div className = "box">
               <div className = "columns">
                 <div className = "column">
-                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red"><CountUp end={this.state.SLF} duration={1.5} prefix="$" decimals={2} decimal="."></CountUp></h1>
+                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red">
+                    <VisibilitySensor onChange={this.onVisibilityChange} offset={{
+                      top:
+                        10
+                    }} delayedCall>
+                      <CountUp end={this.state.didViewCountUp ? this.state.SLF : 0} duration={1.5} prefix="$" decimals={2} decimal="." ref={countUp => { this.myCountUp = countUp; }}/>
+                    </VisibilitySensor>
+                  </h1>
                 </div>
                 <div className = "is-divider-vertical"></div>
                 <div className = "column">
-                    <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is </h1><h1 className = "title red"><CountUp end={this.state.total} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
+                    <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is </h1><h1 className = "title red"><CountUp end={this.state.didViewCountUp ? this.state.total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 </div>
               </div>
             </div>
@@ -347,7 +371,7 @@ class Story extends Component {
             <div className = "column">
               <div className = 'box align-text'>
                 <h1 className = 'subtitle is-3'>Mandatory Transfers</h1>
-                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.MT_total} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
+                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.MT_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                 <p>Covers a variety of campus services such as Snap, Club Sports, Coaches, and Campus Labs. This budget also allows sports to get gym credit!</p>
               </div>
@@ -356,7 +380,7 @@ class Story extends Component {
             <div className = "column">
               <div className = 'box align-text'>
                 <h1 className = 'subtitle is-3'>Organization Budgets</h1>
-                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.CB_total} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
+                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.CB_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                   Organizations, such as clubs, can request an annual budget. SGA approves budgets that
                   align with their bylaws.
@@ -367,7 +391,7 @@ class Story extends Component {
             <div className = "column">
               <div className = 'box align-text'>
                 <h1 className = 'subtitle is-3'>Other</h1>
-                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.Other_total} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
+                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.Other_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                   <p className = "black">This budget is used for Funding Requests (FR). FRs are meants to supplement club budgets, or
                   provide funds for organizations that do not receive an annual budget.</p>
@@ -387,7 +411,8 @@ class Page extends Component {
     return (
       <div>
         <Story/>
-        <BarChart/>
+        {/* <BarChart/> */}
+        {/* <Sankey/> */}
       </div>
     )
   }
