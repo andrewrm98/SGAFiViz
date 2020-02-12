@@ -1,7 +1,71 @@
-.story-container {
-    text-align: center;
-    background-color: #9D1212;
+.story-intro {
+    padding-left: 20%;
+    padding-Right: 20%;
 }
+
+.intro-card {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 0px      !important;
+    padding-top: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.story-slf {
+    padding-top: 50px;
+    padding-left: 17.5%;
+    padding-Right: 17.5%;
+    background-color: rgba(169, 176, 183);
+    padding-bottom: 50px;
+}
+
+.margin-slf {
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.slf-padding {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.story-budget-break {
+    padding-top: 50px;
+    padding-left: 15%;
+    padding-Right: 15%;
+    background-color: rgb(172, 43, 55);
+    padding-bottom: 50px;
+}
+
+
+
+.vertical-divider {
+    border-left: 2px solid rgba(169, 176, 183);
+    height: 100px;
+    position: absolute;
+    left: 50%;
+}
+
+.red-bg {
+    background-color: rgb(172, 43, 55);
+}
+
+.video {
+    padding: 7%;
+}
+
+.padding-grey {
+    padding: 3%;
+}
+
+.center {
+    display: flex;
+    text-align: center;
+    align-content: center;
+}
+
 
 .align-text {
     text-align: center;
@@ -19,18 +83,16 @@
     color: white;
 }
 
-.divide {
-    background-color: #9D1212;
-    text-align: center;
-    width: 100%
-}
-
 .bold {
     font-weight: bold;
 }
 
 .border {
-    border: 5px solid black;
+    border: 1px solid rgba(169, 176, 183, .3)
+}
+
+.border-black {
+    border: 1px solid rgba(0, 0, 0, .4)
 }
 
 .no-padding {
