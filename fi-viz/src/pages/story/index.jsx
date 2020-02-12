@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./story.css"
 import Plot from 'react-plotly.js';
+import CurrencyFormat from 'react-currency-format';
+import CountUp from 'react-countup';  
 
 
 class LineChart extends Component {
@@ -79,17 +81,20 @@ class LineChart extends Component {
                 yaxis: {
                   title: 'Yearly Cost',
                   showline: false,
-                  linecolor: 'black',
-                  showgrid: false
+                  line: {
+                    color: 'black',
+                    width: 3
+                  },
+                  showgrid: true
                 },
                 xaxis: {
                   title: 'Fiscal Year',
                   showline: false,
                   linecolor: 'black',
                   showgrid: false
-                },
-                plot_bgcolor: 'rgba(0, 0, 0, 0)', 
-                paper_bgcolor: 'rgba(0, 0, 0, 0)'
+                }
+                //plot_bgcolor: 'rgba(0, 0, 0, 0)', 
+                //paper_bgcolor: 'rgba(0, 0, 0, 0)'
                 
               }}
             useResizeHandler={true}
@@ -217,12 +222,18 @@ class Story extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // budget breakdown
       fiscal_year: 2020,
       MT_total: 273302.00,
       CB_total: 823527.27,
       Other_total: 400000.00,
       SLF: 316,
-      total: "1.4 Million"
+      total: 1400000,
+      // SLF Trend Data
+      organizations: 39,
+      tuition_inc: 0.007, // %
+      budget_cuts: 25,  // %
+      new_clubs: 80
     };
   }
 
@@ -260,7 +271,7 @@ class Story extends Component {
           </div>
           <div className="video">
             <figure className = "image is-16by9">
-              <iframe className="has-ratio" frameBorder="0" src="https://biteable.com/watch/embed/sgafiviz-2439134" allowFullScreen={true} allow="autoplay"></iframe>
+              <iframe title="introVideo" className="has-ratio" frameBorder="0" src="https://biteable.com/watch/embed/sgafiviz-2439134" allowFullScreen={true} allow="autoplay"></iframe>
             </figure>
           </div> 
         </div>
@@ -279,27 +290,27 @@ class Story extends Component {
           <div className = "slf-padding columns">
             <div className = "column">
               <div className = "box border-black">
-                <p><span className="red">39</span> more organizations since 2015 </p>
+                <p><span className="red">{this.state.organizations}</span> more organizations since 2015 </p>
               </div>
             </div>
             <div className = "column">
               <div className = "box border-black">
-                <p><span className="red">0.007%</span> increase in tuition from FY19</p>
+                <p><span className="red">{this.state.tuition_inc}%</span> increase in tuition from FY19</p>
               </div>
             </div>
             <div className = "column">
               <div className = "box border-black">
-                <p> <span className="red">25%</span> of total budgets had to be cut in FY19 </p>
+                <p> <span className="red">{this.state.budget_cuts}%</span> of total budgets had to be cut in FY19 </p>
               </div>
             </div>
             <div className = "column">
               <div className = "box border-black">
-                <p> <span className="red">80</span> new clubs since 2010 </p>
+                <p> <span className="red">{this.state.new_clubs}</span> new clubs since 2010 </p>
               </div>
             </div>
             <div className = "column">
               <div className = "box border-black">
-                <p> SLF made <span className="red">$300</span> to account for inflation </p>
+                <p> SLF made <span className="red">{this.state.SLF}</span> to account for inflation </p>
               </div>
             </div>
           </div>
@@ -318,11 +329,11 @@ class Story extends Component {
             <div className = "box">
               <div className = "columns">
                 <div className = "column">
-                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red"><span className='numscroller' data-min='1' data-max='1000' data-delay='5' data-increment='10'>1000</span></h1>
+                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red"><CountUp end={this.state.SLF} duration={1.5} prefix="$" decimals={2} decimal="."></CountUp></h1>
                 </div>
                 <div className = "is-divider-vertical"></div>
                 <div className = "column">
-                    <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is </h1><h1 className = "title red">${this.state.total}</h1>
+                    <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is </h1><h1 className = "title red"><CountUp end={this.state.total} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 </div>
               </div>
             </div>
@@ -336,7 +347,7 @@ class Story extends Component {
             <div className = "column">
               <div className = 'box align-text'>
                 <h1 className = 'subtitle is-3'>Mandatory Transfers</h1>
-                <h1 className = 'subtitle is-4'>${this.state.MT_total}</h1>
+                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.MT_total} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                 <p>Covers a variety of campus services such as Snap, Club Sports, Coaches, and Campus Labs. This budget also allows sports to get gym credit!</p>
               </div>
@@ -345,17 +356,18 @@ class Story extends Component {
             <div className = "column">
               <div className = 'box align-text'>
                 <h1 className = 'subtitle is-3'>Organization Budgets</h1>
-                <h1 className = 'subtitle is-4'>${this.state.CB_total}</h1>
+                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.CB_total} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                   Organizations, such as clubs, can request an annual budget. SGA approves budgets that
                   align with their bylaws.
                 </div>
+                <br></br>
               </div>
             </div>
             <div className = "column">
               <div className = 'box align-text'>
                 <h1 className = 'subtitle is-3'>Other</h1>
-                <h1 className = 'subtitle is-4'>${this.state.Other_total}</h1>
+                <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.Other_total} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                   <p className = "black">This budget is used for Funding Requests (FR). FRs are meants to supplement club budgets, or
                   provide funds for organizations that do not receive an annual budget.</p>

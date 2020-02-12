@@ -183,11 +183,11 @@ class Budget extends React.Component {
 class BudgetPage extends Component {
   render() {
     return (
-      <div>
+      <div style={{marginLeft: '15%', marginRight: '15%'}}>
         <Budget />
         <Chart />
         <div className="flourish-embed" data-src="visualisation/1338475"/>
-        <div className="flourish-embed" data-src="visualisation/1338248"/>
+        <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/>
       </div>
     )
   }
