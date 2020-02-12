@@ -187,6 +187,7 @@ class RidgeChart extends Component {
     //     useResizeHandler={true}
     //     onClick={this.plotlyClickHandler}
     //   />
+      <div></div>
     );
   }
 }
