@@ -1,3 +1,5 @@
+import d3 from 'd3';
+
 d3.sankey = function() {
     var sankey = {},
         nodeWidth = 24,
