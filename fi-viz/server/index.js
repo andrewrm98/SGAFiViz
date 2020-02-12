@@ -56,12 +56,13 @@ app.get('/api/categories_budgets', (req, res) => {
 
 app.get('/api/slf', (req, res) => {
     con.query("SELECT * FROM sgadb.`Student Life Fee`;", function (err, data) {
-        var i
+        var i = 0, xAxis = [], yAxis = []
         for (i=0; i<data.length; i++) {
             var year = data[i]["Fiscal Year"]
             var yearArr = year.split(" ")
-            data[i]["Fiscal Year"] = parseInt(yearArr[1])
+            data[i]["Fiscal Year"] = parseInt(yearArr[1]) + 2000
         }
+
         (err) ? res.send(err) : res.json({ slf: data });
     })
 });

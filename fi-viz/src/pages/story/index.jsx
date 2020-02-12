@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./story.css"
 import Plot from 'react-plotly.js';
 
+
 class LineChart extends Component {
 
   constructor(props) {
@@ -77,11 +78,19 @@ class LineChart extends Component {
                 title: 'Student Life Fee Trend',
                 yaxis: {
                   title: 'Yearly Cost',
-                  showline: false
+                  showline: false,
+                  linecolor: 'black',
+                  showgrid: false
                 },
                 xaxis: {
                   title: 'Fiscal Year',
-                  showline: false}
+                  showline: false,
+                  linecolor: 'black',
+                  showgrid: false
+                },
+                plot_bgcolor: 'rgba(0, 0, 0, 0)', 
+                paper_bgcolor: 'rgba(0, 0, 0, 0)'
+                
               }}
             useResizeHandler={true}
           />
@@ -90,7 +99,6 @@ class LineChart extends Component {
     }
   }
 }
-
 
 class BarChart extends Component {
 
@@ -220,9 +228,13 @@ class Story extends Component {
 
   render() {
     return (
+      
       <div>
-        <div className="story-page">
-          <div className = "story-container box border">
+
+        {/* Intro Section - Contains SLF Summary and Video */}
+
+        <div className="story-intro">
+          <div className = "intro-card box border">
               <div>
                 <h1 className = "title">What is the <span className="red">Student Life Fee</span>?</h1>
                 <p>Every WPI Student pays a small fee, through their tuition, so that the clubs on campus 
@@ -230,24 +242,26 @@ class Story extends Component {
                   The Student Goverment Association (SGA), handles these funds in order to give each club a budget, 
                   as well as to fulfill certain funding requests if they deem the club has an acceptable need.</p>
               </div>
-            </div>
-          <div className="padding-video">
+          </div>
+          <div className="video">
             <figure className = "image is-16by9">
               <iframe className="has-ratio" frameBorder="0" src="https://biteable.com/watch/embed/sgafiviz-2439134" allowFullScreen={true} allow="autoplay"></iframe>
             </figure>
           </div> 
         </div>
 
-        <div className = "story-page3">
+        {/* SLF Section - Header */}
+
+        <div className = "story-slf">
           <div className = "box border-black margin-slf">
             <h1 className = "title"><span className="red">Raising</span> the Student Life Fee</h1>
             <p>The student life fee increases routinely in order to satisfy to the rapid expansion of
               WPI's underguate student body and proportionate increase of student clubs and expenses.</p>
           </div>
-          <div>
             
-          </div>
-          <div className = "columns">
+        {/* SLF Section - Columns */}
+        
+          <div className = "slf-padding columns">
             <div className = "column">
               <div className = "box border-black">
                 <p><span className="red">39</span> more organizations since 2015 </p>
@@ -274,20 +288,22 @@ class Story extends Component {
               </div>
             </div>
           </div>
-    
-          <LineChart/>
 
+          {/* SLF Section - LineChart */}
+          <LineChart/>
+          
         </div>
 
+        {/* Story Budget Breakdown Section - Header */}
       
-        <div className = "padding-grey story-page2">
+        <div className = "story-budget-break">
           <div className = "center">
             <h1 className = 'white title'>Where Does That Money Go?</h1>
             <h1 className = 'white subtitle is-4'>The Budget Breakdown</h1>
             <div className = "box">
               <div className = "columns">
                 <div className = "column">
-                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red"><span class='numscroller' data-min='1' data-max='1000' data-delay='5' data-increment='10'>1000</span></h1>
+                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red"><span className='numscroller' data-min='1' data-max='1000' data-delay='5' data-increment='10'>1000</span></h1>
                 </div>
                 <div className = "is-divider-vertical"></div>
                 <div className = "column">
@@ -298,50 +314,42 @@ class Story extends Component {
           </div>
           <br></br>
           <br></br>
+
+          {/* Story Budget Breakdown Section - Columns */}
+
           <div className = "columns">
-          <div className = "column">
-            <div className = 'box align-text'>
-              <h1 className = 'subtitle is-3'>Mandatory Transfers</h1>
-              <h1 className = 'subtitle is-4'>${this.state.MT_total}</h1>
-              <div>
-              <p>Covers a variety of campus services such as Snap, Club Sports, Coaches, and Campus Labs. This budget also allows sports to get gym credit!</p>
+            <div className = "column">
+              <div className = 'box align-text'>
+                <h1 className = 'subtitle is-3'>Mandatory Transfers</h1>
+                <h1 className = 'subtitle is-4'>${this.state.MT_total}</h1>
+                <div>
+                <p>Covers a variety of campus services such as Snap, Club Sports, Coaches, and Campus Labs. This budget also allows sports to get gym credit!</p>
+              </div>
+              </div>  
             </div>
+            <div className = "column">
+              <div className = 'box align-text'>
+                <h1 className = 'subtitle is-3'>Organization Budgets</h1>
+                <h1 className = 'subtitle is-4'>${this.state.CB_total}</h1>
+                <div>
+                  Organizations, such as clubs, can request an annual budget. SGA approves budgets that
+                  align with their bylaws.
+                </div>
+              </div>
             </div>
-          </div>
-          <div className = "column">
-            <div className = 'box align-text'>
-              <h1 className = 'subtitle is-3'>Organization Budgets</h1>
-              <h1 className = 'subtitle is-4'>${this.state.CB_total}</h1>
-              <div>
-                Organizations, such as clubs, can request an annual budget. SGA approves budgets that
-                align with their bylaws.
+            <div className = "column">
+              <div className = 'box align-text'>
+                <h1 className = 'subtitle is-3'>Other</h1>
+                <h1 className = 'subtitle is-4'>${this.state.Other_total}</h1>
+                <div>
+                  <p className = "black">This budget is used for Funding Requests (FR). FRs are meants to supplement club budgets, or
+                  provide funds for organizations that do not receive an annual budget.</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className = "column">
-            <div className = 'box align-text'>
-              <h1 className = 'subtitle is-3'>Other</h1>
-              <h1 className = 'subtitle is-4'>${this.state.Other_total}</h1>
-              <div>
-                <p className = "black">This budget is used for Funding Requests (FR). FRs are meants to supplement club budgets, or
-                provide funds for organizations that do not receive an annual budget.</p>
-              </div>
-            </div>
-          </div>
-        </div>
         </div>
         
-        <div className = 'columns'>
-          <div className = "column">
-            
-          </div>
-          <div className = "column">
-            
-          </div>
-          <div className = "column">
-            
-          </div>
-        </div>
       </div>
     );
   }
@@ -352,8 +360,7 @@ class Page extends Component {
     return (
       <div>
         <Story/>
-        <BarChart/>  
-       
+        <BarChart/>
       </div>
     )
   }
