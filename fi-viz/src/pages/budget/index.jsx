@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import './budget.css'
 import Plot from 'react-plotly.js';
+import Funnel from "../../components/Funnel";
+import RidgeChart from "../../components/Ridge";
 
-class Chart extends Component {
+class SunburstChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,6 +101,11 @@ class Chart extends Component {
       )
   }
 
+  plotlyClickHandler(data) {
+    console.log("plotlyClickHandler");
+    console.log(data);  
+  }
+
   render() {
     console.log(this.state.mandatory_transfers);
     return (
@@ -106,11 +113,12 @@ class Chart extends Component {
         data={[
           {
             type: "sunburst",
-            labels: ["FY 20", "Mandatory Transfers Budget", "Club Budget", "Other"].concat(this.state.mandatory_transfers.map(a => a["Fund Name"])).concat(this.state.categories.map(a => a.Category)).concat(this.state.clubBudgets.map(a => a.Name)),
-            parents: ["", "FY 20", "FY 20", "FY 20"].concat(this.state.mandatory_transfers.map(a => "Mandatory Transfers Budget")).concat(this.state.categories.map(a => "Club Budget")).concat(this.state.clubBudgets.map(a => a.Category)),
+            labels: ["FY 20", "Mandatory Transfers", "Clubs", "Other"].concat(this.state.categories.map(a => a.Category)),
+            parents: ["", "FY 20", "FY 20", "FY 20"].concat(this.state.categories.map(a => "Clubs")),
             // values: [3, 1, 1 , 1],
-            // values: [this.state.data.Total, this.state.data["Mandatory Transfers Budget"], this.state.data["Club Budget"], this.state.data.Other].concat(this.state.categories.map(a => a.Total)).concat(this.state.clubBudgets.map(a => a["Total Budget"])),
-            // outsidetextfont: { size: 20, color: "#377eb8" },
+            values: [this.state.data.Total, this.state.data["Mandatory Transfers Budget"], this.state.data["Club Budget"], this.state.data.Other].concat(this.state.categories.map(a => a.Total)),
+            outsidetextfont: { size: 20, color: "#377eb8" },
+            hovertemplate: `Budget: %{value:$,.0f}<extra></extra>`,
             // leaf: { opacity: 0.4 },
             marker: { line: { width: 2 } },
             branchvalues: 'total'
@@ -118,14 +126,15 @@ class Chart extends Component {
         ]}
         layout={{
           margin: { l: 0, r: 0, b: 0, t: 0 },
-          // sunburstcolorway: [
-          //   "#636efa", "#EF553B", "#00cc96", "#ab63fa", "#19d3f3",
-          //   "#e763fa", "#FECB52", "#FFA15A", "#FF6692", "#B6E880"
-          // ],
-          // extendsunburstcolorway: true,
+          sunburstcolorway: [
+            "#636efa", "#EF553B", "#00cc96", "#ab63fa", "#19d3f3",
+            "#e763fa", "#FECB52", "#FFA15A", "#FF6692", "#B6E880"
+          ],
+          extendsunburstcolorway: true,
            title: 'A Fancy Plot'
         }}
         useResizeHandler={true}
+        onClick={this.plotlyClickHandler}
       />
     );
   }
@@ -185,7 +194,9 @@ class BudgetPage extends Component {
     return (
       <div style={{marginLeft: '15%', marginRight: '15%'}}>
         <Budget />
-        <Chart />
+        <SunburstChart />
+        {/* <RidgeChart /> */}
+        <Funnel />
         <div className="flourish-embed" data-src="visualisation/1338475"/>
         <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/>
       </div>
