@@ -218,9 +218,15 @@ class Sankey extends Component {
 
   render() {
     // console.log('hi')  
+    //<RD3Component data={this.state.d3}/>
         return (
-            <div>
-              <RD3Component data={this.state.d3}/>
+            <div class = "slanted2 light-red-bg">
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
             </div>
       );  
   }
@@ -295,7 +301,7 @@ class Story extends Component {
 
         {/* SLF Section - Header */}
 
-        <div className = "story-slf slanted">
+        <div className = "story-slf slanted light-red-bg">
           <div className = "box border-black margin-slf">
             <h1 className = "title"><span className="red">Raising</span> the Student Life Fee</h1>
             <p>The student life fee increases routinely in order to satisfy to the rapid expansion of
@@ -306,27 +312,27 @@ class Story extends Component {
         
           <div className = "slf-padding columns">
             <div className = "column">
-              <div className = "box border-black">
+              <div className = "box border-black max-height align-text">
                 <p><span className="red">{this.state.organizations}</span> more organizations since 2015 </p>
               </div>
             </div>
             <div className = "column">
-              <div className = "box border-black">
+              <div className = "box border-black max-height align-text">
                 <p><span className="red">{this.state.tuition_inc}%</span> increase in tuition from FY19</p>
               </div>
             </div>
             <div className = "column">
-              <div className = "box border-black">
+              <div className = "box border-black max-height align-text">
                 <p> <span className="red">{this.state.budget_cuts}%</span> of total budgets had to be cut in FY19 </p>
               </div>
             </div>
             <div className = "column">
-              <div className = "box border-black">
+              <div className = "box border-black max-height align-text">
                 <p> <span className="red">{this.state.new_clubs}</span> new clubs since 2010 </p>
               </div>
             </div>
             <div className = "column">
-              <div className = "box border-black">
+              <div className = "box border-black max-height align-text">
                 <p> SLF made <span className="red">{this.state.SLF}</span> to account for inflation </p>
               </div>
             </div>
@@ -339,7 +345,7 @@ class Story extends Component {
 
         {/* Story Budget Breakdown Section - Header */}
       
-        <div className = "story-budget-break slanted">
+        <div className = "story-budget-break slanted red-bg">
           <div className = "center">
             <h1 className = 'white title'>Where Does That Money Go?</h1>
             <h1 className = 'white subtitle is-4'>The Budget Breakdown</h1>
@@ -369,8 +375,8 @@ class Story extends Component {
 
           <div className = "columns">
             <div className = "column">
-              <div className = 'box align-text'>
-                <h1 className = 'subtitle is-3'>Mandatory Transfers</h1>
+              <div className = 'box align-text max-height'>
+                <h1 className = 'subtitle is-3 black'>Mandatory Transfers</h1>
                 <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.MT_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                 <p>Covers a variety of campus services such as Snap, Club Sports, Coaches, and Campus Labs. This budget also allows sports to get gym credit!</p>
@@ -378,8 +384,8 @@ class Story extends Component {
               </div>  
             </div>
             <div className = "column">
-              <div className = 'box align-text'>
-                <h1 className = 'subtitle is-3'>Organization Budgets</h1>
+              <div className = 'box align-text max-height'>
+                <h1 className = 'subtitle is-3 black'>Organization Budgets</h1>
                 <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.CB_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                   Organizations, such as clubs, can request an annual budget. SGA approves budgets that
@@ -389,8 +395,8 @@ class Story extends Component {
               </div>
             </div>
             <div className = "column">
-              <div className = 'box align-text'>
-                <h1 className = 'subtitle is-3'>Other</h1>
+              <div className = 'box align-text max-height'>
+                <h1 className = 'subtitle is-3 black'>Other</h1>
                 <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.Other_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
                   <p className = "black">This budget is used for Funding Requests (FR). FRs are meants to supplement club budgets, or
@@ -412,7 +418,7 @@ class Page extends Component {
       <div>
         <Story/>
         {/* <BarChart/> */}
-        {/* <Sankey/> */}
+        <Sankey/>
       </div>
     )
   }
