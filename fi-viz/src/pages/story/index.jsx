@@ -295,7 +295,7 @@ class Story extends Component {
 
         {/* SLF Section - Header */}
 
-        <div className = "story-slf">
+        <div className = "story-slf slanted">
           <div className = "box border-black margin-slf">
             <h1 className = "title"><span className="red">Raising</span> the Student Life Fee</h1>
             <p>The student life fee increases routinely in order to satisfy to the rapid expansion of
@@ -339,7 +339,7 @@ class Story extends Component {
 
         {/* Story Budget Breakdown Section - Header */}
       
-        <div className = "story-budget-break">
+        <div className = "story-budget-break slanted">
           <div className = "center">
             <h1 className = 'white title'>Where Does That Money Go?</h1>
             <h1 className = 'white subtitle is-4'>The Budget Breakdown</h1>
