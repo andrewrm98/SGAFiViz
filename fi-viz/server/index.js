@@ -93,6 +93,7 @@ app.get('/api/hello', (req, res) => {
     res.json({"msg": "Hello!"});
 });
 
+
 // app.post('/api/addBudget', (req, res) => {
 //     console.log(`Adding budget for ${req.body.name}`)
 //     con.query(`INSERT INTO budgets (name, requested, approved) VALUES ("${req.body.name}", 

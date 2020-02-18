@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import {sankey as d3s} from "d3-sankey";
 
+
 /* d3 sankey function */
 
 d3s.sankey = function() {
@@ -299,7 +300,7 @@ d3s.sankey = function() {
 };
 
 /* d3 environment setup */
-var node = document.createElement('div');
+var sankeyNode = document.createElement('div');
 
 var margin = {top: 1, right: 1, bottom: 6, left: 1},
     width = 1000 - margin.left - margin.right,
@@ -309,7 +310,7 @@ var formatNumber = d3.format(",.0f"),
     format = function(d) { return formatNumber(d) + " TWh"; },
     color = d3.scaleOrdinal(d3.schemeCategory10);
 
-var svg = d3.select(node).append("svg")
+var svg = d3.select(sankeyNode).append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -434,4 +435,6 @@ d3.json("./sankeyData.json", function(error, data) {
     }
 });
 
-export default {node}
+console.log(sankeyNode)
+
+export default {sankeyNode}
