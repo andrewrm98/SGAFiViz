@@ -5,7 +5,7 @@ import CountUp, {startAnimation} from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
 import rd3 from 'react-d3-library';
 import sankeyNode from './d3.sankey.js';
-import node from './test.js';
+import line from './lineChart.js';
 const RD3Component = rd3.Component;
 class LineChart extends Component {
 
@@ -105,6 +105,37 @@ class LineChart extends Component {
     }
   }
 }
+
+class LineChart2 extends Component {
+  _isMounted = false;
+
+  constructor(props) {
+    super(props);
+    this.state = {d3: ''}
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+    if (this._isMounted) {
+      this.setState({d3: line});
+      console.log(this.state.d3)
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  render() {
+        return (
+
+            <div>
+              <RD3Component data={this.state.d3}/>
+            </div>
+      );  
+  }
+}
+
 
 class BarChart extends Component {
 
@@ -232,6 +263,7 @@ class Sankey extends Component {
       );  
   }
 }
+
 class Story extends Component {
 
   constructor(props) {
