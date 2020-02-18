@@ -9,7 +9,8 @@ import {
 import StoryPage from "./pages/story";
 import AboutPage from "./pages/about";
 import BudgetPage from "./pages/budget";
-import Header from "./components/Header.jsx";
+import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx"
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path="/" component={StoryPage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/budget" component={BudgetPage} />
+          <Footer />
         </Router>
       </div>
     );
