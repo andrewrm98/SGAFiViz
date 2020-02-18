@@ -4,11 +4,9 @@ import Plot from 'react-plotly.js';
 import CountUp, {startAnimation} from 'react-countup';  
 import VisibilitySensor from 'react-visibility-sensor';
 import rd3 from 'react-d3-library';
-import node from './d3.sankey.js';
+import sankeyNode from './d3.sankey.js';
+import node from './test.js';
 const RD3Component = rd3.Component;
- 
-
-
 class LineChart extends Component {
 
   constructor(props) {
@@ -206,6 +204,7 @@ class BarChart extends Component {
 }
 
 class Sankey extends Component {
+  _isMounted = false;
 
   constructor(props) {
     super(props);
@@ -213,20 +212,22 @@ class Sankey extends Component {
   }
 
   componentDidMount() {
-    this.setState({d3: node});
+    this._isMounted = true;
+    if (this._isMounted) {
+      this.setState({d3: sankeyNode});
+      console.log(this.state.d3)
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
-    // console.log('hi')  
-    //<RD3Component data={this.state.d3}/>
         return (
-            <div class = "slanted2 light-red-bg">
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
+
+            <div>
+              <RD3Component data={this.state.d3}/>
             </div>
       );  
   }
@@ -418,7 +419,7 @@ class Page extends Component {
       <div>
         <Story/>
         {/* <BarChart/> */}
-        <Sankey/>
+        {/* <Sankey/> */}
       </div>
     )
   }
