@@ -26,9 +26,6 @@ class Header extends React.Component {
         {/* Hero content: will be in the middle */}
         <div className="hero-body has-text-centered">
         <img className = "center" src={require('./wpilogo-edited.png')} width="100" height="200" alt = ""/>
-          <h1 className="title is-1 white">
-            Your Student Life Fee
-          </h1>
         </div>
         <br></br>
 
@@ -37,7 +34,7 @@ class Header extends React.Component {
           <nav className="tabs is-boxed is-fullwidth">
             <div className="container">
               <ul>
-                <li onClick={() => { this.setState({ active: 'story' }) }} id="one" className={this.state.active === 'story' ? 'mytabs is-active' : 'mytabs'}><Link className={this.state.active === 'story' ? 'subtitle red' : 'subtitle white'} to="/">Story</Link></li>
+                <li onClick={() => { this.setState({ active: 'story' }) }} id="one" className={this.state.active === 'story' ? 'mytabs is-active' : 'mytabs'}><Link className={this.state.active === 'story' ? 'subtitle red ' : 'subtitle white'} to="/">Story</Link></li>
                 <li onClick={() => { this.setState({ active: 'budget' }) }} id="two" className={this.state.active === 'budget' ? 'mytabs is-active' : 'mytabs'}><Link className={this.state.active === 'budget' ? 'subtitle red' : 'subtitle white'} to="/budget">Budget</Link></li>
                 <li onClick={() => { this.setState({ active: 'about' }) }} id="three" className={this.state.active === 'about' ? 'mytabs is-active' : 'mytabs is-family-monospace'}><Link className={this.state.active === 'about' ? 'subtitle red' : 'subtitle white'} to="/about">About</Link></li>
               </ul>

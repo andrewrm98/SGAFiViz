@@ -1,9 +1,10 @@
 .has-bg-img {
-    background-image: url('./wpibg.png');
+    /*background-image: url('./wpibg.png');*/
     background-position: center center;
     background-repeat:  no-repeat;
     background-size:  cover;
-    background-color: #A9B0B7;
+    background-color: #AC2B37;
+    background-attachment: fixed;
 }
 
 .center {
@@ -15,10 +16,12 @@
 
 .white {
     color: white        !important;
+    font-weight: bold;
 }
 
 .red {
     color: #9D1212       !important;
+    font-weight: bold;
 }
 
 .black {
