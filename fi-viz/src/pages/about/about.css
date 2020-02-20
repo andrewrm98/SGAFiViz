@@ -3,7 +3,7 @@
     margin-right: 20%;
     margin-left: 20%;
     align-content: center;
-    background-color: #9D1212  ;
+    background-color: white  ;
 }
 
 .center-text {
@@ -20,4 +20,8 @@
 
 .black {
     color: #000000
+}
+
+.border {
+    border: 1px solid rgba(169, 176, 183, .3)
 }

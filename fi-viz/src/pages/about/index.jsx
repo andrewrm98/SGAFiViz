@@ -5,10 +5,10 @@ const AboutPage = () => {
   return (
     <div>
       <br></br>
-      <div className = "about-container notification center-text">
-        <h1 className = 'title is-size-3 white'>The SGA Mission Statement</h1>
+      <div className = "about-container box border center-text">
+        <h1 className = 'title is-size-3'>The <span className = "red">SGA Mission</span> Statement</h1>
         <hr></hr>
-        <h1 className = 'subtitle is-size-5 white'>The mission of SGA is to improve the quality of undergraduate student life at 
+        <h1 className = 'subtitle is-size-5'>The mission of SGA is to improve the quality of undergraduate student life at 
           the University both academically and socially by addressing student needs and concerns, providing financial 
           structure for WPI’s student clubs and organizations, and representing the student body in a profession manner.
         </h1>
@@ -17,7 +17,7 @@ const AboutPage = () => {
       <div className = "columns">
         <div className = "column"></div>
         <div className = "column">
-          <div className = "center-text notification has-background-light">
+          <div className = "center-text box border has-background-light">
             <h1 className = "is-size-3">Want to get involved?</h1>
             <h1 className = "is-size-5">Join a club, or start your own!</h1>
             <h1 className = "is-size-5">Attend campus events</h1>
@@ -26,7 +26,7 @@ const AboutPage = () => {
           
         </div>
         <div className = "column">
-          <div className = "center-text notification has-background-light">
+          <div className = "center-text box border has-background-light">
             <h1 className = "is-size-3">Want to find out more?</h1>
             <h1 className = "is-size-5">Email sgaexecs@wpi.edu,</h1>
             <h1 className = "is-size-5">sgasuggestions@wpi.edu,</h1>
