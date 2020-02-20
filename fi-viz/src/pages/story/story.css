@@ -63,6 +63,8 @@
 .story-intro {
     padding-left: 20%;
     padding-Right: 20%;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 .intro-card {
@@ -79,10 +81,10 @@
 }
 
 .story-slf {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-left: 17.5%;
     padding-Right: 17.5%;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
 
 /*  grey   background-color: rgba(169, 176, 183); */
@@ -99,10 +101,10 @@
 }
 
 .story-budget-break {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-left: 15%;
     padding-Right: 15%;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
 
 .vertical-divider {
