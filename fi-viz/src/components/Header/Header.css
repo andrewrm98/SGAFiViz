@@ -40,3 +40,9 @@
 * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
    }
+
+a:hover {
+    background-color: white;
+    opacity: 60%;
+    color: black        !important;
+}
