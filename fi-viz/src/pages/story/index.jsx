@@ -5,7 +5,7 @@ import CountUp, {startAnimation} from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
 import rd3 from 'react-d3-library';
 import sankeyNode from './d3.sankey.js';
-import line from './lineChart.js';
+import node from './lineChart.js';
 const RD3Component = rd3.Component;
 class LineChart extends Component {
 
@@ -117,8 +117,7 @@ class LineChart2 extends Component {
   componentDidMount() {
     this._isMounted = true;
     if (this._isMounted) {
-      this.setState({d3: line});
-      console.log(this.state.d3)
+      this.setState({d3: node});
     }
   }
 
@@ -372,7 +371,7 @@ class Story extends Component {
           </div>
 
           {/* SLF Section - LineChart */}
-          <LineChart/>
+          <LineChart2/>
           
         </div>
 
