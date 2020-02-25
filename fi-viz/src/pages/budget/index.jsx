@@ -3,6 +3,9 @@ import './budget.css'
 import Plot from 'react-plotly.js';
 import Funnel from "../../components/Funnel";
 import RidgeChart from "../../components/Ridge";
+import rd3 from 'react-d3-library';
+import node from './ztreemap.js';
+const RD3Component = rd3.Component;
 
 class SunburstChart extends Component {
   constructor(props) {
@@ -140,6 +143,35 @@ class SunburstChart extends Component {
   }
 }
 
+class ZTreeMap extends Component {
+  _isMounted = false;
+
+  constructor(props) {
+    super(props);
+    this.state = {d3: ''}
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+    if (this._isMounted) {
+      this.setState({d3: node});
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  render() {
+        return (
+
+            <div>
+              <RD3Component data={this.state.d3}/>
+            </div>
+      );  
+  }
+}
+
 /* We simply can use an array and loop and print each user */
 class Budget extends React.Component {
   constructor(props) {
@@ -199,6 +231,7 @@ class BudgetPage extends Component {
         <Funnel />
         <div className="flourish-embed" data-src="visualisation/1338475"/>
         <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/>
+        <ZTreeMap />
       </div>
     )
   }
