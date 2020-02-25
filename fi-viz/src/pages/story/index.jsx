@@ -128,7 +128,7 @@ class LineChart2 extends Component {
   render() {
         return (
 
-            <div>
+            <div className = "has-text-centered">
               <RD3Component data={this.state.d3}/>
             </div>
       );  
@@ -371,7 +371,9 @@ class Story extends Component {
           </div>
 
           {/* SLF Section - LineChart */}
-          <LineChart2/>
+          <div className = "box border-black" id="lineChartBox">
+            <LineChart2/>
+          </div>
           
         </div>
 

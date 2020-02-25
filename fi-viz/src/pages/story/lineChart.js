@@ -3,26 +3,27 @@ import * as d3 from 'd3'
 
 /********** Global Vars **********/
 var node = document.createElement('div'); // export this
-var xAxis = [], yAxis = []
-var lineData2 = [{}] // connects with server
-var lineData = [ // manually made this data for testing
-  {xAxis: 2005, yAxis: 250}, 
-  {xAxis: 2006, yAxis: 250},
-  {xAxis: 2007, yAxis: 250},
-  {xAxis: 2008, yAxis: 250},
-  {xAxis: 2009, yAxis: 260},
-  {xAxis: 2010, yAxis: 260},
-  {xAxis: 2011, yAxis: 260},
-  {xAxis: 2012, yAxis: 260},
-  {xAxis: 2013, yAxis: 260},
-  {xAxis: 2014, yAxis: 260},
-  {xAxis: 2015, yAxis: 260},
-  {xAxis: 2016, yAxis: 260},
-  {xAxis: 2017, yAxis: 260},
-  {xAxis: 2018, yAxis: 260},
-  {xAxis: 2019, yAxis: 280},
-  {xAxis: 2020, yAxis: 316}, 
-  {xAxis: 2021, yAxis: 316}
+//var parentDiv = document.getElementById("lineChartBox"); // for parent margins
+var year = [], fee = []
+var lineData = [{}] // connects with server
+var lineData2 = [ // manually made this data for testing
+  {year: 2005, fee: 250}, 
+  {year: 2006, fee: 250},
+  {year: 2007, fee: 250},
+  {year: 2008, fee: 250},
+  {year: 2009, fee: 260},
+  {year: 2010, fee: 260},
+  {year: 2011, fee: 260},
+  {year: 2012, fee: 260},
+  {year: 2013, fee: 260},
+  {year: 2014, fee: 260},
+  {year: 2015, fee: 260},
+  {year: 2016, fee: 260},
+  {year: 2017, fee: 260},
+  {year: 2018, fee: 260},
+  {year: 2019, fee: 280},
+  {year: 2020, fee: 316}, 
+  {year: 2021, fee: 316}
 ]
 
 /********** Get Data ***********/
@@ -33,25 +34,78 @@ fetch('/api/slf')
       
       // loop through elements in slf fee to construct x & y axix
       for (var i=0; i< slf.length; i++) {
-        xAxis.push((slf[i])["Fiscal Year"])
-        yAxis.push((slf[i])["SLF Amount"])
+        year.push((slf[i])["Fiscal Year"])
+        fee.push((slf[i])["SLF Amount"])
       } 
 
       // properly order the data
-      const result = yAxis
-          .map((item, index) => [xAxis[index], item]) 
+      const result = fee
+          .map((item, index) => [year[index], item]) 
           .sort(([count1], [count2]) => count2 - count1) 
           .map(([, item]) => item); 
         
-      yAxis = result.reverse()
-      xAxis = xAxis.sort((a, b) => a - b)
+      fee = result.reverse()
+      year = year.sort((a, b) => a - b)
 
-      for (var i=0; i<xAxis.length; i++){
+      for (var i=0; i<year.length; i++){
         var d = {}
-        d['xAxis'] = parseInt(xAxis[i]);
-        d['yAxis'] = parseInt(yAxis[i]);
-        lineData2[i] = d
+        d['year'] = parseInt(year[i]);
+        d['fee'] = parseInt(fee[i]);
+        lineData[i] = d
       } 
+
+      /********** Use D3 To Populate SVG **********/
+      var margin = {top: 50, right: 50, bottom: 50, left: 50},
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+      var svg = d3.select(node).append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              //.style("background-color", 'white')
+            .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      // parse the date / time
+      var parseTime = d3.timeParse("%Y")
+
+      // Add X Axis
+      var x = d3.scaleTime()
+      .domain(d3.extent(lineData, function(d) { return parseTime(d.year) }))
+      .range([ 0, width ]);
+      svg.append("g")
+      .style("font", "14px times")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+      // Add Y Axis
+      var y = d3.scaleLinear()
+      .domain([d3.min(lineData, function(d) { return d.fee}),
+        d3.max(lineData, function(d) { return d.fee })])
+      .range([ height, 0 ]);
+      svg.append("g")
+      .style("font", "14px times")
+      .call(d3.axisLeft(y));
+
+      // Add the line
+      svg.append("path")
+      .datum(lineData)
+      .attr("fill", "none")
+      .attr("stroke", "rgb(172, 43, 55)")
+      .attr("stroke-width", 2)
+      .attr("d", d3.line()
+      .x(function(d) { return x(parseTime(d.year)) })
+      .y(function(d) { return y(d.fee) })
+      );     
+      
+      // add title
+      svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "24px")  
+        .style("font", "times") 
+        .text("SLF Trend");
 })
 
 .catch(err => {
@@ -59,45 +113,6 @@ fetch('/api/slf')
 })
 
 
-/********** Use D3 To Populate SVG **********/
-var margin = {top: 50, right: 50, bottom: 50, left: 50},
-  width = 600 - margin.left - margin.right,
-  height = 450 - margin.top - margin.bottom;
-  
-var svg = d3.select(node).append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// Add X Axis
-var x = d3.scaleLinear()
-  .domain([d3.min(lineData, function(d) { return d.xAxis}),
-      d3.max(lineData, function(d) { return d.xAxis })])
-  .range([ 0, width ]);
-
-svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x));
-
-// Add Y Axis
-var y = d3.scaleLinear()
-  .domain([d3.min(lineData, function(d) { return d.yAxis}),
-    d3.max(lineData, function(d) { return d.yAxis })])
-  .range([ height, 0 ]);
-
-svg.append("g")
-  .call(d3.axisLeft(y));
-
-// Add the line
-svg.append("path")
-  .datum(lineData)
-  .attr("fill", "none")
-  .attr("stroke", "steelblue")
-  .attr("stroke-width", 1.5)
-  .attr("d", d3.line()
-  .x(function(d) { return x(d.xAxis) })
-  .y(function(d) { return y(d.yAxis) })
-  );  
-
+ 
 export default node
