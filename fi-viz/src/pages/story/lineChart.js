@@ -6,25 +6,11 @@ var node = document.createElement('div'); // export this
 //var parentDiv = document.getElementById("lineChartBox"); // for parent margins
 var year = [], fee = []
 var lineData = [{}] // connects with server
-var lineData2 = [ // manually made this data for testing
-  {year: 2005, fee: 250}, 
-  {year: 2006, fee: 250},
-  {year: 2007, fee: 250},
-  {year: 2008, fee: 250},
-  {year: 2009, fee: 260},
-  {year: 2010, fee: 260},
-  {year: 2011, fee: 260},
-  {year: 2012, fee: 260},
-  {year: 2013, fee: 260},
-  {year: 2014, fee: 260},
-  {year: 2015, fee: 260},
-  {year: 2016, fee: 260},
-  {year: 2017, fee: 260},
-  {year: 2018, fee: 260},
-  {year: 2019, fee: 280},
-  {year: 2020, fee: 316}, 
-  {year: 2021, fee: 316}
-]
+ // parse the date / time
+ var parseTime = d3.timeParse("%Y"),
+      bisectDate = d3.bisector(function(d) { return d.year; }).left;
+
+
 
 /********** Get Data ***********/
 fetch('/api/slf')
@@ -47,9 +33,9 @@ fetch('/api/slf')
       fee = result.reverse()
       year = year.sort((a, b) => a - b)
 
-      for (var i=0; i<year.length; i++){
+      for (i=0; i<year.length; i++){
         var d = {}
-        d['year'] = parseInt(year[i]);
+        d['year'] = parseTime(parseInt(year[i]));
         d['fee'] = parseInt(fee[i]);
         lineData[i] = d
       } 
@@ -62,42 +48,87 @@ fetch('/api/slf')
       var svg = d3.select(node).append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
-              //.style("background-color", 'white')
             .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      // parse the date / time
-      var parseTime = d3.timeParse("%Y")
-
       // Add X Axis
       var x = d3.scaleTime()
-      .domain(d3.extent(lineData, function(d) { return parseTime(d.year) }))
-      .range([ 0, width ]);
+          .domain(d3.extent(lineData, function(d) { return (d.year) }))
+          .range([ 0, width ]);
       svg.append("g")
-      .style("font", "14px times")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+          .style("font", "14px times")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
 
       // Add Y Axis
       var y = d3.scaleLinear()
-      .domain([d3.min(lineData, function(d) { return d.fee}),
-        d3.max(lineData, function(d) { return d.fee })])
-      .range([ height, 0 ]);
+          .domain([d3.min(lineData, function(d) { return d.fee}),
+            d3.max(lineData, function(d) { return d.fee })])
+          .range([ height, 0 ]);
       svg.append("g")
-      .style("font", "14px times")
-      .call(d3.axisLeft(y));
+          .style("font", "14px times")
+          .call(d3.axisLeft(y));
 
       // Add the line
       svg.append("path")
-      .datum(lineData)
-      .attr("fill", "none")
-      .attr("stroke", "rgb(172, 43, 55)")
-      .attr("stroke-width", 2)
-      .attr("d", d3.line()
-      .x(function(d) { return x(parseTime(d.year)) })
-      .y(function(d) { return y(d.fee) })
-      );     
-      
+        .datum(lineData)
+        .attr("fill", "none")
+        .attr("stroke", "rgb(172, 43, 55)")
+        .attr("stroke-width", 2.5)
+        .attr("d", d3.line() 
+        .x(function(d) { return x((d.year)) }) 
+        .y(function(d) { return y(d.fee) }));
+
+    // tooltip
+    var focus = svg.append("g")
+        .attr("class", "focus")
+        .style("display", "none");
+
+    focus.append("line")
+        .attr("class", "x-hover-line hover-line")
+        .attr("y1", 0)
+        .attr("y2", height);
+
+    focus.append("line")
+        .attr("class", "y-hover-line hover-line")
+        .attr("x1", width)
+        .attr("x2", width);
+
+    focus.append("circle")
+        .attr("r", 7.5);
+
+    focus.append("text")
+        .attr("x", 15)
+      	.attr("dy", ".31em");
+
+    svg.append("rect")
+        //.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .attr("class", "overlay")
+        .attr("width", width)
+        .attr("height", height)
+        .on("mouseover", function() { 
+          console.log('mouseover')
+          focus.style("display", null); 
+        })
+        .on("mouseout", function() { 
+          console.log('mouse out')
+          focus.style("display", "none"); 
+        })
+        .on("mousemove", mousemove);
+
+    function mousemove() {
+      console.log('mousemove')
+      var x0 = x.invert(d3.mouse(this)[0]),
+         i = bisectDate(lineData, x0, 1),
+        d0 = lineData[i - 1],
+        d1 = lineData[i],
+        d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+      focus.attr("transform", "translate(" + x(d.year) + "," + y(d.fee) + ")");
+      focus.select("text").text(function() { return d.fee; });
+      focus.select(".x-hover-line").attr("y2", height - y(d.fee));
+      focus.select(".y-hover-line").attr("x2", width + width);
+    }
+       
       // add title
       svg.append("text")
         .attr("x", (width / 2))             
@@ -105,7 +136,7 @@ fetch('/api/slf')
         .attr("text-anchor", "middle")  
         .style("font-size", "24px")  
         .style("font", "times") 
-        .text("SLF Trend");
+        .text("Student Life Fee Trend");
 })
 
 .catch(err => {
