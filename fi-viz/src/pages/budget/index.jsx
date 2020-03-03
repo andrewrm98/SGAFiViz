@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import './budget.css'
 import Plot from 'react-plotly.js';
 import Funnel from "../../components/Funnel";
-import RidgeChart from "../../components/Ridge";
+import RidgeChart from "../../components/Ridge.jsx";
 
 class SunburstChart extends Component {
   constructor(props) {
@@ -195,10 +195,10 @@ class BudgetPage extends Component {
       <div style={{marginLeft: '15%', marginRight: '15%'}}>
         <Budget />
         <SunburstChart />
-        {/* <RidgeChart /> */}
-        <Funnel />
+        <RidgeChart />
+        {/* <Funnel /> */}
         <div className="flourish-embed" data-src="visualisation/1338475"/>
-        <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/>
+        {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>
     )
   }

@@ -67,6 +67,20 @@ app.get('/api/slf', (req, res) => {
     })
 });
 
+app.get('/api/organization_numbers', (req, res) => {
+    con.query("SELECT * FROM sgadb.`Organization Membership Numbers` WHERE `Active Members` != 'Not Provided' AND `Active Members` IS NOT NULL AND `Active Members` != '';", function (err, data) {
+        // console.log(data);
+        (err) ? res.send(err) : res.json({ members: data });
+    })
+});
+
+app.get('/api/category_organization_numbers', (req, res) => {
+    con.query("SELECT * FROM sgadb.`Categories Club Membership` WHERE `Active Members` != 'Not Provided' AND `Active Members` IS NOT NULL AND `Active Members` != '';", function (err, data) {
+        // console.log(data);
+        (err) ? res.send(err) : res.json({ members: data });
+    })
+});
+
 
 app.get('/api/mandatory_transfers', (req, res) => {
     con.query("SELECT * FROM sgadb.`Mandatory Transfers Total Budget` WHERE `Fiscal Year` = 'FY 20';", function (err, data) {
