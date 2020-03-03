@@ -1,6 +1,7 @@
 // import * as d3 from "d3";
 import * as d3 from 'd3'
 
+
 /********** Global Vars **********/
 var node = document.createElement('div'); // export this
 //var parentDiv = document.getElementById("lineChartBox"); // for parent margins
@@ -9,8 +10,6 @@ var lineData = [{}] // connects with server
  // parse the date / time
  var parseTime = d3.timeParse("%Y"),
       bisectDate = d3.bisector(function(d) { return d.year; }).left;
-
-
 
 /********** Get Data ***********/
 fetch('/api/slf')
@@ -36,7 +35,7 @@ fetch('/api/slf')
       for (i=0; i<year.length; i++){
         var d = {}
         d['year'] = parseTime(parseInt(year[i]));
-        d['fee'] = parseInt(fee[i]);
+        d['fee'] = +parseInt(fee[i]);
         lineData[i] = d
       } 
 
@@ -48,6 +47,7 @@ fetch('/api/slf')
       var svg = d3.select(node).append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
+              .attr("id", "lineChart")
             .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -124,7 +124,9 @@ fetch('/api/slf')
         d1 = lineData[i],
         d = x0 - d0.year > d1.year - x0 ? d1 : d0;
       focus.attr("transform", "translate(" + x(d.year) + "," + y(d.fee) + ")");
-      focus.select("text").text(function() { return d.fee; });
+      focus.select("text").text(function() {
+        return d.fee; 
+      });
       focus.select(".x-hover-line").attr("y2", height - y(d.fee));
       focus.select(".y-hover-line").attr("x2", width + width);
     }
