@@ -5,7 +5,6 @@ import CountUp, {startAnimation} from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
 import rd3 from 'react-d3-library';
 import sankeyNode from './d3.sankey.js';
-import node from './lineChart.js';
 import * as d3 from 'd3';
 
 
