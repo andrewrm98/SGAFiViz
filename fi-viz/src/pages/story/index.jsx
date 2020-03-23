@@ -305,7 +305,6 @@ class BarChart extends Component {
 }
 
 class Sankey extends Component {
-  _isMounted = false;
 
   constructor(props) {
     super(props);
@@ -319,11 +318,10 @@ class Sankey extends Component {
   componentDidMount() {
     let width = this.getWidth();
     //let height = this.getHeight();
-    this._isMounted = true;
-    if (this._isMounted) {
-      this.setState({width: width, height: 500});
-      this.drawChart();
-    }
+
+    this.setState({width: width-60, height: 500});
+    this.drawChart();
+
     let resizedFn;
     window.addEventListener("resize", () => {
       clearTimeout(resizedFn);
@@ -336,7 +334,7 @@ class Sankey extends Component {
   redrawChart() {
     let width = this.getWidth()
     let height = this.getHeight()
-    this.setState({width: width-10, height: height-50});
+    this.setState({width: width-60, height: height-60});
     d3.select(".sankey svg").remove();
     this.drawChart = this.drawChart.bind(this);
     this.drawChart();
@@ -645,42 +643,43 @@ class Sankey extends Component {
       return sankey;
     };
 
-    /* Setup D3 Environment */
-    var margin = {top: 1, right: 1, bottom: 6, left: 1},
-        width = 1000 - margin.left - margin.right,
-        height = 700 - margin.top - margin.bottom;
+    /* Grab data and do some KFT sankey stuff */
+    fetch('/api/sankey_data')
+      .then(response => response.json())
+      .then(data => {
+        //console.log(data)
 
-    var formatNumber = d3.format(",.0f"),
-        format = function(d) { return formatNumber(d) + " TWh"; },
-        color = d3.scaleOrdinal(d3.schemeCategory10);
+        /* Setup D3 Environment */
 
-    var svg = d3.select(".sankey").append("svg")
-        .attr('id', 'sankey')
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        // var margin = {top: 1, right: 1, bottom: 6, left: 1},
+        //     width = 1000 - margin.left - margin.right,
+        //     height = 700 - margin.top - margin.bottom;
 
-    var mySankey = d3s.sankey()
-        .nodeWidth(15)
-        .nodePadding(10)
-        .size([width, height]);
+        var margin = {top: 1, right: 1, bottom: 6, left: 1},
+        width = this.state.width - margin.left - margin.right,
+        height = this.state.height - margin.top - margin.bottom;
 
-    var path = mySankey.link();
+        var formatNumber = d3.format(",.0f"),
+            format = function(d) { return formatNumber(d) + " TWh"; },
+            color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    d3.json("./sankeyData.json", function(error, data) {
+        var svg = d3.select(".sankey").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var mySankey = d3s.sankey()
+            .nodeWidth(15)
+            .nodePadding(10)
+            .size([width, height]);
+
+        var path = mySankey.link(); 
         
-        if (error) {
-            console.log("ERROR")
-            throw error
-        }   // Exceptions handling
-    
-        console.log('HIIIIIIIIIIIIIIIII')
-
         mySankey
-            .nodes(data.nodes)
-            .links(data.links)
-            .layout(32);
+          .nodes(data.nodes)
+          .links(data.links)
+          .layout(32);
 
         var link = svg.append("g").selectAll(".link")
             .data(data.links)
@@ -779,7 +778,11 @@ class Sankey extends Component {
                 context.fill();
             }
         }
-    });
+
+      })
+      .catch(err => {
+        console.log (err)
+      })
 
   }
 
@@ -792,7 +795,7 @@ class Sankey extends Component {
 
   render() {
         return (
-            <div ref={this.chartRef} className = " sankey has-text-centered">
+            <div ref={this.chartRef} className = "sankey has-text-centered">
             </div>
       );  
   }
@@ -823,7 +826,8 @@ class Story extends Component {
   }
 
   componentDidMount() {
-    this.getData();
+    //TODO - UNCOMMENT
+    //this.getData();
   }
 
   getData = async () => {
@@ -909,7 +913,8 @@ class Story extends Component {
 
           {/* SLF Section - LineChart */}
           <div className = "box border-black" id="lineChartBox">
-            <LineChart/>
+            {/* TODO - UNCOMMENT */}
+            {/* <LineChart/> */}
           </div>
           
         </div>
