@@ -196,10 +196,10 @@ class BudgetPage extends Component {
     return (
       <div style={{marginLeft: '15%', marginRight: '15%'}}>
         <RadarChart></RadarChart>
-        {/*<Budget />
+        <Budget />
         <SunburstChart />
-        <RidgeChart /> /*}
-        {/* <Funnel /> */}
+        <RidgeChart /> 
+        <Funnel />
         {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>
