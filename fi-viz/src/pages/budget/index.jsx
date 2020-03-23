@@ -3,6 +3,8 @@ import './budget.css'
 import Plot from 'react-plotly.js';
 import Funnel from "../../components/Funnel";
 import RidgeChart from "../../components/Ridge.jsx";
+import RadarChart from "./radarChart.jsx"
+import * as d3 from 'd3';
 
 class SunburstChart extends Component {
   constructor(props) {
@@ -193,11 +195,12 @@ class BudgetPage extends Component {
   render() {
     return (
       <div style={{marginLeft: '15%', marginRight: '15%'}}>
-        <Budget />
+        <RadarChart></RadarChart>
+        {/*<Budget />
         <SunburstChart />
-        <RidgeChart />
+        <RidgeChart /> /*}
         {/* <Funnel /> */}
-        <div className="flourish-embed" data-src="visualisation/1338475"/>
+        {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>
     )
