@@ -5,6 +5,8 @@ import Funnel from "../../components/Funnel";
 import RidgeChart from "../../components/Ridge.jsx";
 import Select from "../../components/Select";
 import ExampleSelectChart from "../../components/ExampleSelectChart";
+import RadarChart from "./radarChart.jsx"
+import * as d3 from 'd3';
 
 class SunburstChart extends Component {
   constructor(props) {
@@ -209,15 +211,16 @@ class Budget extends React.Component {
 class BudgetPage extends Component {
   render() {
     return (
-      <div style={{ marginLeft: "15%", marginRight: "15%" }}>
+      <div style={{marginLeft: '15%', marginRight: '15%'}}>
         <Select>
           <ExampleSelectChart />
         </Select>
-        {/* <Budget /> */}
-        {/* <SunburstChart /> */}
-        {/* <RidgeChart /> */}
-        {/* <Funnel /> */}
-        <div className="flourish-embed" data-src="visualisation/1338475" />
+        <RadarChart></RadarChart>
+        <Budget />
+        <SunburstChart />
+        <RidgeChart /> 
+        <Funnel />
+        {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>
     );
