@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./budget.css";
 import Plot from "react-plotly.js";
-import Funnel from "../../components/Funnel";
 import RidgeChart from "../../components/Ridge.jsx";
 import Select from "../../components/Select";
 import ExampleSelectChart from "../../components/ExampleSelectChart";
@@ -218,8 +217,7 @@ class BudgetPage extends Component {
         <RadarChart></RadarChart>
         <Budget />
         <SunburstChart />
-        <RidgeChart /> 
-        <Funnel />
+        <RidgeChart />
         {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>
