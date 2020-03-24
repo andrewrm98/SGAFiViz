@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import './budget.css'
-import Plot from 'react-plotly.js';
+import "./budget.css";
+import Plot from "react-plotly.js";
 import Funnel from "../../components/Funnel";
 import RidgeChart from "../../components/Ridge.jsx";
+import Select from "../../components/Select";
+import ExampleSelectChart from "../../components/ExampleSelectChart";
 
 class SunburstChart extends Component {
   constructor(props) {
@@ -21,7 +23,7 @@ class SunburstChart extends Component {
     fetch("/api/sunburst")
       .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           // console.log(result.data);
           this.setState({
             isLoaded: true,
@@ -31,17 +33,17 @@ class SunburstChart extends Component {
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
             error
           });
         }
-      )
+      );
     fetch("/api/club_budgets")
       .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           // console.log(result.budgets);
           this.setState({
             isLoaded: true,
@@ -51,17 +53,17 @@ class SunburstChart extends Component {
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
             error
           });
         }
-      )
+      );
     fetch("/api/categories_budgets")
       .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           // console.log(result.budgets);
           this.setState({
             isLoaded: true,
@@ -71,18 +73,18 @@ class SunburstChart extends Component {
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
             error
           });
         }
-      )
+      );
 
     fetch("/api/mandatory_transfers")
       .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           // console.log(result.mandatory);
           this.setState({
             isLoaded: true,
@@ -92,46 +94,64 @@ class SunburstChart extends Component {
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
             error
           });
         }
-      )
+      );
   }
 
   plotlyClickHandler(data) {
     console.log("plotlyClickHandler");
-    console.log(data);  
+    console.log(data);
   }
 
   render() {
     console.log(this.state.mandatory_transfers);
     return (
-      <Plot className="fill-space"
+      <Plot
+        className="fill-space"
         data={[
           {
             type: "sunburst",
-            labels: ["FY 20", "Mandatory Transfers", "Clubs", "Other"].concat(this.state.categories.map(a => a.Category)),
-            parents: ["", "FY 20", "FY 20", "FY 20"].concat(this.state.categories.map(a => "Clubs")),
+            labels: ["FY 20", "Mandatory Transfers", "Clubs", "Other"].concat(
+              this.state.categories.map(a => a.Category)
+            ),
+            parents: ["", "FY 20", "FY 20", "FY 20"].concat(
+              this.state.categories.map(a => "Clubs")
+            ),
             // values: [3, 1, 1 , 1],
-            values: [this.state.data.Total, this.state.data["Mandatory Transfers Budget"], this.state.data["Club Budget"], this.state.data.Other].concat(this.state.categories.map(a => a.Total)),
+            values: [
+              this.state.data.Total,
+              this.state.data["Mandatory Transfers Budget"],
+              this.state.data["Club Budget"],
+              this.state.data.Other
+            ].concat(this.state.categories.map(a => a.Total)),
             outsidetextfont: { size: 20, color: "#377eb8" },
             hovertemplate: `Budget: %{value:$,.0f}<extra></extra>`,
             // leaf: { opacity: 0.4 },
             marker: { line: { width: 2 } },
-            branchvalues: 'total'
-          },
+            branchvalues: "total"
+          }
         ]}
         layout={{
           margin: { l: 0, r: 0, b: 0, t: 0 },
           sunburstcolorway: [
-            "#636efa", "#EF553B", "#00cc96", "#ab63fa", "#19d3f3",
-            "#e763fa", "#FECB52", "#FFA15A", "#FF6692", "#B6E880"
+            "#636efa",
+            "#EF553B",
+            "#00cc96",
+            "#ab63fa",
+            "#19d3f3",
+            "#e763fa",
+            "#FECB52",
+            "#FFA15A",
+            "#FF6692",
+            "#B6E880"
           ],
           extendsunburstcolorway: true,
-           title: 'A Fancy Plot'
+          title: "A Fancy Plot"
         }}
         useResizeHandler={true}
         onClick={this.plotlyClickHandler}
@@ -155,7 +175,7 @@ class Budget extends React.Component {
     fetch("/api/budgets")
       .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           console.log(result.budgets);
           this.setState({
             isLoaded: true,
@@ -165,13 +185,13 @@ class Budget extends React.Component {
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
             error
           });
         }
-      )
+      );
   }
 
   render() {
@@ -181,10 +201,7 @@ class Budget extends React.Component {
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      return (
-        <div className='budget-container center-text'>
-        </div>
-      );
+      return <div className="budget-container center-text"></div>;
     }
   }
 }
@@ -192,15 +209,18 @@ class Budget extends React.Component {
 class BudgetPage extends Component {
   render() {
     return (
-      <div style={{marginLeft: '15%', marginRight: '15%'}}>
-        <Budget />
-        <SunburstChart />
-        <RidgeChart />
+      <div style={{ marginLeft: "15%", marginRight: "15%" }}>
+        <Select>
+          <ExampleSelectChart />
+        </Select>
+        {/* <Budget /> */}
+        {/* <SunburstChart /> */}
+        {/* <RidgeChart /> */}
         {/* <Funnel /> */}
-        <div className="flourish-embed" data-src="visualisation/1338475"/>
+        <div className="flourish-embed" data-src="visualisation/1338475" />
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>
-    )
+    );
   }
 }
 
