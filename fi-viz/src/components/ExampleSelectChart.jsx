@@ -14,27 +14,23 @@ class ExampleSelectChart extends Component {
     });
   }
 
-//   componentDidUpdate(prevProps) {
-//     // this.setState({
-//     //   selected: this.props.selected
-//     // });
-//   }
   static getDerivedStateFromProps(props, current_state) {
     if (current_state.selected !== props.selected) {
       return {
-        selected: props.selected,
-      }
+        selected: props.selected
+      };
     }
-    return null
+    return null;
   }
 
   render() {
     if (this.state.selected.length > 0) {
-      let clubNames = this.state.selected.map(function(el) {
-        return el.name;
-      });
       const listItems = this.state.selected.map(club => (
-        <li key={club.name.toString()}> {club.name} - {club.category}: ${club.budget}</li>
+        <li key={club.name.toString()}>
+          {" "}
+          {club.name} - {club.category}: ${club.budget} -_- Members:{" "}
+          {club.active_members}
+        </li>
       ));
       return <ul>{listItems}</ul>;
     }

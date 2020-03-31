@@ -4,8 +4,8 @@ import Plot from "react-plotly.js";
 import RidgeChart from "../../components/Ridge.jsx";
 import Select from "../../components/Select";
 import ExampleSelectChart from "../../components/ExampleSelectChart";
-import RadarChart from "./radarChart.jsx"
-import * as d3 from 'd3';
+import RadarChart from "./radarChart.jsx";
+import * as d3 from "d3";
 
 class SunburstChart extends Component {
   constructor(props) {
@@ -168,7 +168,8 @@ class Budget extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      budgets: []
+      budgets: [],
+      options: []
     };
   }
 
@@ -181,6 +182,26 @@ class Budget extends React.Component {
           this.setState({
             isLoaded: true,
             budgets: result.budgets
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        error => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      );
+    fetch("/api/selection_options")
+      .then(res => res.json())
+      .then(
+        result => {
+          console.log(result.options);
+          this.setState({
+            isLoaded: true,
+            options: result.options
           });
         },
         // Note: it's important to handle errors here
@@ -208,16 +229,56 @@ class Budget extends React.Component {
 }
 
 class BudgetPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      options: []
+    };
+  }
+
+  componentDidMount() {
+    fetch("/api/selection_options")
+      .then(res => res.json())
+      .then(
+        result => {
+          console.log(result.options);
+          var options = result.options.map(function(obj) {
+            return {
+              name: obj.Name,
+              category: obj.Category,
+              fiscal_year: obj["Fiscal Year"],
+              budget: obj["Total Budget"],
+              active_members: parseInt(obj["Active Members"])
+            };
+          });
+          this.setState({
+            isLoaded: true,
+            options: options
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        error => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      );
+  }
   render() {
     return (
-      <div style={{marginLeft: '15%', marginRight: '15%'}}>
-        <Select>
+      <div style={{ marginLeft: "15%", marginRight: "15%" }}>
+        <Select options={this.state.options}>
           <ExampleSelectChart />
         </Select>
-        <RadarChart></RadarChart>
+        {/* <RadarChart></RadarChart>
         <Budget />
         <SunburstChart />
-        <RidgeChart />
+        <RidgeChart /> */}
         {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>
