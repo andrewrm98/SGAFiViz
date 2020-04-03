@@ -8,9 +8,8 @@ class Sankey extends Component {
       super(props);
       this.state = {
         // counting up values on proper position
-        didViewCountUp: false,
         height: 0, 
-        width: 0
+        width: 0,
       }
       this.chartRef = React.createRef();
     }
@@ -31,14 +30,6 @@ class Sankey extends Component {
       });
     }
 
-    // Used to engage number countup when the section is visible 
-    onVisibilityChange = isVisible => {
-        if (isVisible) {
-        this.setState({didViewCountUp: true});
-        }
-    }
-
-  
     redrawChart() {
       let width = this.getWidth()
       let height = this.getHeight()
@@ -160,7 +151,8 @@ class Sankey extends Component {
           })
   
           d3.timer(tick, 1000);
-          var particles = [];
+          var particles = [],
+              speed = this.props.particle_speed;
   
           function tick(elapsed, time) {
   
@@ -173,7 +165,7 @@ class Sankey extends Component {
                               var offset = (Math.random() - .5) * (d.dy - 4);
                               if (Math.random() < d.freq) {
                                   var length = this.getTotalLength();
-                                  particles.push({link: d, time: elapsed, offset: offset, path: this, length: length, animateTime: length, speed: 2.5 + (Math.random())})
+                                  particles.push({link: d, time: elapsed, offset: offset, path: this, length: length, animateTime: length, speed: speed + (Math.random())})
                               }
                           }
                       });

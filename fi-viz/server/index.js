@@ -144,80 +144,8 @@ app.get("/api/hello", (req, res) => {
 });
 
 app.get("/api/sankey_data", (req, res) => {
-  var sankey = {
-    nodes: [
-      { name: "Overall Budget" },
-      { name: "Mandatory Transfers" },
-      { name: "Club Budgets" },
-      { name: "Other" },
-      { name: "Liability" },
-      { name: "Sponsorships" },
-      { name: "City Bus Ride" },
-      { name: "Senior Class Board" },
-      { name: "Junior Class Board" },
-      { name: "Sophomore Class Board" },
-      { name: "Freshmen Class Board" },
-      { name: "Club Sports Coach Transfer" },
-      { name: "Community Services" },
-      { name: "Van Upkeep" },
-      { name: "Copywrite and Liscensing Fee" },
-      { name: "Goat's Head Programming" },
-      { name: "Greek Life Program" },
-      { name: "Leadership Account" },
-      { name: "Projection Services" },
-      { name: "SNAP Fund" },
-      { name: "Speakers Fund" },
-      { name: "Techsync Payment" },
-      { name: "Reserve" },
-      { name: "Operating Account" },
-      { name: "SAO" },
-      { name: "SGA" },
-      { name: "Academic" },
-      { name: "Awareness" },
-      { name: "Community Service" },
-      { name: "Cultural" },
-      { name: "Extracurricular" },
-      { name: "Music and Arts" },
-      { name: "Religious" },
-      { name: "Sports" }
-    ],
-    links: [
-      { source: 0, target: 1, value: 63.05591962 },
-      { source: 0, target: 2, value: 155.6589231 },
-      { source: 0, target: 3, value: 97.28515727 },
-      { source: 3, target: 4, value: 40.02339013 },
-      { source: 3, target: 5, value: 57.26176715 },
-      { source: 1, target: 6, value: 1.092179991 },
-      { source: 1, target: 7, value: 1.092179991 },
-      { source: 1, target: 8, value: 0.5460899956 },
-      { source: 1, target: 9, value: 0.7645259939 },
-      { source: 1, target: 10, value: 0.7645259939 },
-      { source: 1, target: 11, value: 21.15989515 },
-      { source: 1, target: 12, value: 1.638269987 },
-      { source: 1, target: 13, value: 0.5832241153 },
-      { source: 1, target: 14, value: 1.135867191 },
-      { source: 1, target: 15, value: 4.96941896 },
-      { source: 1, target: 16, value: 6.000436872 },
-      { source: 1, target: 17, value: 3.276539974 },
-      { source: 1, target: 18, value: 0.7863695937 },
-      { source: 1, target: 19, value: 3.276539974 },
-      { source: 1, target: 20, value: 1.638269987 },
-      { source: 1, target: 21, value: 3.276539974 },
-      { source: 1, target: 22, value: 1.092179991 },
-      { source: 1, target: 23, value: 9.96286588 },
-      { source: 23, target: 24, value: 4.316295325 },
-      { source: 23, target: 25, value: 5.646570555 },
-      { source: 2, target: 26, value: 24.23785059 },
-      { source: 2, target: 27, value: 2.160504587 },
-      { source: 2, target: 28, value: 2.941677588 },
-      { source: 2, target: 29, value: 14.66133464 },
-      { source: 2, target: 30, value: 49.06202272 },
-      { source: 2, target: 31, value: 24.1402927 },
-      { source: 2, target: 32, value: 2.314657055 },
-      { source: 2, target: 33, value: 36.14058322 }
-    ]
-  };
-  res.json(sankey);
+  var sankeyData = require("./../src/pages/story/sankey/sankeyData.json")
+  res.json(sankeyData);
 });
 
 // app.post('/api/addBudget', (req, res) => {

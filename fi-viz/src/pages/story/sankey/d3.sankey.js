@@ -138,13 +138,13 @@ d3s.sankey = function() {
         scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
     }
 
-    function moveSourcesRight() {
-        nodes.forEach(function(node) {
-            if (!node.targetLinks.length) {
-                node.x = d3.min(node.sourceLinks, function(d) { return d.target.x; }) - 1;
-            }
-        });
-    }
+    // function moveSourcesRight() {
+    //     nodes.forEach(function(node) {
+    //         if (!node.targetLinks.length) {
+    //             node.x = d3.min(node.sourceLinks, function(d) { return d.target.x; }) - 1;
+    //         }
+    //     });
+    // }
 
     function moveSinksRight(x) {
         nodes.forEach(function(node) {

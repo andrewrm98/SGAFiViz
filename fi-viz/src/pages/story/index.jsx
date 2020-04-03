@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import "./story.css"
-import CountUp, {startAnimation} from 'react-countup';  
+import CountUp from 'react-countup';  
 import VisibilitySensor from 'react-visibility-sensor';
-import Sankey from "./sankey.jsx"
-import LineChart from "./lineChart.jsx"
-
+import Sankey from "./sankey/sankey.jsx"
+import LineChart from "./slfLineChart.jsx"
 
 
 class Story extends Component {
@@ -27,12 +26,12 @@ class Story extends Component {
       // counting up values on proper position
       didViewCountUp: false,
       pHeight: 50,
-      pWidth: 50
+      pWidth: 50,
+      particle_speed: 1.5 // speed of sankey particles
     };
   }
 
   componentDidMount() {
-    //TODO - UNCOMMENT
     this.getData();
   }
 
@@ -118,8 +117,8 @@ class Story extends Component {
           </div>
 
           {/* SLF Section - LineChart */}
+
           <div className = "box border-black" id="lineChartBox">
-            {/* TODO - UNCOMMENT */}
             <LineChart/>
           </div>
           
@@ -200,7 +199,7 @@ class Story extends Component {
           </div>
           <br></br>
           <div className = "box border-black" id="sankeyBox">
-            <Sankey/>
+            <Sankey particle_speed={this.state.particle_speed}/>
           </div>
 
         </div>
