@@ -72,7 +72,7 @@ class Story extends Component {
           </div>
           <div className="video">
             <figure className = "image is-16by9">
-              <iframe title="introVideo" className="has-ratio" frameBorder="0" src="https://biteable.com/watch/embed/sgafiviz-2439134" allowFullScreen={true} allow="autoplay"></iframe>
+              <iframe title="introVideo" className="has-ratio" frameBorder="0" src="https://biteable.com/watch/embed/sgafiviz-2439134" allowFullScreen={true}></iframe>
             </figure>
           </div> 
         </div>

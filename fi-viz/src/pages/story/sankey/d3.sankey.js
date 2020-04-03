@@ -112,18 +112,20 @@ d3s.sankey = function() {
     // Iteratively assign the breadth (x-position) for each node.
     // Nodes are assigned the maximum breadth of incoming neighbors plus one;
     // nodes with no incoming links are assigned breadth zero, while
-    // nodes with no outgoing links are assigned the maximum breadth.
+    // nodes with no outgoing links are assigned the maximum breadth
     function computeNodeBreadths() {
-        var remainingNodes = nodes,
+        let remainingNodes = nodes,
             nextNodes,
             x = 0;
 
         while (remainingNodes.length) {
             nextNodes = [];
-            remainingNodes.forEach(function(node) {
+            // eslint-disable-next-line
+            remainingNodes.forEach(node => {
                 node.x = x;
                 node.dx = nodeWidth;
-                node.sourceLinks.forEach(function(link) {
+                // eslint-disable-next-line
+                node.sourceLinks.forEach(link=> {
                     if (nextNodes.indexOf(link.target) < 0) {
                         nextNodes.push(link.target);
                     }
