@@ -19,10 +19,10 @@ var con = mysql.createConnection({
 });
 
 // TODO - UNCOMMENT
-// con.connect(function (err) {
-//     if (err) throw err;
-//     console.log("Connected!");
-// });
+con.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected!");
+});
 
 app.use(express.static(path.join(__dirname, "./build")));
 

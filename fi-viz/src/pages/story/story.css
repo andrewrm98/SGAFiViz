@@ -173,6 +173,22 @@
     height: 100%;
 }
 
+.overlay {
+    fill: none;
+    pointer-events: all;
+  }
+  
+.focus {
+    fill: #F1F3F3;
+    stroke: rgb(172, 43, 55);
+    stroke-width: 1.5px;
+}
+    
+.hover-line {
+    stroke: rgb(172, 43, 55);
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
+}
 
 
 .node rect {
@@ -197,27 +213,9 @@
 }
 
 .svg {
-    position: absolute;
+    position: relative;
 }
 
 .canvas {
     position: absolute;
-}
-
-
-.overlay {
-    fill: none;
-    pointer-events: all;
-  }
-  
-.focus {
-    fill: #F1F3F3;
-    stroke: rgb(172, 43, 55);
-    stroke-width: 1.5px;
-}
-    
-.hover-line {
-    stroke: rgb(172, 43, 55);
-    stroke-width: 2px;
-    stroke-dasharray: 3,3;
 }

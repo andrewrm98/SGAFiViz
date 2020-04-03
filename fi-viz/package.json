@@ -8,6 +8,7 @@
     "bulma": "^0.8.0",
     "bulma-extensions": "^6.2.7",
     "d3": "^5.15.0",
+    "d3-drag": "^1.2.5",
     "d3-sankey": "^0.12.3",
     "express": "^4.17.1",
     "jQuery": "^1.7.4",
