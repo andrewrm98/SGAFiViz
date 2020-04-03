@@ -27,7 +27,7 @@ class Story extends Component {
       didViewCountUp: false,
       pHeight: 50,
       pWidth: 50,
-      particle_speed: 1.5 // speed of sankey particles
+      particle_speed: 0.5 // speed of sankey particles
     };
   }
 
