@@ -19,7 +19,7 @@ class Sankey extends Component {
       let width = this.getWidth();
       //let height = this.getHeight();
   
-      this.setState({width: width-60, height: 600});
+      this.setState({width: width-60, height: 700});
       this.drawChart();
   
       let resizedFn;
@@ -67,7 +67,7 @@ class Sankey extends Component {
           //     width = 1000 - margin.left - margin.right,
           //     height = 700 - margin.top - margin.bottom;
   
-          var margin = {top: 1, right: 1, bottom: 6, left: 1},
+          var margin = {top: 1, right: 1, bottom: 20, left: 1},
               width = this.state.width - margin.left - margin.right,
               height = this.state.height - margin.top - margin.bottom;
   

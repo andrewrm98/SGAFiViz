@@ -193,11 +193,17 @@ class Story extends Component {
         {/* Sankey */}
 
         <div className = "story-slf slanted light-red-bg">
+
+          <div className = "box border-black margin-slf">
+            <h1 className = "title">Insert Sankey Title Here</h1>
+            <p>Describe this beautiful sankey boy. </p>
+          </div>
+          <br></br>
           <div className = "box border-black" id="sankeyBox">
             <Sankey/>
           </div>
+
         </div>
-        
       </div>
     );
   }
