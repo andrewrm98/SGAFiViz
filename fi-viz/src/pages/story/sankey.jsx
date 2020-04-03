@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import * as d3 from 'd3'
-import mySankey from "./d3.sankey.js"
+import mySankey from "./d3.sankey.js";
 
 class Sankey extends Component {
 
     constructor(props) {
       super(props);
       this.state = {
+        // counting up values on proper position
+        didViewCountUp: false,
         height: 0, 
         width: 0
       }
@@ -17,7 +19,7 @@ class Sankey extends Component {
       let width = this.getWidth();
       //let height = this.getHeight();
   
-      this.setState({width: width-60, height: 750});
+      this.setState({width: width-60, height: 600});
       this.drawChart();
   
       let resizedFn;
@@ -28,6 +30,14 @@ class Sankey extends Component {
         }, 200)
       });
     }
+
+    // Used to engage number countup when the section is visible 
+    onVisibilityChange = isVisible => {
+        if (isVisible) {
+        this.setState({didViewCountUp: true});
+        }
+    }
+
   
     redrawChart() {
       let width = this.getWidth()
@@ -62,10 +72,10 @@ class Sankey extends Component {
               height = this.state.height - margin.top - margin.bottom;
   
           var formatNumber = d3.format(",.0f"),
-              format = function(d) { return formatNumber(d) + " TWh"; },
+              format = function(d) { return '$' + formatNumber(d); },
               color = d3.scaleOrdinal(d3.schemeCategory10);
   
-          d3.select(".sankey").append("canvas")  
+          var canvas = d3.select(".sankey").append("canvas")  
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr("id", "sankeyCanvas")
@@ -163,7 +173,7 @@ class Sankey extends Component {
                               var offset = (Math.random() - .5) * (d.dy - 4);
                               if (Math.random() < d.freq) {
                                   var length = this.getTotalLength();
-                                  particles.push({link: d, time: elapsed, offset: offset, path: this, length: length, animateTime: length, speed: 0.4 + (Math.random())})
+                                  particles.push({link: d, time: elapsed, offset: offset, path: this, length: length, animateTime: length, speed: 2.5 + (Math.random())})
                               }
                           }
                       });
@@ -174,9 +184,11 @@ class Sankey extends Component {
           function particleEdgeCanvasPath(elapsed) {
               
              try {
-                var context = d3.select("#sankeyCanvas").node().getContext("2d")
+
+                var context = canvas.node().getContext("2d")
   
-                context.clearRect(0, 0, 1000, 1000);
+                // this prevents moving particle buildup
+                context.clearRect(0, 0, 2000, 2000);
   
                 context.fillStyle = "gray";
                 context.lineWidth = "1px";
