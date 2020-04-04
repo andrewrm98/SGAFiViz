@@ -189,7 +189,7 @@ class Sankey extends Component {
                 var context = canvas.node().getContext("2d")
   
                 // this prevents moving particle buildup
-                context.clearRect(0, 0, 2000, 2000);
+                context.clearRect(0, 0, width, height);
   
                 context.fillStyle = "gray";
                 context.lineWidth = "1px";
