@@ -27,7 +27,7 @@ class Story extends Component {
       didViewCountUp: false,
       pHeight: 50,
       pWidth: 50,
-      particle_speed: 0.8 // speed of sankey particles
+      particle_speed: 0.4 // speed of sankey particles
     };
   }
 
@@ -133,7 +133,7 @@ class Story extends Component {
             <div className = "box">
               <div className = "columns">
                 <div className = "column">
-                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF is </h1><h1 className = "title red">
+                  <h1 className = 'subtitle is-4 align-text black bold'>Current SLF: </h1><h1 className = "title red">
                     <VisibilitySensor onChange={this.onVisibilityChange} offset={{
                       top:
                         10
@@ -144,7 +144,7 @@ class Story extends Component {
                 </div>
                 <div className = "is-divider-vertical"></div>
                 <div className = "column">
-                    <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget is </h1><h1 className = "title red"><CountUp end={this.state.didViewCountUp ? this.state.total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
+                    <h1 className = 'subtitle is-4 align-text black bold'>Total SGA Budget: </h1><h1 className = "title red"><CountUp end={this.state.didViewCountUp ? this.state.total : 0} duration={1.5} prefix="$" separator=","  decimals={0} decimal="."></CountUp></h1>
                 </div>
               </div>
             </div>

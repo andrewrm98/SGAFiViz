@@ -31,8 +31,17 @@ class Sankey extends Component {
     }
 
     redrawChart() {
-      let width = this.getWidth()
-      let height = this.getHeight()
+      // save past dimensions
+      let width = this.state.width  + 60
+      let height = this.state.height + 60
+      try {
+        width = this.getWidth();
+        height = this.getHeight();
+      }
+      catch(error) {
+        console.log(error)
+        console.error("element dimension error, please refresh page")
+      }
       this.setState({width: width-60, height: height-60});
       d3.select("#sankeyCanvas").remove();
       d3.select("#sankeySVG").remove();

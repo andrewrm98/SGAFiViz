@@ -32,8 +32,17 @@ class LineChart extends Component {
     }
   
     redrawChart() {
-      let width = this.getWidth()
-      let height = this.getHeight()
+      // save past dimensions
+      let width = this.state.width + 10 
+      let height = this.state.height + 50
+      try {
+        width = this.getWidth();
+        height = this.getHeight();
+      }
+      catch(error) {
+        console.log(error)
+        console.error("element dimension error, please refresh page")
+      }
       this.setState({width: width-10, height: height-50});
       d3.select(".lineChart svg").remove();
       this.drawChart = this.drawChart.bind(this);

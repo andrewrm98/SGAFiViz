@@ -7,6 +7,10 @@ class Header extends React.Component {
     render() {
         return (
             <footer className="footer">
+                <br></br>
+                <br></br>
+                <br></br>
+                <hr className="footer-line" style={{color: '#464646', backgroundColor: '#464646', height: .5, borderColor : '#464646 '}}/>
                 <div className="content has-text-centered">
 
                     <strong>This website was created as part of a MQP</strong>
