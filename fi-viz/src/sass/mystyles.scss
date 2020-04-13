@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+$wpired: #ac2b37;
+$wpisecondary: #9d1212;
+
+$primary: $wpired;
+$link: $wpisecondary;
+
+@import "../../node_modules/bulma/bulma.sass";

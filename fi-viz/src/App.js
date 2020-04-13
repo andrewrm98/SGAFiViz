@@ -2,15 +2,13 @@
 import React, { Component } from "react";
 import "./App.css";
 //Import all needed Component for this tutorial
-import {
-  BrowserRouter as Router,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import StoryPage from "./pages/story";
 import AboutPage from "./pages/about";
 import BudgetPage from "./pages/budget";
 import Header from "./components/Header/Header.jsx";
-import Footer from "./components/Footer/Footer.jsx"
+import Footer from "./components/Footer/Footer.jsx";
+import "./sass/mystyles.scss";
 
 class App extends Component {
   render() {
