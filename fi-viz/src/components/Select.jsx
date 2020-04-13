@@ -5,7 +5,7 @@ class Select extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: []
+      selected: [],
     };
     this.onSelect = this.onSelect.bind(this);
     this.onRemove = this.onRemove.bind(this);
@@ -18,14 +18,14 @@ class Select extends Component {
   onSelect(selected) {
     console.log(selected);
     this.setState({
-      selected: selected
+      selected: selected,
     });
   }
 
   onRemove(selected) {
     console.log(selected);
     this.setState({
-      selected: selected
+      selected: selected,
     });
   }
 
@@ -48,7 +48,7 @@ class Select extends Component {
         </div>
         <div className="column">
           {React.cloneElement(this.props.children, {
-            selected: this.state.selected
+            selected: this.state.selected,
           })}
         </div>
       </div>
