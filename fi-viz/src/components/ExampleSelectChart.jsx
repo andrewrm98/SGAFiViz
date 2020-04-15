@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 class ExampleSelectChart extends Component {
-  static displayName = "Example Chart";
   constructor(props) {
     super(props);
     this.state = {
@@ -28,15 +27,19 @@ class ExampleSelectChart extends Component {
     if (this.state.selected.length > 0) {
       const listItems = this.state.selected.map((club) => (
         <li key={club.name.toString()}>
-          {" "}
           {club.name} - {club.category}: ${club.budget} -_- Members:{" "}
           {club.active_members}
         </li>
       ));
       return (
-        <div>
-          {this.props.alt != null ? "Alternate" : undefined}
-          <ul>{listItems}</ul>
+        <div className="columns">
+          <div className="column is-three-quarters">
+            {this.props.alt != null ? "Alternate" : undefined}
+            <ul>{listItems}</ul>
+          </div>
+          <div className="column">
+            <p>Description of Chart</p>
+          </div>
         </div>
       );
     }

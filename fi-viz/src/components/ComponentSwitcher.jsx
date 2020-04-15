@@ -10,10 +10,6 @@ class ComponentSwitcher extends Component {
     this.getComponentList = this.getComponentList.bind(this);
   }
 
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps) {}
-
   changeComponent(selected) {
     this.setState({
       componentNum: selected,
