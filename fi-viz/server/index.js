@@ -15,59 +15,52 @@ var con = mysql.createConnection({
   host: "webdb.wpi.edu",
   user: "sgamqpteam",
   password: "j93Z9m+wDIA",
-  database: "sgadb"
+  database: "sgadb",
 });
 
-// TODO - UNCOMMENT
 con.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected!");
+  if (err) throw err;
+  console.log("Connected!");
 });
 
 app.use(express.static(path.join(__dirname, "./build")));
 
 app.get("/api/budgets", (req, res) => {
-  // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
-  con.query("SELECT * FROM sgadb.Budgets;", function(err, data) {
+  con.query("SELECT * FROM sgadb.Budgets;", function (err, data) {
     err ? res.send(err) : res.json({ budgets: data });
   });
 });
 
 app.get("/api/sunburst", (req, res) => {
-  // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
   con.query(
     "SELECT * FROM sgadb.`Total Budget` WHERE `Fiscal Year` = 'FY 20';",
-    function(err, data) {
+    function (err, data) {
       err ? res.send(err) : res.json({ data: data[0] });
     }
   );
 });
 
 app.get("/api/club_budgets", (req, res) => {
-  // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
   con.query(
     "SELECT * FROM sgadb.`Club Total Budget` WHERE `Fiscal Year` = 'FY 20';",
-    function(err, data) {
+    function (err, data) {
       err ? res.send(err) : res.json({ budgets: data });
     }
   );
 });
 
 app.get("/api/categories_budgets", (req, res) => {
-  // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
   con.query(
     "SELECT * FROM sgadb.`Categories Total Budget` WHERE `Fiscal Year` = 'FY 20';",
-    function(err, data) {
+    function (err, data) {
       err ? res.send(err) : res.json({ budgets: data });
     }
   );
 });
 
 app.get("/api/slf", (req, res) => {
-  con.query("SELECT * FROM sgadb.`Student Life Fee`;", function(err, data) {
-    var i = 0,
-      xAxis = [],
-      yAxis = [];
+  con.query("SELECT * FROM sgadb.`Student Life Fee`;", function (err, data) {
+    var i = 0;
     for (i = 0; i < data.length; i++) {
       var year = data[i]["Fiscal Year"];
       var yearArr = year.split(" ");
@@ -81,8 +74,7 @@ app.get("/api/slf", (req, res) => {
 app.get("/api/organization_numbers", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Organization Membership Numbers` WHERE `Active Members` != 'Not Provided' AND `Active Members` IS NOT NULL AND `Active Members` != '';",
-    function(err, data) {
-      // console.log(data);
+    function (err, data) {
       err ? res.send(err) : res.json({ members: data });
     }
   );
@@ -91,8 +83,7 @@ app.get("/api/organization_numbers", (req, res) => {
 app.get("/api/category_organization_numbers", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Categories Club Membership` WHERE `Active Members` != 'Not Provided' AND `Active Members` IS NOT NULL AND `Active Members` != '';",
-    function(err, data) {
-      // console.log(data);
+    function (err, data) {
       err ? res.send(err) : res.json({ members: data });
     }
   );
@@ -101,16 +92,14 @@ app.get("/api/category_organization_numbers", (req, res) => {
 app.get("/api/mandatory_transfers", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Mandatory Transfers Total Budget` WHERE `Fiscal Year` = 'FY 20';",
-    function(err, data) {
-      console.log(data);
+    function (err, data) {
       err ? res.send(err) : res.json({ mandatory: data });
     }
   );
 });
 
 app.get("/api/budget_breakdown", (req, res) => {
-  // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
-  con.query("SELECT * FROM sgadb.`Total Budget`;", function(err, data) {
+  con.query("SELECT * FROM sgadb.`Total Budget`;", function (err, data) {
     var i;
     for (i = 0; i < data.length; i++) {
       var year = data[i]["Fiscal Year"];
@@ -123,17 +112,9 @@ app.get("/api/budget_breakdown", (req, res) => {
 });
 
 app.get("/api/selection_options", (req, res) => {
-  // Remember to add id as props when doing mysql, I want array syntax, but efficiency of a map/object
   con.query(
     "SELECT * FROM sgadb.`Selection Options` WHERE `Fiscal Year` = 'FY 19';",
-    function(err, data) {
-      // var i;
-      // for (i=0; i<data.length; i++) {
-      //     var year = data[i]["Fiscal Year"]
-      //     var yearArr = year.split(" ")
-      //     data[i]["Fiscal Year"] = "20" + parseInt(yearArr[1])
-      // }
-
+    function (err, data) {
       err ? res.send(err) : res.json({ options: data });
     }
   );
@@ -144,83 +125,9 @@ app.get("/api/hello", (req, res) => {
 });
 
 app.get("/api/sankey_data", (req, res) => {
-  var sankeyData = require("./../src/pages/story/sankey/sankeyData.json")
+  var sankeyData = require("./../src/pages/story/sankey/sankeyData.json");
   res.json(sankeyData);
 });
-
-// app.post('/api/addBudget', (req, res) => {
-//     console.log(`Adding budget for ${req.body.name}`)
-//     con.query(`INSERT INTO budgets (name, requested, approved) VALUES ("${req.body.name}",
-//     '${req.body.requested}', '${req.body.approved}');`,
-//         function (err, result) {
-//             (err) ? res.send(err) : res.send(true);
-//         })
-// });
-
-/**
- * HOW TO USE in react - Use home - handleSubmit as an example
- * const response = await fetch('/api/editBudget', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({id: { name, requested, etc. }}),
-        });
-    const edited = await response;
-    if(edited) {
-        // Call home again to update all the data
-    }
- */
-// app.post('/api/editBudget', (req, res) => {
-//     let id = parseInt(req.body.id);
-//     console.log("Id: " + id)
-//     console.log(req.body);
-//     con.query(`UPDATE budgets SET requested = ${req.body.requested}, approved = ${req.body.approved} WHERE id = ${id};`, function (err, result) {
-//         console.log("Result: " + result);
-//         (err) ? res.send(err) : res.send(true);
-//     })
-// });
-
-/**
- * HOW TO USE in react - Use home - handleSubmit as an example
- * const response = await fetch('/api/deleteBudget', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ index: index }),
-        });
-    const deleted = await response;
-
-    if(deleted) {
-        // Call home again to update all the data
-    }
- */
-// app.post('/api/deleteBudget', function (req, res) {
-//     let id = parseInt(req.body.id);
-//     con.query(`DELETE FROM budgets where id = ${id};`, function (err, result) {
-//         console.log(result);
-//         (err) ? res.send(err) : res.send(true);
-//     });
-// });
-
-// app.post('/api/login', (req, res) => {
-//     console.log(req.body);
-//     let username = req.body.username;
-//     let password = req.body.password;
-//     let user;
-//     con.query("SELECT * FROM accounts where username = '" + username + "' AND password = '" + password + "';", function (err, data) {
-//         user = data;
-//         if(err) {
-//             res.send(err);
-//         } else if(Object.entries(user).length > 0 ) {
-//             user.ok = true;
-//             res.json(user)
-//         } else {
-//             res.sendStatus(401);
-//         }
-//     })
-// });
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "./build/index.html"));

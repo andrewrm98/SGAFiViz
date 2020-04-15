@@ -4,69 +4,8 @@ import RidgeChart from "../../components/Ridge.jsx";
 import Select from "../../components/Select";
 import ExampleSelectChart from "../../components/ExampleSelectChart";
 import RadarChart from "./radarChart.jsx";
-import * as d3 from "d3";
 import ComponentSwitcher from "../../components/ComponentSwitcher";
 import SunburstChart from "./Sunburst";
-/* We simply can use an array and loop and print each user */
-class Budget extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      budgets: [],
-      options: [],
-    };
-  }
-
-  componentDidMount() {
-    fetch("/api/budgets")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result.budgets);
-          this.setState({
-            isLoaded: true,
-            budgets: result.budgets,
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );
-    fetch("/api/selection_options")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result.options);
-          this.setState({
-            isLoaded: true,
-            options: result.options,
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );
-  }
-
-  render() {
-    const { error, isLoaded } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return <div className="budget-container center-text"></div>;
-    }
-  }
-}
 
 class BudgetPage extends Component {
   constructor(props) {
@@ -122,7 +61,6 @@ class BudgetPage extends Component {
           </ComponentSwitcher>
         </Select>
         <RadarChart></RadarChart>
-        <Budget />
         <SunburstChart />
         <RidgeChart />
         {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
