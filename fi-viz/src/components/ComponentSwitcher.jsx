@@ -41,10 +41,11 @@ class ComponentSwitcher extends Component {
   render() {
     return (
       <div>
+        {this.getComponentList()}
+
         {React.cloneElement(this.props.children[this.state.componentNum], {
           selected: this.props.selected,
         })}
-        {this.getComponentList()}
       </div>
     );
   }

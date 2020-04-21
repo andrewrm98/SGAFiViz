@@ -9,8 +9,10 @@ class ExampleSelectChart extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      selected: this.props.selected,
+    this.setState(function (state, props) {
+      return {
+        selected: props.selected,
+      };
     });
   }
 

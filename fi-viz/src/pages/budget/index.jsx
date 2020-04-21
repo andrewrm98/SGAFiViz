@@ -51,7 +51,7 @@ class BudgetPage extends Component {
   }
   render() {
     return (
-      <div style={{ marginLeft: "15%", marginRight: "15%" }}>
+      <div className="budget-container">
         <Select options={this.state.options}>
           <ComponentSwitcher>
             <ExampleSelectChart displayName={"Test Example Chart"} />
@@ -59,7 +59,7 @@ class BudgetPage extends Component {
               displayName={"Alternate Example Chart"}
               alt={2}
             />
-              <LollipopSelect displayName={"Lollipop"}/>
+            <LollipopSelect displayName={"Lollipop"} />
           </ComponentSwitcher>
         </Select>
         <RadarChart></RadarChart>

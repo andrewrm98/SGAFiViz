@@ -2,26 +2,39 @@ import React, { Component } from "react";
 import { Multiselect } from "multiselect-react-dropdown";
 
 class Select extends Component {
-  /*options = [
-    { name: "Cyber Security Club", category: "Academic", budget: "15000" },
-    { name: "The Alliance", category: "Awareness", budget: "3550" },
+  options = [
+    {
+      name: "Cyber Security Club",
+      category: "Academic",
+      budget: "15000",
+      active_members: 23,
+    },
+    {
+      name: "The Alliance",
+      category: "Awareness",
+      budget: "3550",
+      active_members: 43,
+    },
     {
       name: "Colleges Against Cancer",
       category: "Community Service",
       budget: "70000",
+      active_members: 75,
     },
     {
       name: "Habitat For Humanity",
       category: "Community Service",
       budget: "13505",
+      active_members: 30,
     },
     { name: "Hillel", category: "Cultural", budget: "2500" },
     {
       name: "Game Development Club",
       category: "Extracurricular",
       budget: "300",
+      active_members: 35,
     },
-  ];*/
+  ];
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +59,7 @@ class Select extends Component {
   render() {
     return (
       <div className="columns">
-        <div className="column is-one-quarter">
+        <div className="column is-one-third">
           <Multiselect
             options={this.props.options} // Options to display in the dropdown
             groupBy="category" // Value to group options by
@@ -59,6 +72,7 @@ class Select extends Component {
               searchBox: {
                 "border-bottom": "1px solid #9D1212",
                 "border-radius": "0px",
+                border: "none",
               },
             }}
           />
