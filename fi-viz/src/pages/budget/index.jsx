@@ -8,6 +8,7 @@ import ComponentSwitcher from "../../components/ComponentSwitcher";
 import SunburstChart from "./Sunburst";
 import LollipopSelect from "../../components/LollipopSelect";
 import BarChart from "../../components/BarChart";
+import ScatterPlot from "../../components/ScatterPlot";
 
 class BudgetPage extends Component {
   constructor(props) {
@@ -61,6 +62,7 @@ class BudgetPage extends Component {
               alt={2}
             />
             <LollipopSelect displayName={"Lollipop"} />
+            <ScatterPlot displayName={"Scatterplot"} />
             <BarChart displayName={"BarChart"}/>
           </ComponentSwitcher>
         </Select>
