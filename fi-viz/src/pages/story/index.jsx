@@ -194,8 +194,8 @@ class Story extends Component {
         <div className = "story-slf slanted light-red-bg">
 
           <div className = "box border-black margin-slf">
-            <h1 className = "title">Insert Sankey Title Here</h1>
-            <p>Describe this beautiful sankey boy. </p>
+            <h1 className = "title">Overall Budget Breakdown</h1>
+            <p>Using this visualization you can see where your personal $316 goes within the overall budget and see what the different sections of the budget actually are. Hover over the lines to see each amount and click and drag the segements for ease of viewing.</p>
           </div>
           <br></br>
           <div className = "box border-black" id="sankeyBox">

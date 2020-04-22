@@ -47,7 +47,7 @@ class ExampleSelectChart extends Component {
     }
     return (
       <div>
-        {this.props.alt != null ? "Alternate" : undefined} Nothing Selected!
+        {this.props.alt != null ? "Alternate" : undefined} Nothing Selected, select clubs on the left to see more information!
       </div>
     );
   }

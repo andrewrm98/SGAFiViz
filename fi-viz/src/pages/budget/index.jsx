@@ -7,6 +7,7 @@ import RadarChart from "./radarChart.jsx";
 import ComponentSwitcher from "../../components/ComponentSwitcher";
 import SunburstChart from "./Sunburst";
 import LollipopSelect from "../../components/LollipopSelect";
+import BarChart from "../../components/BarChart";
 
 class BudgetPage extends Component {
   constructor(props) {
@@ -54,12 +55,13 @@ class BudgetPage extends Component {
       <div className="budget-container">
         <Select options={this.state.options}>
           <ComponentSwitcher>
-            <ExampleSelectChart displayName={"Test Example Chart"} />
+            <ExampleSelectChart displayName={"Raw Data"} />
             <ExampleSelectChart
               displayName={"Alternate Example Chart"}
               alt={2}
             />
             <LollipopSelect displayName={"Lollipop"} />
+            <BarChart displayName={"BarChart"}/>
           </ComponentSwitcher>
         </Select>
         <RadarChart></RadarChart>

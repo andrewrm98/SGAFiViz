@@ -33,39 +33,6 @@ class LollipopSelect extends Component {
 
   drawLollipop() {
     d3.select("#lollipop").select("svg").remove();
-    const data1 = [
-      {
-        name: "Cyber Security Club",
-        category: "Academic",
-        budget: "15000",
-        active_members: 23,
-      },
-      {
-        name: "The Alliance",
-        category: "Awareness",
-        budget: "3550",
-        active_members: 43,
-      },
-      {
-        name: "Colleges Against Cancer",
-        category: "Community Service",
-        budget: "70000",
-        active_members: 75,
-      },
-      {
-        name: "Habitat For Humanity",
-        category: "Community Service",
-        budget: "13505",
-        active_members: 30,
-      },
-      { name: "Hillel", category: "Cultural", budget: "2500" },
-      {
-        name: "Game Development Club",
-        category: "Extracurricular",
-        budget: "300",
-        active_members: 35,
-      },
-    ];
     const data = this.state.selected;
 
     var Lolmargin = { top: 30, right: 30, bottom: 70, left: 60 },
@@ -155,31 +122,9 @@ class LollipopSelect extends Component {
           return y(d.budget);
         })
         .attr("r", 8)
-        .attr("fill", "#e06377");
+        .attr("fill", "#AC2B37");
       Lolsvg.selectAll("circle").data(data);
     });
-
-    //basaic bar chart below
-    /*
-        const data = [12, 5, 6, 6, 9, 10];
-
-        const svg = d3.select("#lollipop")
-            .append("svg")
-            .attr("width", 500)
-            .attr("height", 500)
-            .style("margin-left", 100);
-
-        svg.selectAll("rect")
-            .data(data)
-            .enter()
-            .append("rect")
-            .attr("x", (d, i) => i * 70)
-            .attr("y", (d, i) => 500 - 10 * d)
-            .attr("width", 65)
-            .attr("height", (d, i) => d * 10)
-            .attr("fill", "green")
-
-         */
   }
 
   render() {
