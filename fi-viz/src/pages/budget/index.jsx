@@ -7,6 +7,7 @@ import RadarChart from "./radarChart.jsx";
 import ComponentSwitcher from "../../components/ComponentSwitcher";
 import SunburstChart from "./Sunburst";
 import LollipopSelect from "../../components/LollipopSelect";
+import ScatterPlot from "../../components/ScatterPlot";
 
 class BudgetPage extends Component {
   constructor(props) {
@@ -60,6 +61,7 @@ class BudgetPage extends Component {
               alt={2}
             />
             <LollipopSelect displayName={"Lollipop"} />
+            <ScatterPlot displayName={"Scatterplot"} />
           </ComponentSwitcher>
         </Select>
         <RadarChart></RadarChart>
