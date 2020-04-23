@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import 'react-tabulator/lib/styles.css'; // required styles
 import 'react-tabulator/lib/css/tabulator.min.css'; // theme
 import { ReactTabulator } from 'react-tabulator'; // for React 15.x, use import { React15Tabulator }
-import BudgetPage from "../pages/budget";
-// import { Redirect } from "react-router-dom";
 
 
 class RawDataTable extends Component {

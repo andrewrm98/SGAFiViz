@@ -161,11 +161,26 @@ class ScatterPlot extends Component {
                 // add the text for the tooltip
                 tooltips.append("text")
                     .attr("x", x(d.active_members))
+                    .attr("y", y(d.budget) - CIRCLE_SIZE - 48) // place the tooltip at the yvalue of the circle minus the radius of the circle
+                    .attr('font-family', "Bebas Neue")
+                    .attr("font-size", "16px")
+                    .style("fill", accent(d.category)) 
+                    .style("font-weight", "bold") 
+                    .text(d.name)
+                tooltips.append("text")
+                    .attr("x", x(d.active_members))
+                    .attr("y", y(d.budget) - CIRCLE_SIZE - 28) // place the tooltip at the yvalue of the circle minus the radius of the circle
+                    .attr('font-family', "Bebas Neue")
+                    .attr("font-size", "16px")
+                    .style("fill", accent(d.category))  
+                    .text("Budget: $" + d.budget)
+                tooltips.append("text")
+                    .attr("x", x(d.active_members))
                     .attr("y", y(d.budget) - CIRCLE_SIZE - 8) // place the tooltip at the yvalue of the circle minus the radius of the circle
                     .attr('font-family', "Bebas Neue")
                     .attr("font-size", "16px")
                     .style("fill", accent(d.category))  
-                    .text(d.name)
+                    .text("Students: " + d.active_members)
                 // give hovering a little life
                 d3.select(d3.event.target)
                     .transition()
