@@ -9,6 +9,7 @@ import SunburstChart from "./Sunburst";
 import LollipopSelect from "../../components/LollipopSelect";
 import BarChart from "../../components/BarChart";
 import ScatterPlot from "../../components/ScatterPlot";
+import RawDataTable from "../../components/RawDataTable";
 
 class BudgetPage extends Component {
   constructor(props) {
@@ -56,7 +57,8 @@ class BudgetPage extends Component {
       <div className="budget-container">
         <Select options={this.state.options}>
           <ComponentSwitcher>
-            <ExampleSelectChart displayName={"Raw Data"} />
+            <RawDataTable displayName={"Raw Data"} />
+            <ExampleSelectChart displayName={"Raw Data2"} />
             <ExampleSelectChart
               displayName={"Alternate Example Chart"}
               alt={2}
@@ -66,9 +68,9 @@ class BudgetPage extends Component {
             <BarChart displayName={"BarChart"}/>
           </ComponentSwitcher>
         </Select>
-        <RadarChart></RadarChart>
+        {/* <RadarChart></RadarChart>
         <SunburstChart />
-        <RidgeChart />
+        <RidgeChart /> */}
         {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>

@@ -6,17 +6,53 @@ class ScatterPlot extends Component {
     super(props);
     this.state = {
       selected: [],
+      height: 0, 
+      width: 0,
     };
+    this.chartRef = React.createRef();
   }
 
-  componentDidMount() { 
-   
+  componentDidMount() {
+    let width = 900
+    if (this.state.selected.length > 0) {
+      width = this.getWidth();
+    }
+
     this.setState(function (state, props) {
       return {
         selected: props.selected,
-    
+        width: width-60, 
+        height: 700
       };
     });
+    this.drawChart();
+
+    let resizedFn;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizedFn);
+        resizedFn = setTimeout(() => {
+            this.redrawChart();
+        }, 200)
+      });
+  }
+
+  redrawChart() {
+    // save past dimensions
+    let width = this.state.width + 60
+    let height = this.state.height + 60
+    try {
+      width = this.getWidth();
+      height = this.getHeight();
+    }
+    catch(error) {
+      console.log(error)
+      console.error("element dimension error, please refresh page")
+      // width = this.state.width  + 60
+      // height = this.state.height + 60
+    }
+    this.setState({width: width-60, height: height-60});
+    
+    this.drawChart = this.drawChart.bind(this);
     this.drawChart();
   }
 
@@ -40,7 +76,7 @@ class ScatterPlot extends Component {
     // X SCALE = STUDENT OCUNT
     // Y SCALE = BUDGET
 
-    console.log(d3.min(data, function(d) {return d.budget}))
+    console.log('HI IM IN DRAW CHART')
 
     // svg dimensions
     var MIN_STUDENTS = d3.min(data, function(d) {return d.active_members})
@@ -58,9 +94,9 @@ class ScatterPlot extends Component {
 
 
     // set the dimensions and margins of the graph
-    var margin = {top: 30, right: 200   , bottom: 50, left: 80},
-        width = 800 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+    var margin = {top: 30, right: 200, bottom: 50, left: 80},
+        width = this.state.width - margin.left - margin.right,
+        height =  this.state.height - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#scatterplot")
@@ -174,12 +210,21 @@ class ScatterPlot extends Component {
         .text(function(d) { return d;})
   }
 
+  getWidth(){
+    if (this.state.selected.length > 0) {
+      return this.chartRef.current.parentElement.offsetWidth;
+    }
+  }
+  getHeight(){
+      return this.chartRef.current.parentElement.offsetHeight;
+  }
+
   render() {
     if (this.state.selected.length > 0) {
-        return <div id="scatterplot" className = "intro-card box border"> </div>;
+        return <div ref={this.chartRef} id="scatterplot" className = "intro-card box border"> </div>;
       }
       return (
-        <div>
+        <div> 
           {this.props.alt != null ? "Alternate" : undefined} Nothing Selected!
         </div>
       );

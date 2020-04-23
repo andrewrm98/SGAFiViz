@@ -18,7 +18,7 @@ class ComponentSwitcher extends Component {
 
   getComponentList() {
     const listComponents = this.props.children.map((component, index) => {
-      console.log(component);
+      // console.log(component);
       return (
         <li
           key={component.props.displayName.toString()}

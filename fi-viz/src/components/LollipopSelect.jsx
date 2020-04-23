@@ -7,14 +7,49 @@ class LollipopSelect extends Component {
     this.state = {
       selected: [],
     };
+    this.chartRef = React.createRef();
   }
 
   componentDidMount() {
+    let width = 900
+    if (this.state.selected.length > 0) {
+      width = this.getWidth();
+    }
     this.setState(function (state, props) {
       return {
         selected: props.selected,
+        width: width-60, 
+        height: 740
       };
     });
+    this.drawLollipop();
+
+    let resizedFn;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizedFn);
+        resizedFn = setTimeout(() => {
+            this.redrawChart();
+        }, 200)
+      });
+  }
+
+  redrawChart() {
+    // save past dimensions
+    let width = this.state.width + 60
+    let height = this.state.height + 60
+    try {
+      width = this.getWidth();
+      height = this.getHeight();
+    }
+    catch(error) {
+      console.log(error)
+      console.error("element dimension error, please refresh page")
+      // width = this.state.width  + 60
+      // height = this.state.height + 60
+    }
+    this.setState({width: width-60, height: height-60});
+    
+    this.drawLollipop = this.drawLollipop.bind(this);
     this.drawLollipop();
   }
 
@@ -36,8 +71,8 @@ class LollipopSelect extends Component {
     const data = this.state.selected;
 
     var Lolmargin = { top: 30, right: 30, bottom: 70, left: 60 },
-      Lolwidth = 900 - Lolmargin.left - Lolmargin.right,
-      Lolheight = 740 - Lolmargin.top - Lolmargin.bottom;
+      Lolwidth = this.state.width - Lolmargin.left - Lolmargin.right,
+      Lolheight = this.state.height - Lolmargin.top - Lolmargin.bottom;
 
     var div = d3
       .select("#lollipop")
@@ -127,9 +162,19 @@ class LollipopSelect extends Component {
     });
   }
 
+  getWidth(){
+    if (this.state.selected.length > 0) {
+      return this.chartRef.current.parentElement.offsetWidth;
+    }
+  }
+  getHeight(){
+      return this.chartRef.current.parentElement.offsetHeight;
+  }
+
+
   render() {
     if (this.state.selected.length > 0) {
-      return <div id="lollipop"> </div>;
+      return <div ref={this.chartRef} id="lollipop" className = "intro-card box border"> </div>;
     }
     return (
       <div>

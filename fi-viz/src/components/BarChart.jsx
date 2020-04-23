@@ -6,17 +6,56 @@ class BarChart extends Component {
         super(props);
         this.state = {
             selected: [],
+            height: 0, 
+            width: 0,
         };
+        this.chartRef = React.createRef();
     }
 
     componentDidMount() {
+        let width = 860
+        if (this.state.selected.length > 0) {
+        width = this.getWidth();
+        }
+
         this.setState(function (state, props) {
             return {
                 selected: props.selected,
+                width: width-60, 
+                height: 800
             };
         });
         this.drawScatter();
+
+        
+        let resizedFn;
+        window.addEventListener("resize", () => {
+        clearTimeout(resizedFn);
+        resizedFn = setTimeout(() => {
+            this.redrawChart();
+        }, 200)
+        });
     }
+
+    redrawChart() {
+        // save past dimensions
+        let width = this.state.width + 60
+        let height = this.state.height + 60
+        try {
+          width = this.getWidth();
+          height = this.getHeight();
+        }
+        catch(error) {
+          console.log(error)
+          console.error("element dimension error, please refresh page")
+          // width = this.state.width  + 60
+          // height = this.state.height + 60
+        }
+        this.setState({width: width-60, height: height-60});
+        
+        this.drawScatter = this.drawScatter.bind(this);
+        this.drawScatter();
+      }
 
     componentDidUpdate(prevProps, prevState) {
         this.drawScatter();
@@ -37,8 +76,8 @@ class BarChart extends Component {
 
         // set the dimensions and margins of the graph
         var margin = {top: 20, right: 20, bottom: 40, left: 300},
-            width = 860 - margin.left - margin.right,
-            height = 800 - margin.top - margin.bottom;
+            width = this.state.width - margin.left - margin.right,
+            height = this.state.height - margin.top - margin.bottom;
 
         // append the svg object to the body of the page
         var Barsvg = d3.select("#bar")
@@ -83,9 +122,18 @@ class BarChart extends Component {
         })
     }
 
+    getWidth(){
+        if (this.state.selected.length > 0) {
+          return this.chartRef.current.parentElement.offsetWidth;
+        }
+      }
+      getHeight(){
+          return this.chartRef.current.parentElement.offsetHeight;
+      }
+
     render() {
         if (this.state.selected.length > 0) {
-            return <div id="bar"> </div>;
+            return <div ref={this.chartRef} id="bar" className = "intro-card box border"> </div>;
         }
         return (
             <div>
