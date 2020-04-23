@@ -12,8 +12,17 @@ class RawDataTable extends Component {
         columns : [
             {title: 'Name', field: 'name'},
             {title: 'Category', field: 'category'},
-            {title: 'Budget', field: 'budget'},
-            {title: 'Members', field: 'active_members'}
+            {title: 'Budget', field: 'budget', formatter:"money", bottomCalc:"sum", bottomCalcFormatter: "money",
+              bottomCalcFormatterParams:  {
+                decimal: ".",
+                thousand: ",",
+                symbol: "$"
+              }, formatterParams: {
+                decimal: ".",
+                thousand: ",",
+                symbol: "$"
+            }},
+            {title: 'Members', field: 'active_members', bottomCalc:"sum"}
         ],
         tableOptions: {
           pagination: 'local', 
