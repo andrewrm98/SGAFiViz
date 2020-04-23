@@ -92,7 +92,7 @@ class ScatterPlot extends Component {
 
 
     // set the dimensions and margins of the graph
-    var margin = {top: 30, right: 200, bottom: 50, left: 80},
+    var margin = {top: 80, right: 200, bottom: 50, left: 80},
         width = this.state.width - margin.left - margin.right,
         height =  this.state.height - margin.top - margin.bottom;
 
