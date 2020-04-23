@@ -189,7 +189,7 @@ class LollipopSelect extends Component {
 
     return (
       <div>
-        {this.props.alt != null ? "Alternate" : undefined} Please select clubs to compare!
+        {this.props.alt != null ? "Alternate" : undefined} <span className="red">* Please select clubs to compare! *</span>
       </div>
     );
   }
