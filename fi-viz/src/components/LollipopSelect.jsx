@@ -174,11 +174,22 @@ class LollipopSelect extends Component {
 
   render() {
     if (this.state.selected.length > 0) {
-      return <div ref={this.chartRef} id="lollipop" className = "intro-card box border"> </div>;
+      return(
+        <div>
+            {/* chart description */}
+            <div className= "multi-select-description box border has-background-light">
+                <h1 className="title"> Chart Title </h1>
+                <p> This a description for this beautiful chart that super cool and fun. </p>
+            </div>
+            {/* chart */}
+            <div ref={this.chartRef} id="lollipop" className = "intro-card box border"> </div>
+        </div>
+        );
     }
+
     return (
       <div>
-        {this.props.alt != null ? "Alternate" : undefined} Nothing Selected!
+        {this.props.alt != null ? "Alternate" : undefined} Please select clubs to compare!
       </div>
     );
   }

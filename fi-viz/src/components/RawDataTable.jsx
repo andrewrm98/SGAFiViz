@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import 'react-tabulator/lib/styles.css'; // required styles
 import 'react-tabulator/lib/css/tabulator.min.css'; // theme
 import { ReactTabulator } from 'react-tabulator'; // for React 15.x, use import { React15Tabulator }
-import { Redirect } from "react-router-dom";
+import BudgetPage from "../pages/budget";
+// import { Redirect } from "react-router-dom";
+
 
 class RawDataTable extends Component {
     constructor(props) {
@@ -14,7 +16,21 @@ class RawDataTable extends Component {
             {title: 'Category', field: 'category'},
             {title: 'Budget', field: 'budget'},
             {title: 'Members', field: 'active_members'}
-        ]
+        ],
+        tableOptions: {
+          pagination: 'local', 
+          paginationSize: '20', 
+          layout:"fitColumns",      //fit columns to width of table
+          responsiveLayout:"hide",  //hide columns that dont fit on the table
+          tooltips:true,            //show tool tips on cells
+          addRowPos:"top",          //when adding a new row, add it to the top of the table
+          history:true,             //allow undo and redo actions on the table
+          movableColumns:true,      //allow column order to be changed
+          resizableRows:true,       //allow row order to be changed
+          initialSort:[             //set the initial sort order of the data
+            {column:"name", dir:"asc"},
+          ],
+        }
       };
     }
   
@@ -24,6 +40,11 @@ class RawDataTable extends Component {
           selected: props.selected,
         };
       });
+      
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+      console.log(this.state.selected)
     }
 
     static getDerivedStateFromProps(props, current_state) {
@@ -37,11 +58,19 @@ class RawDataTable extends Component {
 
     render() {
       if (this.state.selected.length > 0) {
-          return <ReactTabulator columns={this.state.columns} data={this.state.selected} />
+          return <ReactTabulator 
+                    columns={this.state.columns} 
+                    data={this.state.selected}
+                    options={this.state.tableOptions}
+                  />
         }
         return (
           <div>
-            {this.props.alt != null ? "Alternate" : undefined} Nothing Selected!
+            <ReactTabulator 
+                columns={this.state.columns} 
+                data={this.props.allOptions}
+                options={this.state.tableOptions}
+              />
           </div>
         );
       }

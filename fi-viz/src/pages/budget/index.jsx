@@ -18,6 +18,7 @@ class BudgetPage extends Component {
       error: null,
       isLoaded: false,
       options: [],
+      allOptions: [],
     };
   }
 
@@ -26,7 +27,7 @@ class BudgetPage extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result.options);
+          // console.log(result.options);
           var options = result.options.map(function (obj) {
             return {
               name: obj.Name,
@@ -39,6 +40,7 @@ class BudgetPage extends Component {
           this.setState({
             isLoaded: true,
             options: options,
+            allOptions: options,
           });
         },
         // Note: it's important to handle errors here
@@ -57,20 +59,37 @@ class BudgetPage extends Component {
       <div className="budget-container">
         <Select options={this.state.options}>
           <ComponentSwitcher>
-            <RawDataTable displayName={"Raw Data"} />
-            <ExampleSelectChart displayName={"Raw Data2"} />
+            <RawDataTable allOptions={this.state.allOptions} displayName={"Raw Data"} />
+            {/* <ExampleSelectChart displayName={"Raw Data2"} />
             <ExampleSelectChart
               displayName={"Alternate Example Chart"}
               alt={2}
-            />
+            /> */}
             <LollipopSelect displayName={"Lollipop"} />
             <ScatterPlot displayName={"Scatterplot"} />
             <BarChart displayName={"BarChart"}/>
           </ComponentSwitcher>
         </Select>
-        {/* <RadarChart></RadarChart>
-        <SunburstChart />
-        <RidgeChart /> */}
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className= "columns">
+          <div className= "column chart-columns box border has-background-light ">
+            <h1 className="title"> Chart Title </h1>
+            <p> This a description for this beautiful chart that super cool and fun. </p>
+            <br></br>
+            <br></br>
+            <SunburstChart />  
+          </div>
+          <div className=  "column chart-columns box border has-background-light">
+            <h1 className="title"> Chart Title </h1>
+            <p> This a description for this beautiful chart that super cool and fun. </p>
+            <br></br>
+            <br></br>
+            <RidgeChart/>  
+          </div>
+        </div>
         {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
       </div>

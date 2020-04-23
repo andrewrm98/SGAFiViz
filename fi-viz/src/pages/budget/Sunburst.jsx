@@ -116,6 +116,8 @@ class SunburstChart extends Component {
         layout={{
           margin: { l: 0, r: 0, b: 0, t: 0 },
           title: "Sunburst Chart",
+          plot_bgcolor: 'rgba(0,0,0,0)',
+          paper_bgcolor: 'rgba(0,0,0,0)'
         }}
         useResizeHandler={true}
         onClick={this.plotlyClickHandler}

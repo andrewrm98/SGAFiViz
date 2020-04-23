@@ -74,9 +74,7 @@ class ScatterPlot extends Component {
     const data = this.state.selected;
 
     // X SCALE = STUDENT OCUNT
-    // Y SCALE = BUDGET
-
-    console.log('HI IM IN DRAW CHART')
+    // Y SCALE = BUDGEt
 
     // svg dimensions
     var MIN_STUDENTS = d3.min(data, function(d) {return d.active_members})
@@ -221,11 +219,22 @@ class ScatterPlot extends Component {
 
   render() {
     if (this.state.selected.length > 0) {
-        return <div ref={this.chartRef} id="scatterplot" className = "intro-card box border"> </div>;
+      return(
+        <div>
+            {/* chart description */}
+            <div className= "multi-select-description box border has-background-light">
+                <h1 className="title"> Chart Title </h1>
+                <p> This a description for this beautiful chart that super cool and fun. </p>
+            </div>
+            {/* chart */}
+            <div ref={this.chartRef} id="scatterplot" className = "intro-card box border"> </div>
+        </div>
+        ); 
       }
+
       return (
-        <div> 
-          {this.props.alt != null ? "Alternate" : undefined} Nothing Selected!
+        <div>
+                {this.props.alt != null ? "Alternate" : undefined} Please select clubs to compare!
         </div>
       );
     }
