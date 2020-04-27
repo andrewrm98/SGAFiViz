@@ -3,7 +3,7 @@ import "./story.css"
 import CountUp from 'react-countup';  
 import VisibilitySensor from 'react-visibility-sensor';
 import Sankey from "./sankey/sankey.jsx"
-import LineChart from "./slfLineChart.jsx"
+import SLFLineChart from "./slfLineChart.jsx"
 
 
 class Story extends Component {
@@ -119,7 +119,7 @@ class Story extends Component {
           {/* SLF Section - LineChart */}
 
           <div className = "box border-black" id="lineChartBox">
-            <LineChart/>
+            <SLFLineChart/>
           </div>
           
         </div>

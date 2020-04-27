@@ -17,8 +17,8 @@
   padding-left: 4%;
   padding-right: 4%;
   padding-bottom: 4%;
-  margin-right: 15%;
-  margin-left: 15%
+  margin-right: 25%;
+  margin-left: 25%;
 }
 
 
@@ -47,4 +47,44 @@
 
 .multi-select {
   margin-left: 40px;
+}
+
+.b-red-bg {
+  background-color: rgb(172, 43, 55);
+}
+
+.b-slanted {
+  position: relative;
+  z-index: 1;
+}
+.b-slanted:after {
+  background: inherit;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 50%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  transform: skewY(1.5deg);
+  transform-origin: 0%;
+  z-index: -1;
+}
+.b-slanted:before {
+  background: inherit;
+  top: 0;
+  content: "";
+  display: block;
+  height: 50%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  transform: skewY(1.5deg);
+  transform-origin: 100%;
+  z-index: -1;
+}
+
+.total-line-chart {
+  margin-left: 20%;
+  margin-right: 20%;
 }
