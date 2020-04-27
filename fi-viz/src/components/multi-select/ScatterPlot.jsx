@@ -239,8 +239,8 @@ class ScatterPlot extends Component {
         <div>
             {/* chart description */}
             <div className= "multi-select-description box border has-background-light">
-                <h1 className="title"> Chart Title </h1>
-                <p> This a description for this beautiful chart that super cool and fun. </p>
+                <h1 className="title"> Club Budget vs. Membership </h1>
+                <p> The scatterplot reveals the correlation between club budgets and club membership. As you hover over each color coded plot point you can see more detailed numbers, and furthermore you can select more clubs on the left for comparison. </p>
             </div>
             {/* chart */}
             <div ref={this.chartRef} id="scatterplot" className = "intro-card box border"> </div>
