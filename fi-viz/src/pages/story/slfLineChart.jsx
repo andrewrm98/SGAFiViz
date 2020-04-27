@@ -91,7 +91,7 @@ class SLFLineChart extends Component {
             } 
   
             /********** Use D3 To Populate SVG **********/
-            var margin = {top: 50, right: 50, bottom: 50, left: 50},
+            var margin = {top: 50, right: 50, bottom: 50, left: 80},
                 width = this.state.width - margin.left - margin.right,
                 height = this.state.height - margin.top - margin.bottom;
   
@@ -129,6 +129,26 @@ class SLFLineChart extends Component {
               .attr("d", d3.line() 
               .x(function(d) { return x((d.year)) }) 
               .y(function(d) { return y(d.fee) }));
+
+            // x axis title
+            svg.append("text")
+            .attr("text-anchor", "end")
+            .attr("x", width/2 + margin.left - 100)
+            .attr("y", height + margin.bottom)
+            .attr('font-family', "Bebas Neue")
+            .attr("font-size", "18px")
+            .text("Year");
+
+            // y axis title
+            svg.append("text")
+                .attr("text-anchor", "end")
+                .attr("x", 20)
+                .attr("y", height/2- margin.left - 30)
+                .attr("transform", `rotate(270, 20, ${height/2-35})`) // rotate takes the rotation, and then the x and y coord of the center of rotation. Make sure these coords are the same as the text
+                .attr("font-family", "Bebas Neue")
+                .attr("font-size", "18px")
+                .text("SLF ($)");
+
   
           // tooltip
           var focus = svg.append("g")
@@ -168,7 +188,7 @@ class SLFLineChart extends Component {
               d = x0 - d0.year > d1.year - x0 ? d1 : d0;
             focus.attr("transform", "translate(" + x(d.year) + "," + y(d.fee) + ")");
             focus.select("text").text(function() {
-              return d.fee; 
+              return '$' + d.fee; 
             });
             focus.select(".x-hover-line").attr("y2", height - y(d.fee));
             focus.select(".y-hover-line").attr("x2", width + width);

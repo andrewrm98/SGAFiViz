@@ -72,7 +72,7 @@ class ScatterPlot extends Component {
 
   drawChart() {
     d3.select("#scatterplot").select("svg").remove();
-    const data = this.props.allOptions;
+    const data = this.state.selected;
 
     // X SCALE = STUDENT OCUNT
     // Y SCALE = BUDGEt

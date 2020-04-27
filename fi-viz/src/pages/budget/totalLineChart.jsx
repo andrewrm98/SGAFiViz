@@ -129,6 +129,26 @@ class TotalLineChart extends Component {
               .attr("d", d3.line() 
               .x(function(d) { return x((d.year)) }) 
               .y(function(d) { return y(d.total) }));
+
+          // x axis title
+          svg.append("text")
+              .attr("text-anchor", "end")
+              .attr("x", width/2 + margin.left - 100)
+              .attr("y", height + margin.bottom)
+              .attr('font-family', "Bebas Neue")
+              .attr("font-size", "18px")
+              .text("Year");
+
+          // y axis title
+          svg.append("text")
+              .attr("text-anchor", "end")
+              .attr("x", 20)
+              .attr("y", height/2- margin.left - 30)
+              .attr("transform", `rotate(270, 20, ${height/2-35})`) // rotate takes the rotation, and then the x and y coord of the center of rotation. Make sure these coords are the same as the text
+              .attr("font-family", "Bebas Neue")
+              .attr("font-size", "18px")
+              .text("Budget ($)");
+
   
           // tooltip
           var focus = svg.append("g")
@@ -144,8 +164,8 @@ class TotalLineChart extends Component {
               .attr("r", 7.5);
   
           focus.append("text")
-              .attr("x", -25)
-              .attr("y", -15);
+              .attr("x", -80)
+              .attr("y", -20);
   
           svg.append("rect")
               //.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -168,7 +188,7 @@ class TotalLineChart extends Component {
               d = x0 - d0.year > d1.year - x0 ? d1 : d0;
             focus.attr("transform", "translate(" + x(d.year) + "," + y(d.total) + ")");
             focus.select("text").text(function() {
-              return d.total; 
+              return '$' +  d3.format(",.2f")(d.total); 
             });
             focus.select(".x-hover-line").attr("y2", height - y(d.total));
             focus.select(".y-hover-line").attr("x2", width + width);
