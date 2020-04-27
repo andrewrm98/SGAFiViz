@@ -45,6 +45,15 @@ const draw = (props) => {
           }
         }
 
+        // x axis title
+        svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width/2 + margin.left - 40)
+        .attr("y", height + margin.bottom)
+        .attr('font-family', "Bebas Neue")
+        .attr("font-size", "18px")
+        .text("Number of Active Members");
+
         var x = d3.scaleLinear().domain([0, max]).range([0, width]);
         svg
           .append("g")

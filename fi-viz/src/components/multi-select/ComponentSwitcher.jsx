@@ -22,7 +22,7 @@ class ComponentSwitcher extends Component {
       return (
         <li
           key={component.props.displayName.toString()}
-          className={this.state.componentNum === index ? "is-active" : ""}
+          className={this.state.componentNum === index ? "is-active" : "has-background-light"}
           onClick={() => this.changeComponent(index)}
         >
           <a>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as d3 from 'd3'
 
-class SLFLineChart extends Component {
+class TotalLineChart extends Component {
     _isMounted = false;
   
     constructor(props) {
@@ -56,7 +56,7 @@ class SLFLineChart extends Component {
     drawChart() {
       //var node = document.createElement('div'); // export this
       //var parentDiv = document.getElementById("lineChartBox"); // for parent margins
-      var year = [], fee = []
+      var year = [], total = []
       var lineData = [{}] // connects with server
       // parse the date / time
       var parseTime = d3.timeParse("%Y"),
@@ -71,27 +71,27 @@ class SLFLineChart extends Component {
             // loop through elements in slf fee to construct x & y axix
             for (var i=0; i< slf.length; i++) {
               year.push((slf[i])["Fiscal Year"])
-              fee.push((slf[i])["SLF Amount"])
+              total.push((slf[i])["SLF Amount"] * (slf[i])["Fall Student Amount"])
             } 
   
             // properly order the data
-            const result = fee
+            const result = total
                 .map((item, index) => [year[index], item]) 
                 .sort(([count1], [count2]) => count2 - count1) 
                 .map(([, item]) => item); 
               
-            fee = result.reverse()
+            total = result.reverse()
             year = year.sort((a, b) => a - b)
   
             for (i=0; i<year.length; i++){
               var d = {}
               d['year'] = parseTime(parseInt(year[i]));
-              d['fee'] = +parseInt(fee[i]);
+              d['total'] = +parseInt(total[i]);
               lineData[i] = d
             } 
   
             /********** Use D3 To Populate SVG **********/
-            var margin = {top: 50, right: 50, bottom: 50, left: 50},
+            var margin = {top: 50, right: 100, bottom: 50, left: 100},
                 width = this.state.width - margin.left - margin.right,
                 height = this.state.height - margin.top - margin.bottom;
   
@@ -113,8 +113,8 @@ class SLFLineChart extends Component {
   
             // Add Y Axis
             var y = d3.scaleLinear()
-                .domain([d3.min(lineData, function(d) { return d.fee}),
-                  d3.max(lineData, function(d) { return d.fee })])
+                .domain([d3.min(lineData, function(d) { return d.total}),
+                  d3.max(lineData, function(d) { return d.total })])
                 .range([ height, 0 ]);
             svg.append("g")
                 .style("font", "14px times")
@@ -128,7 +128,7 @@ class SLFLineChart extends Component {
               .attr("stroke-width", 2.5)
               .attr("d", d3.line() 
               .x(function(d) { return x((d.year)) }) 
-              .y(function(d) { return y(d.fee) }));
+              .y(function(d) { return y(d.total) }));
   
           // tooltip
           var focus = svg.append("g")
@@ -139,7 +139,7 @@ class SLFLineChart extends Component {
               .attr("class", "x-hover-line hover-line")
               .attr("y1", 0)
               .attr("y2", height);
-  
+
           focus.append("circle")
               .attr("r", 7.5);
   
@@ -166,11 +166,11 @@ class SLFLineChart extends Component {
               d0 = lineData[i - 1],
               d1 = lineData[i],
               d = x0 - d0.year > d1.year - x0 ? d1 : d0;
-            focus.attr("transform", "translate(" + x(d.year) + "," + y(d.fee) + ")");
+            focus.attr("transform", "translate(" + x(d.year) + "," + y(d.total) + ")");
             focus.select("text").text(function() {
-              return d.fee; 
+              return d.total; 
             });
-            focus.select(".x-hover-line").attr("y2", height - y(d.fee));
+            focus.select(".x-hover-line").attr("y2", height - y(d.total));
             focus.select(".y-hover-line").attr("x2", width + width);
           }
             
@@ -181,7 +181,7 @@ class SLFLineChart extends Component {
               .attr("text-anchor", "middle")  
               .style("font-size", "24px")  
               .style("font", "times") 
-              .text("Student Life Fee Trend");
+              .text("Total Budget Trend");
       })
   
       .catch(err => {
@@ -205,4 +205,4 @@ class SLFLineChart extends Component {
     }
   }
 
-  export default SLFLineChart;
+  export default TotalLineChart;
