@@ -5,7 +5,7 @@ const draw = (props) => {
   var categories = new Set();
   var data = {};
   
-  var margin = { top: 80, right: 30, bottom: 50, left: 110 },
+  var margin = { top: 80, right: 80, bottom: 50, left: 110 },
     width = props.width - margin.left - margin.right, //460
     height = props.height - margin.top - margin.bottom; //400
 

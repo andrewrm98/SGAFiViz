@@ -66,23 +66,21 @@ class BudgetPage extends Component {
         <br></br>
         <br></br>
         <br></br>
-        <div className= "columns">
-          <div className= "column chart-columns box border has-background-light ">
-            <h1 className="title"> Chart Title </h1>
-            <p> This a description for this beautiful chart that super cool and fun. </p>
-            <br></br>
-            <br></br>
-            <SunburstChart />
-          </div>
+        <div className= "chart-columns box border has-background-light ">
+          <h1 className="title"> Chart Title </h1>
+          <p> This a description for this beautiful chart that super cool and fun. </p>
           <br></br>
           <br></br>
-          <div className=  "column chart-columns box border has-background-light">
-            <h1 className="title"> Chart Title </h1>
-            <p> This a description for this beautiful chart that super cool and fun. </p>
-            <br></br>
-            <br></br>
-            <RidgeChart/>  
-          </div>
+          <SunburstChart />
+        </div>
+        <br></br>
+        <br></br>
+        <div className=  "chart-columns box border has-background-light">
+          <h1 className="title"> Chart Title </h1>
+          <p> This a description for this beautiful chart that super cool and fun. </p>
+          <br></br>
+          <br></br>
+          <RidgeChart/>  
         </div>
         {/*<div className="flourish-embed" data-src="visualisation/1338475"/>/*}
         {/* <div style={{marginLeft: '15%', marginRight: '15%'}} className="flourish-embed" data-src="visualisation/1338248"/> */}
