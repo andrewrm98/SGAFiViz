@@ -96,12 +96,12 @@ class Story extends Component {
             </div>
             <div className = "column">
               <div className = "box border-black max-height align-text">
-                <p><span className="red">{this.state.tuition_inc}%</span> increase in tuition from FY19</p>
+                <p><span className="red">{this.state.tuition_inc}%</span> increase in tuition from {this.state.fiscal_year - 1}</p>
               </div>
             </div>
             <div className = "column">
               <div className = "box border-black max-height align-text">
-                <p> <span className="red">{this.state.budget_cuts}%</span> of total budgets had to be cut in FY19 </p>
+                <p> <span className="red">{this.state.budget_cuts}%</span> of total budgets had to be cut in {this.state.fiscal_year - 1} </p>
               </div>
             </div>
             <div className = "column">

@@ -147,7 +147,7 @@ class BarChart extends Component {
         }
         return (
             <div>
-                {this.props.alt != null ? "Alternate" : undefined} <span className="red">* Please select clubs to compare! *</span>
+                {this.props.alt != null ? "Alternate" : undefined} <span className="red error-msg">* Please select clubs to compare! *</span>
             </div>
         );
     }

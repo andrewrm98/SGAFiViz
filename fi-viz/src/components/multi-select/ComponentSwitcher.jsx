@@ -40,7 +40,7 @@ class ComponentSwitcher extends Component {
 
   render() {
     return (
-      <div>
+      <div className="multi-select">
         {this.getComponentList()}
 
         {React.cloneElement(this.props.children[this.state.componentNum], {

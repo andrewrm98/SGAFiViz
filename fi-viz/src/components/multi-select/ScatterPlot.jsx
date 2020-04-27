@@ -139,7 +139,7 @@ class ScatterPlot extends Component {
         .attr("transform", `rotate(270, 20, ${height/2-35})`) // rotate takes the rotation, and then the x and y coord of the center of rotation. Make sure these coords are the same as the text
         .attr("font-family", "Bebas Neue")
         .attr("font-size", "22px")
-        .text("Budget");
+        .text("Budget ($)");
 
     // this group will save all our tooltips so they can be removed easily
     var tooltips = svg.append('g')
@@ -250,7 +250,7 @@ class ScatterPlot extends Component {
 
       return (
         <div>
-                {this.props.alt != null ? "Alternate" : undefined} <span className="red">* Please select clubs to compare! *</span>
+                {this.props.alt != null ? "Alternate" : undefined} <span className="red error-msg">* Please select clubs to compare! *</span>
         </div>
       );
     }

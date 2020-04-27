@@ -38,3 +38,12 @@
 .light-grey-bg {
   background-color: red;
 }
+
+.error-msg {
+  margin-left: 70px;
+}
+
+
+.multi-select {
+  margin-left: 40px;
+}

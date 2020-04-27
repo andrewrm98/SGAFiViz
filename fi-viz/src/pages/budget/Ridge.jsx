@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import draw from './ridge.js';
 
-
 class RidgeChart extends Component {
 
   constructor(props) {

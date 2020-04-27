@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import "./budget.css";
-import RidgeChart from "../../components/Ridge.jsx";
-import Select from "../../components/Select";
-import ExampleSelectChart from "../../components/ExampleSelectChart";
+import RidgeChart from "./Ridge.jsx";
+import Select from "../../components/multi-select/Select";
+import ExampleSelectChart from "../../components/multi-select/ExampleSelectChart";
 import RadarChart from "./radarChart.jsx";
-import ComponentSwitcher from "../../components/ComponentSwitcher";
+import ComponentSwitcher from "../../components/multi-select/ComponentSwitcher";
 import SunburstChart from "./Sunburst";
-import LollipopSelect from "../../components/LollipopSelect";
-import BarChart from "../../components/BarChart";
-import ScatterPlot from "../../components/ScatterPlot";
-import RawDataTable from "../../components/RawDataTable";
+import LollipopSelect from "../../components/multi-select/LollipopSelect";
+import BarChart from "../../components/multi-select/BarChart";
+import ScatterPlot from "../../components/multi-select/ScatterPlot";
+import RawDataTable from "../../components/multi-select/RawDataTable";
 
 class BudgetPage extends Component {
   constructor(props) {
