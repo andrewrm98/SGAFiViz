@@ -35,7 +35,8 @@ class RawDataTable extends Component {
           initialSort:[             //set the initial sort order of the data
             {column:"name", dir:"asc"},
           ],
-        }
+        },
+        table_size: 0,
       };
     }
   
@@ -43,14 +44,13 @@ class RawDataTable extends Component {
       this.setState(function (state, props) {
         return {
           selected: props.selected,
+          table_size: props.selected.length,
         };
       });
       
     }
 
-    componentDidUpdate(prevProps, prevState) {
-     this.setState()
-      
+    componentDidUpdate(prevProps, prevState) {    
     }
 
     static getDerivedStateFromProps(props, current_state) {
@@ -64,22 +64,26 @@ class RawDataTable extends Component {
 
     render() {
       if (this.state.selected.length > 0) {
-          return <ReactTabulator 
-                    columns={this.state.columns} 
-                    data={this.state.selected}
-                    options={this.state.tableOptions}
-                  />
-        }
         return (
           <div>
             <ReactTabulator 
                 columns={this.state.columns} 
-                data={this.props.allOptions}
+                data={this.state.selected}
                 options={this.state.tableOptions}
               />
           </div>
         );
       }
+      return (
+        <div>
+          <ReactTabulator 
+              columns={this.state.columns} 
+              data={this.props.allOptions}
+              options={this.state.tableOptions}
+            />
+        </div>
+      );
+    }
   }
   
   export default RawDataTable;
