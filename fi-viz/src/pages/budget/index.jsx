@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "./budget.css";
 import RidgeChart from "./Ridge.jsx";
 import Select from "../../components/multi-select/Select";
-import ExampleSelectChart from "../../components/multi-select/ExampleSelectChart";
-import RadarChart from "./radarChart.jsx";
+// import ExampleSelectChart from "../../components/multi-select/ExampleSelectChart";
+// import RadarChart from "./radarChart.jsx";
 import ComponentSwitcher from "../../components/multi-select/ComponentSwitcher";
 import SunburstChart from "./Sunburst";
 import LollipopSelect from "../../components/multi-select/LollipopSelect";
@@ -27,7 +27,6 @@ class BudgetPage extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          // console.log(result.options);
           var options = result.options.map(function (obj) {
             return {
               name: obj.Name,

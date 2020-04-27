@@ -63,7 +63,7 @@ class Select extends Component {
           <Multiselect
             options={this.props.options} // Options to display in the dropdown
             groupBy="category" // Value to group options by
-            placeholder="Select club(s)"
+            placeholder="Select Club(s)"
             onSelect={this.onSelect} // Function will trigger on select event
             onRemove={this.onRemove} // Function will trigger on remove event
             displayValue="name" // Property name to display in the dropdown options
@@ -72,7 +72,7 @@ class Select extends Component {
               searchBox: {
                 "borderBottom": "1px solid #9D1212",
                 "borderRadius": "0px",
-                border: "none",
+                // "border": "none",
               },
             }}
           />

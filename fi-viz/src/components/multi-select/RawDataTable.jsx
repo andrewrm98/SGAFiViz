@@ -30,8 +30,6 @@ class RawDataTable extends Component {
           layout:"fitColumns",      //fit columns to width of table
           responsiveLayout:"hide",  //hide columns that dont fit on the table
           tooltips:true,            //show tool tips on cells
-          addRowPos:"top",          //when adding a new row, add it to the top of the table
-          history:true,             //allow undo and redo actions on the table
           movableColumns:true,      //allow column order to be changed
           resizableRows:true,       //allow row order to be changed
           initialSort:[             //set the initial sort order of the data
@@ -51,6 +49,8 @@ class RawDataTable extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+     this.setState()
+      
     }
 
     static getDerivedStateFromProps(props, current_state) {

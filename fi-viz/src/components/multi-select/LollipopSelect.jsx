@@ -74,7 +74,7 @@ class LollipopSelect extends Component {
       Lolwidth = this.state.width - Lolmargin.left - Lolmargin.right,
       Lolheight = this.state.height - Lolmargin.top - Lolmargin.bottom;
 
-    var div = d3
+    d3
       .select("#lollipop")
       .append("div")
       //.attr("class", "tooltip")
