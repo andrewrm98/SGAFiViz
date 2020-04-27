@@ -12,10 +12,11 @@
 .chart-columns {
   text-align: center;
   margin-top: 60px;
-  margin-bottom: 0px ! important;
   padding-top: 4%;
+  margin-bottom: 0px ! important;
   padding-left: 4%;
   padding-right: 4%;
+  padding-bottom: 4%;
   margin: 3%;
 }
 

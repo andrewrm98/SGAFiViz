@@ -82,13 +82,13 @@ class SunburstChart extends Component {
       );
   }
 
-  plotlyClickHandler(data) {
-    console.log("plotlyClickHandler");
-    console.log(data);
-  }
+  // plotlyClickHandler(data) {
+  //   console.log("plotlyClickHandler");
+  //   console.log(data);
+  // }
 
   render() {
-    console.log(this.state.mandatory_transfers);
+    // console.log(this.state.mandatory_transfers);
     return (
       <Plot
         className="fill-space"
@@ -120,7 +120,7 @@ class SunburstChart extends Component {
           paper_bgcolor: 'rgba(0,0,0,0)'
         }}
         useResizeHandler={true}
-        onClick={this.plotlyClickHandler}
+        // onClick={this.plotlyClickHandler}
       />
     );
   }

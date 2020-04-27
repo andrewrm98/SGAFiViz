@@ -4,10 +4,10 @@ const draw = (props) => {
   d3.select(".ridge > *").remove();
   var categories = new Set();
   var data = {};
-
+  
   var margin = { top: 80, right: 30, bottom: 50, left: 110 },
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = props.width - margin.left - margin.right, //460
+    height = props.height - margin.top - margin.bottom; //400
 
   // Code for Ridgeline chart adapted from: https://www.d3-graph-gallery.com/graph/ridgeline_basic.html
   const svg = d3

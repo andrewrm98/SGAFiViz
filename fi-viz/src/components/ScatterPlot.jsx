@@ -43,7 +43,7 @@ class ScatterPlot extends Component {
     try {
       width = this.getWidth();
       height = this.getHeight() - 175; // subtract 175 bc of weird offset issue
-      console.log(height)
+    
     }
     catch(error) {
       console.log(error)

@@ -70,8 +70,8 @@ class Select extends Component {
             style={{
               chips: { background: "#9D1212" },
               searchBox: {
-                "border-bottom": "1px solid #9D1212",
-                "border-radius": "0px",
+                "borderBottom": "1px solid #9D1212",
+                "borderRadius": "0px",
                 border: "none",
               },
             }}

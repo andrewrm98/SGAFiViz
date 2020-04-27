@@ -32,7 +32,7 @@ class ComponentSwitcher extends Component {
       );
     });
     return (
-      <div class="tabs is-toggle is-toggle">
+      <div className="tabs is-toggle is-toggle">
         <ul>{listComponents}</ul>
       </div>
     );

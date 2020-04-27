@@ -80,8 +80,10 @@ class BudgetPage extends Component {
             <p> This a description for this beautiful chart that super cool and fun. </p>
             <br></br>
             <br></br>
-            <SunburstChart />  
+            <SunburstChart />
           </div>
+          <br></br>
+          <br></br>
           <div className=  "column chart-columns box border has-background-light">
             <h1 className="title"> Chart Title </h1>
             <p> This a description for this beautiful chart that super cool and fun. </p>
