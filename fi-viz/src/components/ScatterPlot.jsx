@@ -38,11 +38,12 @@ class ScatterPlot extends Component {
 
   redrawChart() {
     // save past dimensions
-    let width = this.state.width + 60
-    let height = this.state.height + 60
+    var width = this.state.width + 60
+    var height = this.state.height + 60
     try {
       width = this.getWidth();
-      height = this.getHeight();
+      height = this.getHeight() - 175; // subtract 175 bc of weird offset issue
+      console.log(height)
     }
     catch(error) {
       console.log(error)
@@ -50,7 +51,7 @@ class ScatterPlot extends Component {
       // width = this.state.width  + 60
       // height = this.state.height + 60
     }
-    this.setState({width: width-60, height: height-60});
+    this.setState({width: width-60, height: height-60 });
     
     this.drawChart = this.drawChart.bind(this);
     this.drawChart();

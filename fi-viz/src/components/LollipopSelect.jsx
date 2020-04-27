@@ -39,7 +39,7 @@ class LollipopSelect extends Component {
     let height = this.state.height + 60
     try {
       width = this.getWidth();
-      height = this.getHeight();
+      height = this.getHeight() - 175; // subtract 175 bc of weird offset issue
     }
     catch(error) {
       console.log(error)

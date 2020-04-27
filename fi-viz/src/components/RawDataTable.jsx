@@ -51,7 +51,6 @@ class RawDataTable extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-      console.log(this.state.selected)
     }
 
     static getDerivedStateFromProps(props, current_state) {
