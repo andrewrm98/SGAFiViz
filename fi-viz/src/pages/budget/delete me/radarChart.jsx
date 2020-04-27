@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import updateRadar from './radarChart.js';
+import updateRadar from './radarChart.jsx';
 import * as d3 from 'd3'
-import data from './data/FinalDataVis.csv'
+import data from './FinalDataVis.csv'
 
 class RadarChart extends Component {
 

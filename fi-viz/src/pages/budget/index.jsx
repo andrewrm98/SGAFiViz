@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "./budget.css";
 import RidgeChart from "./Ridge.jsx";
 import Select from "../../components/multi-select/Select";
-// import ExampleSelectChart from "../../components/multi-select/ExampleSelectChart";
-// import RadarChart from "./radarChart.jsx";
 import ComponentSwitcher from "../../components/multi-select/ComponentSwitcher";
 import SunburstChart from "./Sunburst";
 import LollipopSelect from "../../components/multi-select/LollipopSelect";
@@ -59,11 +57,6 @@ class BudgetPage extends Component {
         <Select options={this.state.options}>
           <ComponentSwitcher>
             <RawDataTable allOptions={this.state.allOptions} displayName={"Raw Data"} />
-            {/* <ExampleSelectChart displayName={"Raw Data2"} />
-            <ExampleSelectChart
-              displayName={"Alternate Example Chart"}
-              alt={2}
-            /> */}
             <LollipopSelect displayName={"Lollipop"} />
             <ScatterPlot displayName={"Scatterplot"} />
             <BarChart displayName={"BarChart"}/>
