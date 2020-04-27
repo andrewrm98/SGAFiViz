@@ -95,10 +95,10 @@ class BudgetPage extends Component {
             <br></br>
             <br></br>
             <div className= "chart-columns box border has-background-light">
-              <h1 className="title"> Categorical Budget Sunburst </h1>
-              <p> This interactive sunburst diagram shows
-                a total breakdown of budget allocations. This goes from top level (overarching categories) 
-                to the low level (type of club).
+              <h1 className="title"> Overall Budget Sunburst </h1>
+              <p> This sunburst chart represents the overall budget and shows
+                 the three main areas where the student life fee goes. To see 
+                 a further breakdown hover or click over each section.
               </p>
               <br></br>
               <br></br>
@@ -107,8 +107,13 @@ class BudgetPage extends Component {
             <br></br>
             <br></br>
             <div className=  "chart-columns box border has-background-light">
-              <h1 className="title"> Active Club Members Ridge Chart  </h1>
-              <p> The peaks in each category show the frequency of clubs with a certain amount of students. </p>
+              <h1 className="title"> Club Membership Ridge Chart  </h1>
+              <p> Our ridge chart allows you to see what categories of clubs we have at 
+                WPI and what their membership counts look like. For example looking at 
+                Community Service clubs we know that most of them have 40-80 members per 
+                club given that is where the ridge appears. The higher the ridge the more 
+                clubs that fall into that section of membership numbers. 
+              </p>
               <br></br>
               <RidgeChart/>  
             </div>
