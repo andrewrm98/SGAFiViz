@@ -71,9 +71,9 @@ class Story extends Component {
               </div>
           </div>
           <div className="video">
-            <figure className = "image is-16by9">
-              <iframe title="introVideo" className="has-ratio" frameBorder="0" src="https://biteable.com/watch/embed/sgafiviz-2439134" allowFullScreen={true}></iframe>
-            </figure>
+              <video width="1000" height="500" controls>
+                <source src="/Videos/fivizvideo.mp4" type="video/mp4"></source>
+              </video>
           </div> 
         </div>
 
