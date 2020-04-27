@@ -151,7 +151,7 @@ class ScatterPlot extends Component {
         .enter()
         .append("circle")
             .attr("transform", "translate(20, 0)") // move all circles to the right to make room for scales
-            .attr("cx", function(d) {return x(d.active_members)})
+            .attr("cx", function(d) {return x(d.active_members)-19})
             .attr("cy", function(d) {return y(d.budget)})
             .attr("r", CIRCLE_SIZE)
             .style('fill', function(d) {return accent(d.category)}) //--> Subgroup 
