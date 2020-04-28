@@ -71,8 +71,19 @@ class ScatterPlot extends Component {
   }
 
   drawChart() {
-    d3.select("#scatterplot").select("svg").remove();
-    const data = this.state.selected;
+    d3.select("#scatterplot").select("*").remove();
+    
+    var plot_data;
+
+    // show all data if no options are selected
+    if (this.state.selected.length > 0) {
+      plot_data = this.state.selected;
+    }
+    else {
+      plot_data = this.props.allOptions;
+    }
+
+    const data = plot_data
 
     // X SCALE = STUDENT OCUNT
     // Y SCALE = BUDGEt
@@ -80,8 +91,12 @@ class ScatterPlot extends Component {
     // svg dimensions
     var MIN_STUDENTS = d3.min(data, function(d) {return d.active_members})
     var MAX_STUDENTS = d3.max(data, function(d) {return d.active_members})
+    MIN_STUDENTS -= MIN_STUDENTS * 0.1  //increase bounds slightly to fit full circle size
+    MAX_STUDENTS += MAX_STUDENTS * 0.1  //increase bounds slightly to fit full circle size
     var MIN_BUDGET = d3.min(data, function(d) {return d.budget})
     var MAX_BUDGET = d3.max(data, function(d) {return d.budget})
+    MIN_BUDGET -= MIN_BUDGET * 0.1  //increase bounds slightly to fit full circle size
+    MAX_BUDGET += MAX_BUDGET* 0.1 //increase bounds slightly to fit full circle size
     var CIRCLE_SIZE = 10
     var BORDER_SIZE = 1.5
     var BORDER_COLOR = "BLACK"
@@ -89,8 +104,6 @@ class ScatterPlot extends Component {
     // color scale
     var accent = d3.scaleOrdinal(d3.schemeSet2)
     .domain(["Academic", "Awareness", "Cultural", "Extracurricular", "Music and Arts", "Religious", "Sports"]);
-
-
 
     // set the dimensions and margins of the graph
     var margin = {top: 80, right: 200, bottom: 50, left: 80},
@@ -107,20 +120,35 @@ class ScatterPlot extends Component {
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
 
+    // create a clipping region 
+    svg.append("defs").append("clipPath")
+      .attr("id", "clip")
+      .append("rect")
+      .attr("width", width)
+      .attr("height", height);
+    
     // create scales
     var x = d3.scaleLinear()
         .domain([MIN_STUDENTS, MAX_STUDENTS])
         .range([0, width])
-    svg.append('g')
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
-    
-    
+  
     var y = d3.scaleLinear()
         .domain([MIN_BUDGET, MAX_BUDGET])
         .range([height, 0])
-    svg.append('g')
-        .call(d3.axisLeft(y))
+
+     //create axes
+     var xAxis = d3.axisBottom(x)
+        .ticks(20, "s");
+     var yAxis = d3.axisLeft(y)
+        .ticks(20, "s");
+
+    // Draw Axis
+    var gX = svg.append('g')
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+    var gY = svg.append('g')
+      .call(yAxis);
+    
  
     // x axis title
     svg.append("text")
@@ -141,23 +169,49 @@ class ScatterPlot extends Component {
         .attr("font-size", "22px")
         .text("Budget ($)");
 
-    // this group will save all our tooltips so they can be removed easily
-    var tooltips = svg.append('g')
+    d3.selection.prototype.moveToFront = function() {
+      return this.each(function() {
+        this.parentNode.appendChild(this);
+      });
+    }; 
 
+    /// Pan and zoom
+    var zoom = d3.zoom()
+     .scaleExtent([.1, 100])
+     .extent([[0, 0], [width, height]])
+     .on("zoom", zoomed);
+
+    // pan and zoom area
+    svg.append("rect")
+      .attr("width", width)
+      .attr("height", height)
+      .style("fill", "none") // shows zoom area
+      .style("pointer-events", "all")
+      .call(zoom);
+    
+    // Draw Datapoints
+    var points_g = svg.append("g")
+      .attr("clip-path", "url(#clip)")
+      .classed("points_g", true);
 
     // create scatter points
-    svg.selectAll("circle")
+    var points = points_g.selectAll("circle")
         .data(data)
         .enter()
         .append("circle")
-            .attr("transform", "translate(20, 0)") // move all circles to the right to make room for scales
-            .attr("cx", function(d) {return x(d.active_members)-19})
+            //.attr("transform", "translate(20, 0)") // move all circles to the right to make room for scales
+            .attr("cx", function(d) {return x(d.active_members)})
             .attr("cy", function(d) {return y(d.budget)})
             .attr("r", CIRCLE_SIZE)
             .style('fill', function(d) {return accent(d.category)}) //--> Subgroup 
             .style('stroke', function(d) {return BORDER_COLOR})
             .style("stroke-width", function(d) {return BORDER_SIZE})
-            .style("opacity", 0.5)
+            .style("opacity", 0.5);
+
+    // this group will save all our tooltips so they can be removed easily
+    var tooltips = svg.append('g')
+
+    points.data(data)
             .on("mouseenter", function(d) {
                 // add the text for the tooltip
                 tooltips.append("text")
@@ -165,7 +219,7 @@ class ScatterPlot extends Component {
                     .attr("y", y(d.budget) - CIRCLE_SIZE - 48) // place the tooltip at the yvalue of the circle minus the radius of the circle
                     .attr('font-family', "Bebas Neue")
                     .attr("font-size", "16px")
-                    .style("fill", accent(d.category)) 
+                    .style("fill", "black") 
                     .style("font-weight", "bold") 
                     .text(d.name)
                 tooltips.append("text")
@@ -173,14 +227,14 @@ class ScatterPlot extends Component {
                     .attr("y", y(d.budget) - CIRCLE_SIZE - 28) // place the tooltip at the yvalue of the circle minus the radius of the circle
                     .attr('font-family', "Bebas Neue")
                     .attr("font-size", "16px")
-                    .style("fill", accent(d.category))  
+                    .style("fill", "black")
                     .text("Budget: $" + d.budget)
                 tooltips.append("text")
                     .attr("x", x(d.active_members))
                     .attr("y", y(d.budget) - CIRCLE_SIZE - 8) // place the tooltip at the yvalue of the circle minus the radius of the circle
                     .attr('font-family', "Bebas Neue")
                     .attr("font-size", "16px")
-                    .style("fill", accent(d.category))  
+                    .style("fill", "black") 
                     .text("Students: " + d.active_members)
                 // give hovering a little life
                 d3.select(d3.event.target)
@@ -222,38 +276,87 @@ class ScatterPlot extends Component {
         .attr("dy", ".35em")
         .style("text-anchor", "end")
         .text(function(d) { return d;})
+  
+   function zoomed() {
+     // create new scale ojects based on event
+     var new_xScale = d3.event.transform.rescaleX(x);
+     var new_yScale = d3.event.transform.rescaleY(y);
+     // update axes
+     gX.call(xAxis.scale(new_xScale));
+     gY.call(yAxis.scale(new_yScale));
+     points.data(data)
+        .attr('cx', function(d) {return new_xScale(d.active_members)})
+        .attr('cy', function(d) {return new_yScale(d.budget)})
+        .on("mouseenter", function(d) {
+          console.log(new_xScale(d.active_members))
+          console.log(new_yScale(d.budget))
+            // add the text for the tooltip
+            tooltips.append("text")
+                .attr("x", new_xScale(d.active_members))
+                .attr("y", new_yScale(d.budget) - CIRCLE_SIZE - 48) // place the tooltip at the yvalue of the circle minus the radius of the circle
+                .attr('font-family', "Bebas Neue")
+                .attr("font-size", "16px")
+                .style("fill", "black")
+                .style("font-weight", "bold") 
+                .text(d.name)
+            tooltips.append("text")
+                .attr("x", new_xScale(d.active_members))
+                .attr("y", new_yScale(d.budget) - CIRCLE_SIZE - 28) // place the tooltip at the yvalue of the circle minus the radius of the circle
+                .attr('font-family', "Bebas Neue")
+                .attr("font-size", "16px")
+                .style("fill", "black") 
+                .text("Budget: $" + d.budget)
+            tooltips.append("text")
+                .attr("x", new_xScale(d.active_members))
+                .attr("y", new_yScale(d.budget) - CIRCLE_SIZE - 8) // place the tooltip at the yvalue of the circle minus the radius of the circle
+                .attr('font-family', "Bebas Neue")
+                .attr("font-size", "16px")
+                .style("fill", "black") 
+                .text("Students: " + d.active_members)
+            // give hovering a little life
+            d3.select(d3.event.target)
+                .transition()
+                .duration(200)
+                .style("opacity", "1")
+                .attr("r", CIRCLE_SIZE + 2)
+          })
+        .on("mouseout", function(d) {
+            // return everything to normal
+            tooltips.selectAll('text').remove()
+            tooltips.selectAll('line').remove()
+            d3.select(d3.event.target)
+                .transition()
+                .duration(200)
+                .style("opacity", "0.5")
+                .attr("r", CIRCLE_SIZE)
+        });
+    }
+
   }
 
   getWidth(){
-    if (this.state.selected.length > 0) {
       return this.chartRef.current.parentElement.offsetWidth;
-    }
   }
   getHeight(){
       return this.chartRef.current.parentElement.offsetHeight;
   }
 
   render() {
-    if (this.state.selected.length > 0) {
       return(
         <div>
             {/* chart description */}
             <div className= "multi-select-description box border has-background-light">
                 <h1 className="title"> Club Budget vs. Membership </h1>
-                <p> The scatterplot reveals the correlation between club budgets and club membership. As you hover over each color coded plot point you can see more detailed numbers, and furthermore you can select more clubs on the left for comparison. </p>
+                <p> The scatterplot reveals the correlation between club budgets and club membership. 
+                  You can pan and zoom to narrow or widen your search as well as hover each circle for 
+                  more information. You can also select specific clubs for a clearer comparison.
+                </p>
             </div>
             {/* chart */}
             <div ref={this.chartRef} id="scatterplot" className = "intro-card box border"> </div>
         </div>
-        ); 
-      }
-
-      return (
-        <div>
-                {this.props.alt != null ? "Alternate" : undefined} <span className="red error-msg">* Please select clubs to compare! *</span>
-        </div>
-      );
-    }
+        );
+  }
 }
 
 export default ScatterPlot;
