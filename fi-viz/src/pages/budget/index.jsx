@@ -67,7 +67,7 @@ class BudgetPage extends Component {
           </div>
         </div>
 
-        <div className = "total-line-chart box" id="lineChartBox">
+        <div className = "total-line-chart box border">
             <TotalLineChart/>
         </div>
         <br></br>
