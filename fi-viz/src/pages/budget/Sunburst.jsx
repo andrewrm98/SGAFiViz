@@ -107,7 +107,7 @@ class SunburstChart extends Component {
               this.state.data["Club Budget"],
               this.state.data.Other,
             ].concat(this.state.categories.map((a) => a.Total)),
-            outsidetextfont: { size: 20, color: "#377eb8" },
+            outsidetextfont: { size: 20, color: "black" },
             hovertemplate: `Budget: %{value:$,.0f}<extra></extra>`,
             marker: { line: { width: 2 } },
             branchvalues: "total",
@@ -117,10 +117,11 @@ class SunburstChart extends Component {
           margin: { l: 0, r: 0, b: 0, t: 0 },
           title: "Sunburst Chart",
           plot_bgcolor: 'rgba(0,0,0,0)',
-          paper_bgcolor: 'rgba(0,0,0,0)'
+          paper_bgcolor: 'rgba(0,0,0,0)',
+          colorway: ["#ac2b37", "#9d1212", "#d3d3d3"]
         }}
         useResizeHandler={true}
-        // onClick={this.plotlyClickHandler}
+        onClick={this.plotlyClickHandler}
       />
     );
   }

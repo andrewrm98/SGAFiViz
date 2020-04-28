@@ -25,3 +25,7 @@
 .border {
     border: 1px solid rgba(169, 176, 183, .3);
 }
+
+.about-columns {
+    height: 100% ! important;
+}
