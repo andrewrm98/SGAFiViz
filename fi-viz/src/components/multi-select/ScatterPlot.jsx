@@ -228,7 +228,7 @@ class ScatterPlot extends Component {
                     .attr('font-family', "Bebas Neue")
                     .attr("font-size", "16px")
                     .style("fill", "black")
-                    .text("Budget: $" + d.budget)
+                    .text("Budget: $" + d3.format(",.2f")(d.budget))
                 tooltips.append("text")
                     .attr("x", x(d.active_members))
                     .attr("y", y(d.budget) - CIRCLE_SIZE - 8) // place the tooltip at the yvalue of the circle minus the radius of the circle
@@ -305,7 +305,7 @@ class ScatterPlot extends Component {
                 .attr('font-family', "Bebas Neue")
                 .attr("font-size", "16px")
                 .style("fill", "black") 
-                .text("Budget: $" + d.budget)
+                .text("Budget: $" + d3.format(",.2f")(d.budget))
             tooltips.append("text")
                 .attr("x", new_xScale(d.active_members))
                 .attr("y", new_yScale(d.budget) - CIRCLE_SIZE - 8) // place the tooltip at the yvalue of the circle minus the radius of the circle
