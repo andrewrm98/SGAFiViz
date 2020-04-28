@@ -44,7 +44,7 @@ class TotalLineChart extends Component {
         console.error("element dimension error, please refresh page")
       }
       this.setState({width: width-10, height: height-50});
-      d3.select(".lineChart svg").remove();
+      d3.select(".TotalLineChart svg").remove();
       this.drawChart = this.drawChart.bind(this);
       this.drawChart();
     }
@@ -95,10 +95,10 @@ class TotalLineChart extends Component {
                 width = this.state.width - margin.left - margin.right,
                 height = this.state.height - margin.top - margin.bottom;
   
-            var svg = d3.select(".lineChart").append("svg")
+            var svg = d3.select(".TotalLineChart").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
-                    .attr("id", "lineChart")
+                    .attr("id", "TotalLineChart")
                   .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   
@@ -219,7 +219,7 @@ class TotalLineChart extends Component {
     render() {
           return (
   
-              <div ref={this.chartRef} className = " lineChart has-text-centered">
+              <div ref={this.chartRef} className = " TotalLineChart has-text-centered">
               </div>
         );  
     }

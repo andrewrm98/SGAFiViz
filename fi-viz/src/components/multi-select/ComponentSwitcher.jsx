@@ -25,9 +25,13 @@ class ComponentSwitcher extends Component {
           className={this.state.componentNum === index ? "is-active" : "has-background-light"}
           onClick={() => this.changeComponent(index)}
         >
-          <a>
-            <span> {component.props.displayName}</span>
-          </a>
+           <div>{
+              //eslint-disable-next-line react/jsx-no-target-blank
+              }
+            <a>
+              <span>{component.props.displayName}</span>
+            </a>
+          </div>
         </li>
       );
     });
