@@ -1,5 +1,24 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
+/**
+ * Example for a component that uses the multi-select data
+ *
+ * @prop {array} selected The selected obects from the @external Select.jsx component
+ * @prop {element} alt If we want an 'alternate' component for comparison
+ *
+ * @component
+ * @example
+ * const options = {
+ *    name: "Cyber Security Club",
+ *    category: "Academic",
+ *    budget: "15000",
+ *    active_members: 23,
+ * }
+ * return (
+ *   <ExampleSelectChart selected={options} />
+ * )
+ */
 class ExampleSelectChart extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +55,7 @@ class ExampleSelectChart extends Component {
       return (
         <div className="columns">
           <div className="column is-three-quarters">
-            {this.props.alt != null ? "Alternate" : undefined}
+            {this.props.alt ? "Alternate" : undefined}
             <ul>{listItems}</ul>
           </div>
           <div className="column">
@@ -47,10 +66,23 @@ class ExampleSelectChart extends Component {
     }
     return (
       <div>
-        {this.props.alt != null ? "Alternate" : undefined} Nothing Selected, select clubs on the left to see more information!
+        {this.props.alt ? "Alternate" : undefined} Nothing Selected, select
+        clubs on the left to see more information!
       </div>
     );
   }
 }
+
+ExampleSelectChart.propTypes = {
+  /**
+   * selected The selected obects from the @external Select component
+   */
+  selected: PropTypes.array,
+
+  /**
+   * If we want an 'alternate' component for comparison
+   */
+  alt: PropTypes.bool,
+};
 
 export default ExampleSelectChart;
