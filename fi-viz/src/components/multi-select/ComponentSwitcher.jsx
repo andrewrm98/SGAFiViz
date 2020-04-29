@@ -1,5 +1,26 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
+/**
+ * Component for showing a tabbed list of components that selection data from the Select component gets passed into.
+ *
+ * @prop {array} selected The selected objects to show in each component.
+ * @prop {element} children The child element(s) to have that the user can select between. Needs a displayName prop in each child to show in the tabbed list of components.
+ *
+ * @component
+ * @example
+ * const options = {
+ *    name: "Cyber Security Club",
+ *    category: "Academic",
+ *    budget: "15000",
+ *    active_members: 23,
+ * }
+ * return (
+ *   <ComponentSwitcher selected={options}>
+ *      <ExampleSelectChart displayName="Example" />
+ *   </ComponentSwitcher>
+ * )
+ */
 class ComponentSwitcher extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +39,6 @@ class ComponentSwitcher extends Component {
 
   getComponentList() {
     const listComponents = this.props.children.map((component, index) => {
-      // console.log(component);
       return (
         <li
           key={component.props.displayName.toString()}
@@ -54,5 +74,17 @@ class ComponentSwitcher extends Component {
     );
   }
 }
+
+ComponentSwitcher.propTypes = {
+  /**
+   * The options for the multi select component to show.
+   */
+  options: PropTypes.array,
+
+  /**
+   * The child element(s) to have in the Select component to pass the selected options as props to.
+   */
+  children: PropTypes.element.isRequired,
+};
 
 export default ComponentSwitcher;

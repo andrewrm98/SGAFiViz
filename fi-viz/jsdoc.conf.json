@@ -1,0 +1,21 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["src"]
+  },
+  "plugins": ["plugins/markdown", "node_modules/better-docs/component"],
+  "templates": {
+    "better-docs": {
+      "name": "SGA FiViz"
+    }
+  },
+  "opts": {
+    "destination": "src/docs",
+    "recurse": true,
+    "verbose": true,
+    "readme": "README.md"
+  }
+}

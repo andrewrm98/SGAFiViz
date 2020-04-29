@@ -3,19 +3,22 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const path = require("path");
 const pino = require("express-pino-logger")();
+var config = require("./config.json");
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+const fiscalYear = "FY 20";
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(pino);
 
 var con = mysql.createConnection({
-  host: "webdb.wpi.edu",
-  user: "sgamqpteam",
-  password: "j93Z9m+wDIA",
-  database: "sgadb",
+  host: config.host,
+  user: config.user,
+  password: config.password,
+  database: config.database,
 });
 
 con.connect(function (err) {
@@ -33,7 +36,8 @@ app.get("/api/budgets", (req, res) => {
 
 app.get("/api/sunburst", (req, res) => {
   con.query(
-    "SELECT * FROM sgadb.`Total Budget` WHERE `Fiscal Year` = 'FY 20';",
+    "SELECT * FROM sgadb.`Total Budget` WHERE `Fiscal Year` = ?;",
+    [fiscalYear],
     function (err, data) {
       err ? res.send(err) : res.json({ data: data[0] });
     }
@@ -42,7 +46,8 @@ app.get("/api/sunburst", (req, res) => {
 
 app.get("/api/club_budgets", (req, res) => {
   con.query(
-    "SELECT * FROM sgadb.`Club Total Budget` WHERE `Fiscal Year` = 'FY 20';",
+    "SELECT * FROM sgadb.`Club Total Budget` WHERE `Fiscal Year` = ?;",
+    [fiscalYear],
     function (err, data) {
       err ? res.send(err) : res.json({ budgets: data });
     }
@@ -51,7 +56,8 @@ app.get("/api/club_budgets", (req, res) => {
 
 app.get("/api/categories_budgets", (req, res) => {
   con.query(
-    "SELECT * FROM sgadb.`Categories Total Budget` WHERE `Fiscal Year` = 'FY 20';",
+    "SELECT * FROM sgadb.`Categories Total Budget` WHERE `Fiscal Year` = ?;",
+    [fiscalYear],
     function (err, data) {
       err ? res.send(err) : res.json({ budgets: data });
     }
@@ -91,7 +97,8 @@ app.get("/api/category_organization_numbers", (req, res) => {
 
 app.get("/api/mandatory_transfers", (req, res) => {
   con.query(
-    "SELECT * FROM sgadb.`Mandatory Transfers Total Budget` WHERE `Fiscal Year` = 'FY 20';",
+    "SELECT * FROM sgadb.`Mandatory Transfers Total Budget` WHERE `Fiscal Year` = ?;",
+    [fiscalYear],
     function (err, data) {
       err ? res.send(err) : res.json({ mandatory: data });
     }
@@ -113,7 +120,8 @@ app.get("/api/budget_breakdown", (req, res) => {
 
 app.get("/api/selection_options", (req, res) => {
   con.query(
-    "SELECT * FROM sgadb.`Selection Options` WHERE `Fiscal Year` = 'FY 19';",
+    "SELECT * FROM sgadb.`Selection Options` WHERE `Active Members` != 'Not Provided' AND `Fiscal Year` = ?;",
+    [fiscalYear],
     function (err, data) {
       err ? res.send(err) : res.json({ options: data });
     }
