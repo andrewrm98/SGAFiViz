@@ -61,8 +61,9 @@ class BudgetPage extends Component {
         <div className="story-intro">
           <div className = "intro-card box border">
               <div>
-                <h1 className = "title"> Budgets Page Title </h1>
-                <p>Budgets description</p>
+                <h1 className = "title"> A Deeper Look Into The Budget Allocation </h1>
+                <p>Given everyone's student life fee WPI's Student Government Association then has the hard job of allocating funds between different clubs, organizations, and student services.
+                Throughout this page you can interact with our data visualizations to see further how this money is alloted. Feel free to check out the general information provided but also use our club selection tool to see how your favorite organizations compare!</p>
               </div>
           </div>
         </div>
