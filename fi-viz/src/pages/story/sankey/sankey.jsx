@@ -30,21 +30,18 @@ class Sankey extends Component {
       });
     }
 
-    redrawChart() {
+    async redrawChart() {
       // save past dimensions
-      let width = this.state.width  + 60
+      let width = this.state.width + 60
       let height = this.state.height + 60
       try {
         width = this.getWidth();
         height = this.getHeight();
       }
       catch(error) {
-        console.log(error)
-        console.error("element dimension error, please refresh page")
+       return
       }
       this.setState({width: width-60, height: height-60});
-      d3.select("#sankeyCanvas").remove();
-      d3.select("#sankeySVG").remove();
       this.drawChart = this.drawChart.bind(this);
       this.drawChart();
     }
@@ -60,6 +57,9 @@ class Sankey extends Component {
       fetch('/api/sankey_data')
         .then(response => response.json())
         .then(data => {
+
+          d3.select("#sankeyCanvas").remove();
+          d3.select("#sankeySVG").remove();
   
           /* Setup D3 Environment */
   
@@ -75,13 +75,13 @@ class Sankey extends Component {
               format = function(d) { return '$' + formatNumber(d); },
               color = d3.scaleOrdinal(d3.schemeCategory10);
   
-          var canvas = d3.select(".sankey").append("canvas")  
+          var canvas = d3.select("#sankey").append("canvas")  
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr("id", "sankeyCanvas")
             .attr("class", "canvas");
   
-          var svg = d3.select(".sankey").append("svg")
+          var svg = d3.select("#sankey").append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
               .attr("id", "sankeySVG")
@@ -100,7 +100,7 @@ class Sankey extends Component {
             .nodes(data.nodes)
             .links(data.links)
             .layout(32);
-  
+          
           var link = svg.append("g").selectAll(".link")
               .data(data.links)
               .enter().append("path")
@@ -211,7 +211,7 @@ class Sankey extends Component {
   
         })
         .catch(err => {
-          console.log (err)
+          console.log(err)
         })
   
     }
@@ -225,7 +225,7 @@ class Sankey extends Component {
   
     render() {
           return (
-              <div ref={this.chartRef} className = "sankey has-text-centered">
+              <div ref={this.chartRef} id="sankey" className = "has-text-centered">
               </div>
         );  
     }

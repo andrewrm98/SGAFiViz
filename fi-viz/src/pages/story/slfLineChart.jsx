@@ -40,11 +40,9 @@ class SLFLineChart extends Component {
         height = this.getHeight();
       }
       catch(error) {
-        console.log(error)
-        console.error("element dimension error, please refresh page")
+        return
       }
       this.setState({width: width-10, height: height-50});
-      d3.select(".lineChart svg").remove();
       this.drawChart = this.drawChart.bind(this);
       this.drawChart();
     }
@@ -66,6 +64,9 @@ class SLFLineChart extends Component {
       fetch('/api/slf')
         .then(response => response.json())
         .then(data => {
+
+            d3.select(".lineChart svg").remove();
+
             var slf = data.slf
             
             // loop through elements in slf fee to construct x & y axix
@@ -219,7 +220,7 @@ class SLFLineChart extends Component {
     render() {
           return (
   
-              <div ref={this.chartRef} className = " lineChart has-text-centered">
+              <div ref={this.chartRef} className = "lineChart has-text-centered">
               </div>
         );  
     }

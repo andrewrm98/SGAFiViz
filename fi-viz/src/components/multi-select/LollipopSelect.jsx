@@ -6,6 +6,8 @@ class LollipopSelect extends Component {
     super(props);
     this.state = {
       selected: [],
+      width: 0,
+      height: 0,
     };
     this.chartRef = React.createRef();
   }
@@ -39,16 +41,12 @@ class LollipopSelect extends Component {
     let height = this.state.height + 60
     try {
       width = this.getWidth();
-      height = this.getHeight() - 175; // subtract 175 bc of weird offset issue
+      height = this.getHeight() - 200; // subtract 200 bc of weird offset issue
     }
     catch(error) {
-      console.log(error)
-      console.error("element dimension error, please refresh page")
-      // width = this.state.width  + 60
-      // height = this.state.height + 60
+      return
     }
     this.setState({width: width-60, height: height-60});
-    
     this.drawLollipop = this.drawLollipop.bind(this);
     this.drawLollipop();
   }

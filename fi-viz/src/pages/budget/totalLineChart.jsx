@@ -40,8 +40,7 @@ class TotalLineChart extends Component {
         height = this.getHeight();
       }
       catch(error) {
-        console.log(error)
-        console.error("element dimension error, please refresh page")
+        return
       }
       this.setState({width: width-10, height: height-50});
       d3.select(".TotalLineChart svg").remove();

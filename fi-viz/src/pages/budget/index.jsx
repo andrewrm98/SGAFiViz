@@ -67,7 +67,7 @@ class BudgetPage extends Component {
           </div>
         </div>
 
-        <div className = "total-line-chart box" id="lineChartBox">
+        <div className = "total-line-chart box border">
             <TotalLineChart/>
         </div>
         <br></br>
@@ -80,9 +80,9 @@ class BudgetPage extends Component {
           <div className="budget-container">
             <Select options={this.state.options}>
               <ComponentSwitcher>
+                <ScatterPlot allOptions={this.state.allOptions} displayName={"Scatterplot"} />
                 <RawDataTable allOptions={this.state.allOptions} displayName={"Raw Data"} />
                 <LollipopSelect displayName={"Lollipop"} />
-                <ScatterPlot allOptions={this.state.allOptions} displayName={"Scatterplot"} />
                 <BarChart displayName={"BarChart"}/>
               </ComponentSwitcher>
             </Select>
