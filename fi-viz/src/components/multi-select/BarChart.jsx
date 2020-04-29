@@ -43,13 +43,10 @@ class BarChart extends Component {
         let height = this.state.height + 60
         try {
           width = this.getWidth();
-          height = this.getHeight() - 175; // subtract 175 bc of weird offset issue
+          height = this.getHeight() - 200; // subtract 200 bc of weird offset issue
         }
         catch(error) {
-          console.log(error)
-          console.error("element dimension error, please refresh page")
-          // width = this.state.width  + 60
-          // height = this.state.height + 60
+          return
         }
         this.setState({width: width-60, height: height-60});
         
@@ -137,8 +134,8 @@ class BarChart extends Component {
                 <div>
                     {/* chart description */}
                     <div className= "multi-select-description box border has-background-light">
-                        <h1 className="title"> Chart Title </h1>
-                        <p> This a description for this beautiful chart that super cool and fun. </p>
+                        <h1 className="title"> Individual Club Membership </h1>
+                        <p> This horizontal bar chart shows club membership counts. You can select more clubs on the left to further compare membership between clubs. These membership numbers are all self reported, if you think your club membership is incorrect please contact SGA.  </p>
                     </div>
                     {/* chart */}
                     <div ref={this.chartRef} id="bar" className = "intro-card box border"> </div>

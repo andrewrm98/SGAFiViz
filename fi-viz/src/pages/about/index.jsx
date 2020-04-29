@@ -17,7 +17,7 @@ const AboutPage = () => {
       <div className = "columns">
         <div className = "column"></div>
         <div className = "column">
-          <div className = "center-text box hello border has-background-light">
+          <div className = "about-columns center-text box border has-background-light">
             <h1 className = "is-size-3">Want to get involved?</h1>
             <br></br>
             <h1 className = "is-size-5">Join a club, or start your own!</h1>
@@ -27,7 +27,7 @@ const AboutPage = () => {
           
         </div>
         <div className = "column">
-          <div className = "center-text box hello border has-background-light">
+          <div className = "about-columns center-text box border has-background-light">
             <h1 className = "is-size-3">Want to find out more? Email:</h1>
             <br></br>
             <h1 className = "is-size-5">sgaexecs@wpi.edu,</h1>

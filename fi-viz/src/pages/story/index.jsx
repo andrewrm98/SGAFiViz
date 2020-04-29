@@ -3,7 +3,7 @@ import "./story.css"
 import CountUp from 'react-countup';  
 import VisibilitySensor from 'react-visibility-sensor';
 import Sankey from "./sankey/sankey.jsx"
-import LineChart from "./slfLineChart.jsx"
+import SLFLineChart from "./slfLineChart.jsx"
 
 
 class Story extends Component {
@@ -119,7 +119,7 @@ class Story extends Component {
           {/* SLF Section - LineChart */}
 
           <div className = "box border-black" id="lineChartBox">
-            <LineChart/>
+            <SLFLineChart/>
           </div>
           
         </div>
@@ -160,7 +160,7 @@ class Story extends Component {
                 <h1 className = 'subtitle is-3 black'>Mandatory Transfers</h1>
                 <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.MT_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
-                <p>Covers a variety of campus services such as Snap, Club Sports, Coaches, and Campus Labs. This budget also allows sports to get gym credit!</p>
+                <p>Covers a variety of campus services such as Snap, Speakers, Club Sports, Coaches, and Campus Labs. This budget also allows sports to get gym credit!</p>
               </div>
               </div>  
             </div>
@@ -169,8 +169,7 @@ class Story extends Component {
                 <h1 className = 'subtitle is-3 black'>Organization Budgets</h1>
                 <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.CB_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
-                  Organizations, such as clubs, can request an annual budget. SGA approves budgets that
-                  align with their bylaws.
+                  Organizations, such as clubs, can request an annual budget. SGA reviews and approves these budgets annually.
                 </div>
                 <br></br>
               </div>
@@ -180,8 +179,8 @@ class Story extends Component {
                 <h1 className = 'subtitle is-3 black'>Other</h1>
                 <h1 className = 'subtitle is-4'><CountUp className="red" end={this.state.didViewCountUp ? this.state.Other_total : 0} duration={1.5} prefix="$" separator=","  decimals={2} decimal="."></CountUp></h1>
                 <div>
-                  <p className = "black">This budget is used for Funding Requests (FR). FRs are meants to supplement club budgets, or
-                  provide funds for organizations that do not receive an annual budget.</p>
+                  This budget is used for Funding Requests (FR). FRs are meants to supplement club budgets, or
+                  provide funds for organizations that do not receive an annual budget.
                 </div>
               </div>
             </div>

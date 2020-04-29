@@ -26,8 +26,7 @@ class RawDataTable extends Component {
         ],
         tableOptions: {
           pagination: 'local', 
-          paginationSize: '20', 
-          layout:"fitColumns",      //fit columns to width of table
+          paginationSize: '20',
           responsiveLayout:"hide",  //hide columns that dont fit on the table
           tooltips:true,            //show tool tips on cells
           movableColumns:true,      //allow column order to be changed
@@ -75,7 +74,7 @@ class RawDataTable extends Component {
         );
       }
       return (
-        <div>
+        <div>    
           <ReactTabulator 
               columns={this.state.columns} 
               data={this.props.allOptions}
