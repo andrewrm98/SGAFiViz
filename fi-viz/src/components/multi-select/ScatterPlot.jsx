@@ -88,9 +88,11 @@ class ScatterPlot extends Component {
     var MIN_STUDENTS = d3.min(data, function(d) {return d.active_members})
     var MAX_STUDENTS = d3.max(data, function(d) {return d.active_members})
     MAX_STUDENTS += MAX_STUDENTS * 0.1  //increase bounds slightly to fit full circle size
+    MIN_STUDENTS -= MIN_STUDENTS * 0.1  //increase bounds slightly to fit full circle size
     var MIN_BUDGET = d3.min(data, function(d) {return d.budget})
     var MAX_BUDGET = d3.max(data, function(d) {return d.budget})
     MAX_BUDGET += MAX_BUDGET* 0.1 //increase bounds slightly to fit full circle size
+    MIN_BUDGET -= MIN_BUDGET* 0.1 //increase bounds slightly to fit full circle size
     var CIRCLE_SIZE = 10
     var BORDER_SIZE = 1.5
     var BORDER_COLOR = "BLACK"
