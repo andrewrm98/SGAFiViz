@@ -120,7 +120,7 @@ app.get("/api/budget_breakdown", (req, res) => {
 
 app.get("/api/selection_options", (req, res) => {
   con.query(
-    "SELECT * FROM sgadb.`Selection Options` WHERE `Fiscal Year` = ?;",
+    "SELECT * FROM sgadb.`Selection Options` WHERE `Active Members` != 'Not Provided' AND `Fiscal Year` = ?;",
     [fiscalYear],
     function (err, data) {
       err ? res.send(err) : res.json({ options: data });
