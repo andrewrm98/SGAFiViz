@@ -22,6 +22,16 @@ class RawDataTable extends Component {
                 thousand: ",",
                 symbol: "$"
             }},
+            {title: 'Budget out of the student life fee', field: 'budget_for_slf', formatter:"money", bottomCalc:"sum", bottomCalcFormatter: "money",
+            bottomCalcFormatterParams:  {
+              decimal: ".",
+              thousand: ",",
+              symbol: "$"
+            }, formatterParams: {
+              decimal: ".",
+              thousand: ",",
+              symbol: "$"
+          }},
             {title: 'Members', field: 'active_members', bottomCalc:"sum"}
         ],
         tableOptions: {
