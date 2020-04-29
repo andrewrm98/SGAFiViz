@@ -119,10 +119,21 @@ app.get("/api/budget_breakdown", (req, res) => {
 });
 
 app.get("/api/selection_options", (req, res) => {
+  let slf = 0;
+  let totalBudget = 0;
+  con.query("SELECT * FROM sgadb.`Student Life Fee` WHERE `Fiscal Year` = ?;", [fiscalYear], function (err, slfData) {
+    totalBudget = slfData[0]["SLF Amount"] * slfData[0]["Fall Student Amount"];
+    slf = slfData[0]["SLF Amount"];
+  });
   con.query(
     "SELECT * FROM sgadb.`Selection Options` WHERE `Active Members` != 'Not Provided' AND `Fiscal Year` = ?;",
     [fiscalYear],
     function (err, data) {
+      var i;
+      for (i = 0; i < data.length; i++) {
+        var budget = data[i]["Total Budget"];
+        data[i]["Budget Per Student"] = (budget / totalBudget) * slf;
+      }
       err ? res.send(err) : res.json({ options: data });
     }
   );

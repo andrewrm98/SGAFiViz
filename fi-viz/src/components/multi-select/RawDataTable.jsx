@@ -6,7 +6,7 @@ import { ReactTabulator } from 'react-tabulator'; // for React 15.x, use import 
 
 class RawDataTable extends Component {
     constructor(props) {
-      super(props);
+      super(props);     
       this.state = {
         selected: [],
         columns : [

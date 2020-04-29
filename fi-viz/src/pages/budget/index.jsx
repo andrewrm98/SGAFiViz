@@ -32,6 +32,7 @@ class BudgetPage extends Component {
               category: obj.Category,
               fiscal_year: obj["Fiscal Year"],
               budget: obj["Total Budget"],
+              budget_for_slf: parseFloat(obj["Budget Per Student"]).toFixed(2),
               active_members: parseInt(obj["Active Members"]),
             };
           });
