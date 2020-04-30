@@ -343,7 +343,7 @@ class ScatterPlot extends Component {
             {/* chart description */}
             <div className= "multi-select-description box border has-background-light">
                 <h1 className="title"> Club Budget vs. Membership </h1>
-                <p> The scatterplot reveals the correlation between club budgets and club membership. 
+                <p> This <span className="red">scatterplot</span> reveals the correlation between club budgets and club membership. 
                   You can pan and zoom to narrow or widen your search as well as hover each circle for 
                   more information. You can also select specific clubs on the left for a clearer direct comparison.
                 </p>

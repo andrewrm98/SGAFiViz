@@ -135,7 +135,7 @@ class BarChart extends Component {
                     {/* chart description */}
                     <div className= "multi-select-description box border has-background-light">
                         <h1 className="title"> Individual Club Membership </h1>
-                        <p> This horizontal bar chart shows club membership counts. You can select more clubs on the left to further compare membership between clubs. These membership numbers are all self reported, if you think your club membership is incorrect please contact SGA.  </p>
+                        <p> This <span className="red">horizontal bar chart</span> shows club membership counts. You can select more clubs on the left to further compare membership between clubs. These membership numbers are all self reported, if you think your club membership is incorrect please contact SGA.  </p>
                     </div>
                     {/* chart */}
                     <div ref={this.chartRef} id="bar" className = "intro-card box border"> </div>
