@@ -3,7 +3,16 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const path = require("path");
 const pino = require("express-pino-logger")();
-var config = require("./config.json");
+var config;
+
+try {
+  config = require("./config.json");
+} catch (e) {
+  console.log(
+    "ERROR: config.json not present for node to connect to the MySQL server"
+  );
+  process.exit(-1);
+}
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -121,10 +130,15 @@ app.get("/api/budget_breakdown", (req, res) => {
 app.get("/api/selection_options", (req, res) => {
   let slf = 0;
   let totalBudget = 0;
-  con.query("SELECT * FROM sgadb.`Student Life Fee` WHERE `Fiscal Year` = ?;", [fiscalYear], function (err, slfData) {
-    totalBudget = slfData[0]["SLF Amount"] * slfData[0]["Fall Student Amount"];
-    slf = slfData[0]["SLF Amount"];
-  });
+  con.query(
+    "SELECT * FROM sgadb.`Student Life Fee` WHERE `Fiscal Year` = ?;",
+    [fiscalYear],
+    function (err, slfData) {
+      totalBudget =
+        slfData[0]["SLF Amount"] * slfData[0]["Fall Student Amount"];
+      slf = slfData[0]["SLF Amount"];
+    }
+  );
   con.query(
     "SELECT * FROM sgadb.`Selection Options` WHERE `Active Members` != 'Not Provided' AND `Fiscal Year` = ?;",
     [fiscalYear],
