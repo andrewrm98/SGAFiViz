@@ -177,7 +177,7 @@ class LollipopSelect extends Component {
             {/* chart description */}
             <div className= "multi-select-description box border has-background-light">
                 <h1 className="title"> Individual Club Budgets </h1>
-                <p> The lollipop chart shows an idea of what each club has as a yearly working budget. As you select more clubs on the left you can show multiple club budgets in comparison to each other. </p>
+                <p> This <span className="red">lollipop chart</span> shows an idea of what each club has as a yearly working budget. As you select more clubs on the left you can show multiple club budgets in comparison to each other. </p>
             </div>
             {/* chart */}
             <div ref={this.chartRef} id="lollipop" className = "intro-card box border"> </div>

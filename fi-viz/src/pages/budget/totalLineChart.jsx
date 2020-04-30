@@ -71,9 +71,6 @@ class TotalLineChart extends Component {
 
         // loop through elements in slf fee to construct x & y axix
         for (var i = 0; i < slf.length; i++) {
-          if (slf[i]["Fiscal Year"] == 2021) {
-            continue;
-          }
           year.push(slf[i]["Fiscal Year"]);
           total.push(slf[i]["SLF Amount"] * slf[i]["Fall Student Amount"]);
         }

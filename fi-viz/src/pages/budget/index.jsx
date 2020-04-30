@@ -82,10 +82,10 @@ class BudgetPage extends Component {
           <div className="budget-container">
             <Select options={this.state.options}>
               <ComponentSwitcher>
-                <ScatterPlot allOptions={this.state.allOptions} displayName={"Scatterplot"} />
-                <RawDataTable allOptions={this.state.allOptions} displayName={"Raw Data"} />
-                <LollipopSelect displayName={"Lollipop"} />
-                <BarChart displayName={"BarChart"}/>
+                <ScatterPlot allOptions={this.state.allOptions} displayName={"Compare Budgets & Memberships"} />
+                <RawDataTable allOptions={this.state.allOptions} displayName={"See Table"} />
+                <LollipopSelect displayName={"Compare Budgets"} />
+                <BarChart displayName={"Compare Memberships"}/>
               </ComponentSwitcher>
             </Select>
             <br></br>
