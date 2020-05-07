@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: pages/budget/Ridge.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,39 +17,66 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: pages/budget/Ridge.jsx</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>SGA Financial Data Visualization Website</h1>
-<h2>Description</h2>
-<p>This is the repository for the SGA Financial Data Visualization MQP Team of 2019-2020. The team consisted of Peter Christakos, Andrew Morrison, Julian Pinzer, and Katherine Thompson. The advisor was Lane Harrison.</p>
-<p>There are two parts of the website, the <a href="src/README_REACT.md">React.js</a> frontend, and the <a href="server/README_NODE.md">node + express server</a> backend.</p></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from "react";
+import draw from './ridge.js';
+
+
+/**
+ * Entire component for RidgeChart. Created using d3 (ridge.js) 
+ * and grabs parent element for width and height
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;RidgeChart />
+ * )
+ */
+class RidgeChart extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      d3: '',
+      height: 0,
+      width: 0
+    }
+    this.chartRef = React.createRef();
+  }
+
+  componentDidMount() {
+    let width = this.getWidth();
+    let height = this.getHeight();
+    draw({ width: width, height: height });
+  }
+  componentDidUpdate(prevProps) {
+    let width = this.getWidth();
+    let height = this.getHeight();
+    draw({ width: width, height: height });
+  }
+  getWidth() {
+    return this.chartRef.current.parentElement.offsetWidth;
+  }
+  getHeight() {
+    return this.chartRef.current.parentElement.offsetHeight;
+  }
+
+  render() { return &lt;div ref={this.chartRef} className="ridge">&lt;/div> }
+}
+
+
+export default RidgeChart;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

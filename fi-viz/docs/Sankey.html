@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Select</title>
+    <title>JSDoc: Class: Sankey</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Select</h1>
+    <h1 class="page-title">Class: Sankey</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Select<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Sankey<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Component for showing a multi-select list of options to pass as data to child components.</p></div>
+            <div class="class-description"><p>D3 code for creating the ridgechart</p></div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Select"><span class="type-signature"></span>new Select<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Sankey"><span class="type-signature"></span>new Sankey<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -90,13 +90,13 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>particle_speed</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">array</span>
+<span class="param-type">int</span>
 
 
             
@@ -106,30 +106,7 @@
 
             
 
-            <td class="description last"><p>The options for the multi select component to show.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>children</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">element</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The child element(s) to have in the Select component to pass the selected options as props to.</p></td>
+            <td class="description last"><p>speed of moving particles (normally between 0 and 2)</p></td>
         </tr>
 
     
@@ -168,7 +145,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_multi-select_Select.jsx.html">components/multi-select/Select.jsx</a>, <a href="components_multi-select_Select.jsx.html#line58">line 58</a>
+        <a href="pages_story_sankey_sankey.jsx.html">pages/story/sankey/sankey.jsx</a>, <a href="pages_story_sankey_sankey.jsx.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -199,7 +176,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const options = {   name: "Cyber Security Club",   category: "Academic",   budget: "15000",   active_members: 23,}return (  &lt;Select options={options} />)</code></pre>
+    <pre class="prettyprint"><code>return (   &lt;Sankey particle_speed={0.8}/>)</code></pre>
 
 
 

@@ -154,9 +154,6 @@ app.get("/api/selection_options", (req, res) => {
   );
 });
 
-app.get("/api/hello", (req, res) => {
-  res.json({ msg: "Hello!" });
-});
 
 app.get("/api/sankey_data", (req, res) => {
   var sankeyData = require("./../src/pages/story/sankey/sankeyData.json");

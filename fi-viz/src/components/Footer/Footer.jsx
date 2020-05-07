@@ -44,6 +44,15 @@ class Footer extends React.Component {
                 ></img>
               </a>
             </figure>
+            <figure className="image is-64x64">
+              <a href="/docs">
+                <img
+                  className="center-footer"
+                  src={require("./github.png")}
+                  alt=""
+                ></img>
+              </a>
+            </figure>
           </div>
         </div>
       </footer>

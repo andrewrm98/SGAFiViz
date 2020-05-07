@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/budget/totalLineChart.jsx</title>
+    <title>JSDoc: Source: pages/story/slfLineChart.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/budget/totalLineChart.jsx</h1>
+    <h1 class="page-title">Source: pages/story/slfLineChart.jsx</h1>
 
     
 
@@ -30,15 +30,15 @@
 import * as d3 from "d3";
 
 /**
- * A line chart that shows the budget total of SGA for each FY at the top of the budget page.
+ * D3 line chart component. Shows a timeline for the student life fee.
  *
  * @component
  * @example
  * return (
- *   &lt;TotalLineChart />
+ *   &lt;SLFLineChart />
  * )
  */
-class TotalLineChart extends Component {
+class SLFLineChart extends Component {
   _isMounted = false;
 
   constructor(props) {
@@ -79,7 +79,6 @@ class TotalLineChart extends Component {
       return;
     }
     this.setState({ width: width - 10, height: height - 50 });
-    d3.select(".TotalLineChart svg").remove();
     this.drawChart = this.drawChart.bind(this);
     this.drawChart();
   }
@@ -89,8 +88,10 @@ class TotalLineChart extends Component {
   }
 
   drawChart() {
+    //var node = document.createElement('div'); // export this
+    //var parentDiv = document.getElementById("lineChartBox"); // for parent margins
     var year = [],
-      total = [];
+      fee = [];
     var lineData = [{}]; // connects with server
     // parse the date / time
     var parseTime = d3.timeParse("%Y"),
@@ -102,42 +103,43 @@ class TotalLineChart extends Component {
     fetch("/api/slf")
       .then((response) => response.json())
       .then((data) => {
+        d3.select(".lineChart svg").remove();
+
         var slf = data.slf;
 
         // loop through elements in slf fee to construct x &amp; y axix
         for (var i = 0; i &lt; slf.length; i++) {
           year.push(slf[i]["Fiscal Year"]);
-          total.push(slf[i]["SLF Amount"] * slf[i]["Fall Student Amount"]);
+          fee.push(slf[i]["SLF Amount"]);
         }
 
         // properly order the data
-        const result = total
+        const result = fee
           .map((item, index) => [year[index], item])
           .sort(([count1], [count2]) => count2 - count1)
           .map(([, item]) => item);
 
-        total = result.reverse();
+        fee = result.reverse();
         year = year.sort((a, b) => a - b);
 
         for (i = 0; i &lt; year.length; i++) {
           var d = {};
           d["year"] = parseTime(parseInt(year[i]));
-          d["total"] = +parseInt(total[i]);
-          console.log(d);
+          d["fee"] = +parseInt(fee[i]);
           lineData[i] = d;
         }
 
         /********** Use D3 To Populate SVG **********/
-        var margin = { top: 50, right: 100, bottom: 50, left: 100 },
+        var margin = { top: 50, right: 50, bottom: 50, left: 80 },
           width = this.state.width - margin.left - margin.right,
           height = this.state.height - margin.top - margin.bottom;
 
         var svg = d3
-          .select(".TotalLineChart")
+          .select(".lineChart")
           .append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
-          .attr("id", "TotalLineChart")
+          .attr("id", "lineChart")
           .append("g")
           .attr(
             "transform",
@@ -163,9 +165,11 @@ class TotalLineChart extends Component {
         var y = d3
           .scaleLinear()
           .domain([
-            0,
+            d3.min(lineData, function (d) {
+              return d.fee;
+            }),
             d3.max(lineData, function (d) {
-              return d.total;
+              return d.fee;
             }),
           ])
           .range([height, 0]);
@@ -186,7 +190,7 @@ class TotalLineChart extends Component {
                 return x(d.year);
               })
               .y(function (d) {
-                return y(d.total);
+                return y(d.fee);
               })
           );
 
@@ -209,7 +213,7 @@ class TotalLineChart extends Component {
           .attr("transform", `rotate(270, 20, ${height / 2 - 35})`) // rotate takes the rotation, and then the x and y coord of the center of rotation. Make sure these coords are the same as the text
           .attr("font-family", "Bebas Neue")
           .attr("font-size", "18px")
-          .text("Budget ($)");
+          .text("SLF ($)");
 
         // tooltip
         var focus = svg
@@ -225,7 +229,7 @@ class TotalLineChart extends Component {
 
         focus.append("circle").attr("r", 7.5);
 
-        focus.append("text").attr("x", -80).attr("y", -20);
+        focus.append("text").attr("x", -25).attr("y", -15);
 
         svg
           .append("rect")
@@ -242,25 +246,24 @@ class TotalLineChart extends Component {
           .on("mousemove", mousemove);
 
         function mousemove() {
-          var x0 = x.invert(d3.mouse(this)[0]);
-          var i = bisectDate(lineData, x0, 1);
-          var d0 = lineData[i - 1];
-          var d1 = lineData[i];
-          var d = undefined;
+          var x0 = x.invert(d3.mouse(this)[0]),
+            i = bisectDate(lineData, x0, 1),
+            d0 = lineData[i - 1],
+            d1 = lineData[i],
+            d = undefined;
           if (d1) {
             d = x0 - d0.year > d1.year - x0 ? d1 : d0;
           } else {
             d = d0;
           }
-
           focus.attr(
             "transform",
-            "translate(" + x(d.year) + "," + y(d.total) + ")"
+            "translate(" + x(d.year) + "," + y(d.fee) + ")"
           );
           focus.select("text").text(function () {
-            return "$" + d3.format(",.2f")(d.total);
+            return "$" + d.fee;
           });
-          focus.select(".x-hover-line").attr("y2", height - y(d.total));
+          focus.select(".x-hover-line").attr("y2", height - y(d.fee));
           focus.select(".y-hover-line").attr("x2", width + width);
         }
 
@@ -272,7 +275,7 @@ class TotalLineChart extends Component {
           .attr("text-anchor", "middle")
           .style("font-size", "24px")
           .style("font", "times")
-          .text("Total Budget Trend");
+          .text("Student Life Fee Trend");
       })
 
       .catch((err) => {
@@ -289,15 +292,12 @@ class TotalLineChart extends Component {
 
   render() {
     return (
-      &lt;div
-        ref={this.chartRef}
-        className=" TotalLineChart has-text-centered"
-      >&lt;/div>
+      &lt;div ref={this.chartRef} className="lineChart has-text-centered">&lt;/div>
     );
   }
 }
 
-export default TotalLineChart;
+export default SLFLineChart;
 </code></pre>
         </article>
     </section>
