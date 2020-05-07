@@ -30,10 +30,10 @@ var con = mysql.createConnection({
   database: config.database,
 });
 
-// con.connect(function (err) {
-//   if (err) throw err;
-//   console.log("Connected!");
-// });
+con.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
 
 app.use(express.static("./build"));
 app.use("/docs", express.static("./docs"));
