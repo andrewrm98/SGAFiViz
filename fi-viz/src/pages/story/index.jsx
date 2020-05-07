@@ -5,7 +5,15 @@ import VisibilitySensor from 'react-visibility-sensor';
 import Sankey from "./sankey/sankey.jsx"
 import SLFLineChart from "./slfLineChart.jsx"
 
-
+/**
+ * The story page, it shows an explanation and breakdown of the student life fee.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Story />
+ * )
+ */
 class Story extends Component {
 
   constructor(props) {

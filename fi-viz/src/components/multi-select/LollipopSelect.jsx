@@ -1,6 +1,23 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
 
+/**
+ * Component for showing a lollipop chart. Will require a display name if it is part of a multi select
+ *
+ *
+ * @component
+ * @example
+ * 
+ * return (
+ *   <lollipopSelect/>
+ * )
+ * 
+ * @example multi-select
+ * 
+ * return (
+ *   <lollipopSelect displayName={"Lollipop"}/>
+ * )
+ */
 class LollipopSelect extends Component {
   constructor(props) {
     super(props);

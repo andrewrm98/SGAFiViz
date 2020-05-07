@@ -3,6 +3,15 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import './Header.css';
 
+/**
+ * Header for our webite. Covers WPI logo through to the 3 tabs for each page. 
+ *
+ * @component
+ * @example
+ * return (
+ *   <Header />
+ * )
+ */
 class Header extends React.Component {
 
   constructor(props) {

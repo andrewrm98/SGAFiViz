@@ -1,6 +1,23 @@
 import React, { Component } from "react";
 import * as d3 from 'd3'
 
+/**
+ * Component for showing a scatterpolot. Will require a display name if it is part of a multi select
+ *
+ *
+ * @component
+ * @example
+ * 
+ * return (
+ *   <ScatterPlot/>
+ * )
+ * 
+ * @example multi-select
+ * 
+ * return (
+ *   <ScatterPLot displayName={"ScatterPlot"}/>
+ * )
+ */
 class ScatterPlot extends Component {
   constructor(props) {
     super(props);

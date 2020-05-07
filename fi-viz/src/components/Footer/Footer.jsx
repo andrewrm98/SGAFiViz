@@ -2,7 +2,16 @@ import React from "react";
 import { withRouter } from "react-router";
 import "./Footer.css";
 
-class Header extends React.Component {
+/**
+ * Footer for our webite. Shows authors and github link 
+ *
+ * @component
+ * @example
+ * return (
+ *   <Footer />
+ * )
+ */
+class Footer extends React.Component {
   render() {
     return (
       <footer className="footer">
@@ -42,4 +51,4 @@ class Header extends React.Component {
   }
 }
 
-export default withRouter(Header);
+export default withRouter(Footer);

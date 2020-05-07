@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import draw from './ridge.js';
 
+
+/**
+ * Entire component for RidgeChart. Created using d3 (ridge.js) 
+ * and grabs parent element for width and height
+ *
+ * @component
+ * @example
+ * return (
+ *   <RidgeChart />
+ * )
+ */
 class RidgeChart extends Component {
 
   constructor(props) {

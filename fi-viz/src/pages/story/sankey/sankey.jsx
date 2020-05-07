@@ -2,6 +2,16 @@ import React, { Component } from "react";
 import * as d3 from 'd3'
 import mySankey from "./d3.sankey.js";
 
+/**
+ * D3 code for creating the ridgechart
+ *
+ * @component
+ * @prop {int} particle_speed speed of moving particles (normally between 0 and 2)
+ * @example
+ * return (
+ *    <Sankey particle_speed={0.8}/>
+ * )
+ */
 class Sankey extends Component {
 
     constructor(props) {
