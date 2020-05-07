@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import Plot from "react-plotly.js";
 
+/**
+ * Component for a plotly sunburst chart that displays where the budget goes.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SunburstChart />
+ * )
+ */
 class SunburstChart extends Component {
   constructor(props) {
     super(props);
@@ -82,13 +91,7 @@ class SunburstChart extends Component {
       );
   }
 
-  // plotlyClickHandler(data) {
-  //   console.log("plotlyClickHandler");
-  //   console.log(data);
-  // }
-
   render() {
-    // console.log(this.state.mandatory_transfers);
     return (
       <Plot
         className="fill-space"
@@ -116,9 +119,9 @@ class SunburstChart extends Component {
         layout={{
           margin: { l: 0, r: 0, b: 0, t: 0 },
           title: "Sunburst Chart",
-          plot_bgcolor: 'rgba(0,0,0,0)',
-          paper_bgcolor: 'rgba(0,0,0,0)',
-          colorway: ["#ac2b37", "#9d1212", "#d3d3d3"]
+          plot_bgcolor: "rgba(0,0,0,0)",
+          paper_bgcolor: "rgba(0,0,0,0)",
+          colorway: ["#ac2b37", "#9d1212", "#d3d3d3"],
         }}
         useResizeHandler={true}
         onClick={this.plotlyClickHandler}

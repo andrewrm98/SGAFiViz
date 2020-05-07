@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
 
+/**
+ * A line chart that shows the budget total of SGA for each FY at the top of the budget page.
+ *
+ * @component
+ * @example
+ * return (
+ *   <TotalLineChart />
+ * )
+ */
 class TotalLineChart extends Component {
   _isMounted = false;
 
@@ -52,8 +61,6 @@ class TotalLineChart extends Component {
   }
 
   drawChart() {
-    //var node = document.createElement('div'); // export this
-    //var parentDiv = document.getElementById("lineChartBox"); // for parent margins
     var year = [],
       total = [];
     var lineData = [{}]; // connects with server

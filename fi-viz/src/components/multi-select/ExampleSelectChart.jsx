@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 /**
- * Example for a component that uses the multi-select data
+ * Example for a component that uses the multi-select data.
  *
  * @prop {array} selected The selected obects from the @external Select.jsx component
  * @prop {element} alt If we want an 'alternate' component for comparison
