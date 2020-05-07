@@ -30,16 +30,13 @@ var con = mysql.createConnection({
   database: config.database,
 });
 
-con.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+// con.connect(function (err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
 
 app.use(express.static("./build"));
-
-app.get("/docs", function (req, res) {
-  res.sendFile(path.join(__dirname + "/../docs/index.html"));
-});
+app.use("/docs", express.static("./docs"));
 
 app.get("/api/budgets", (req, res) => {
   con.query("SELECT * FROM sgadb.Budgets;", function (err, data) {
