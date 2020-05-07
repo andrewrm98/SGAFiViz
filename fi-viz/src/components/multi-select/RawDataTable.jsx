@@ -3,7 +3,23 @@ import 'react-tabulator/lib/styles.css'; // required styles
 import 'react-tabulator/lib/css/tabulator.min.css'; // theme
 import { ReactTabulator } from 'react-tabulator'; // for React 15.x, use import { React15Tabulator }
 
-
+/**
+ * Component for showing a Raw Data Table using Tabulator. Will require a display name if it is part of a multi select.
+ *
+ *
+ * @component
+ * @example
+ * 
+ * return (
+ *   <RawDataTable/>
+ * )
+ * 
+ * @example multi-select
+ * 
+ * return (
+ *   <RawDataTable displayName={"DataTable"}/>
+ * )
+ */
 class RawDataTable extends Component {
     constructor(props) {
       super(props);     

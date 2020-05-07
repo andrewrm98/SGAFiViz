@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
 
+/**
+ * D3 line chart component. Shows a timeline for the student life fee.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SLFLineChart />
+ * )
+ */
 class SLFLineChart extends Component {
   _isMounted = false;
 

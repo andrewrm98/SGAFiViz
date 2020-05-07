@@ -3,7 +3,15 @@ import {sankey as d3s} from "d3-sankey";
 
 /* d3 sankey function */
 
-
+/**
+ * D3 functions for d3s.sankey. Includes functions to calculate paths for nodes and links.
+ *
+ * @function
+ * @example
+ * return (
+ *    draw({ width: 700, height: 350 });
+ * )
+ */
 d3s.sankey = function() {
     var sankey = {},
         nodeWidth = 24,

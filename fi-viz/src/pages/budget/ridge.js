@@ -1,5 +1,16 @@
 import * as d3 from "d3";
 
+/**
+ * D3 code for creating the ridgechart
+ *
+ * @prop {int} width desired width (currently passed through as this.getWidth())
+ * @prop {int} height desired height (currently passed through as this.getHeight())
+ * 
+ * @example
+ * return (
+ *    draw({ width: 700, height: 350 });
+ * )
+ */
 const draw = (props) => {
   d3.select(".ridge > *").remove();
   var categories = new Set();

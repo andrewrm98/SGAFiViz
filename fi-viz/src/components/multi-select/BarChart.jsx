@@ -1,6 +1,23 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
 
+/**
+ * Component for showing a BarChart. Will require a display name if it is part of a multi select
+ *
+ *
+ * @component
+ * @example
+ * 
+ * return (
+ *   <BarChart/>
+ * )
+ * 
+ * @example multi-select
+ * 
+ * return (
+ *   <BarChart displayName={"BarChart"}/>
+ * )
+ */
 class BarChart extends Component {
     constructor(props) {
         super(props);
