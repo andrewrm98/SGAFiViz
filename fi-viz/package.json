@@ -7,6 +7,7 @@
     "body-parser": "^1.19.0",
     "bulma": "^0.8.0",
     "bulma-extensions": "^6.2.7",
+    "copyfiles": "^2.2.0",
     "d3": "^5.15.0",
     "d3-sankey": "^0.12.3",
     "express": "^4.17.1",
@@ -36,7 +37,7 @@
     "eject": "react-scripts eject",
     "server": "node-env-run server --exec nodemon | pino-colada",
     "dev": "run-p server start",
-    "docs": "jsdoc -c jsdoc.conf.json"
+    "docs": "jsdoc -c jsdoc.conf.json && copyfiles src/README_REACT.md docs/ && copyfiles server/README_NODE.md docs/"
   },
   "eslintConfig": {
     "extends": "react-app"

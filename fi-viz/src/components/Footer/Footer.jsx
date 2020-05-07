@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import "./Footer.css";
 
 /**
- * Footer for our webite. Shows authors and github link 
+ * Footer for our webite. Shows authors and github link
  *
  * @component
  * @example
@@ -44,16 +44,9 @@ class Footer extends React.Component {
                 ></img>
               </a>
             </figure>
-            <figure className="image is-64x64">
-              <a href="/docs">
-                <img
-                  className="center-footer"
-                  src={require("./github.png")}
-                  alt=""
-                ></img>
-              </a>
-            </figure>
           </div>
+          <br />
+          <a href="/docs">Documentation</a>
         </div>
       </footer>
     );
