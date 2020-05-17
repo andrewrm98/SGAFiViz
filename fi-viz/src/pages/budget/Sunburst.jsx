@@ -40,22 +40,6 @@ class SunburstChart extends Component {
           });
         }
       );
-    fetch("/api/club_budgets")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            clubBudgets: result.budgets,
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );
     fetch("/api/categories_budgets")
       .then((res) => res.json())
       .then(
@@ -63,23 +47,6 @@ class SunburstChart extends Component {
           this.setState({
             isLoaded: true,
             categories: result.budgets,
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        }
-      );
-
-    fetch("/api/mandatory_transfers")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            mandatory_transfers: result.mandatory,
           });
         },
         (error) => {
