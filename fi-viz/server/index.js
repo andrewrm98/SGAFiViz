@@ -30,20 +30,16 @@ var con = mysql.createConnection({
   database: config.database,
 });
 
+// Check that the connection to the MySQL database can be established.
 con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 });
 
 app.use(express.static("./build"));
-app.use("/docs", express.static("./docs"));
+app.use("/docs", express.static("./docs")); // Point the /docs url to the documentation
 
-app.get("/api/budgets", (req, res) => {
-  con.query("SELECT * FROM sgadb.Budgets;", function (err, data) {
-    err ? res.send(err) : res.json({ budgets: data });
-  });
-});
-
+// The API call used to generate the Sunburst diagram on the budget page
 app.get("/api/sunburst", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Total Budget` WHERE `Fiscal Year` = ?;",
@@ -54,6 +50,7 @@ app.get("/api/sunburst", (req, res) => {
   );
 });
 
+// The API call used to get the breakdown of each club's total budget for the fiscal year.
 app.get("/api/club_budgets", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Club Total Budget` WHERE `Fiscal Year` = ?;",
@@ -64,6 +61,7 @@ app.get("/api/club_budgets", (req, res) => {
   );
 });
 
+// The API call used to get the sum of each club's budget in a category for the fiscal year.
 app.get("/api/categories_budgets", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Categories Total Budget` WHERE `Fiscal Year` = ?;",
@@ -74,6 +72,7 @@ app.get("/api/categories_budgets", (req, res) => {
   );
 });
 
+// The API call used to get the yearly Student Life Fee.
 app.get("/api/slf", (req, res) => {
   con.query("SELECT * FROM sgadb.`Student Life Fee`;", function (err, data) {
     var i = 0;
@@ -87,6 +86,7 @@ app.get("/api/slf", (req, res) => {
   });
 });
 
+// The API call used to get the Active Member count for each club for the fiscal year.
 app.get("/api/organization_numbers", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Organization Membership Numbers` WHERE `Active Members` != 'Not Provided' AND `Active Members` IS NOT NULL AND `Active Members` != '';",
@@ -96,6 +96,7 @@ app.get("/api/organization_numbers", (req, res) => {
   );
 });
 
+// The API call used to get the Active Member count for each club category for the fiscal year.
 app.get("/api/category_organization_numbers", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Categories Club Membership` WHERE `Active Members` != 'Not Provided' AND `Active Members` IS NOT NULL AND `Active Members` != '';",
@@ -105,6 +106,7 @@ app.get("/api/category_organization_numbers", (req, res) => {
   );
 });
 
+// The API call used to get the budget allocated for Mandatory Transfers the fiscal year.
 app.get("/api/mandatory_transfers", (req, res) => {
   con.query(
     "SELECT * FROM sgadb.`Mandatory Transfers Total Budget` WHERE `Fiscal Year` = ?;",
@@ -115,6 +117,7 @@ app.get("/api/mandatory_transfers", (req, res) => {
   );
 });
 
+// The API call used to get the budget breakdown for the fiscal year.
 app.get("/api/budget_breakdown", (req, res) => {
   con.query("SELECT * FROM sgadb.`Total Budget`;", function (err, data) {
     var i;
@@ -128,6 +131,7 @@ app.get("/api/budget_breakdown", (req, res) => {
   });
 });
 
+// The API call used when populating the multi-select dropdown on the budget page.
 app.get("/api/selection_options", (req, res) => {
   let slf = 0;
   let totalBudget = 0;
@@ -154,7 +158,7 @@ app.get("/api/selection_options", (req, res) => {
   );
 });
 
-
+// The API call used to get the data used to draw the sankey on the story page.
 app.get("/api/sankey_data", (req, res) => {
   var sankeyData = require("./../src/pages/story/sankey/sankeyData.json");
   res.json(sankeyData);

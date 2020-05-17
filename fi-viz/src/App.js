@@ -10,6 +10,15 @@ import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import "./sass/mystyles.scss";
 
+/**
+ * The component containing the main application.
+ *
+ * @component
+ * @example
+ * return (
+ *   <App />
+ * )
+ */
 class App extends Component {
   render() {
     return (
